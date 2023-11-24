@@ -21,6 +21,6 @@ namespace InventoryManagementApp.Models
 
         public Category Category { get; set; }
         public Brand Brand { get; set; }
-        
+        public List<Sale> Sales { get; set; }
     }
 }

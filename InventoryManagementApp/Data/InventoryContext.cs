@@ -11,6 +11,15 @@ namespace InventoryManagementApp.Data
 {
     public class InventoryContext : DbContext
     {
+        public InventoryContext()
+        {
+
+        }
+        public InventoryContext(DbContextOptions<InventoryContext> options) 
+            : base(options)
+        {
+
+        }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Location> Locations { get; set; }
@@ -30,28 +39,50 @@ namespace InventoryManagementApp.Data
 
             modelBuilder.Entity<Product>()
                         .HasKey(p => p.Id);
+
             modelBuilder.Entity<Product>()
                         .Property(p => p.Id)
                         .ValueGeneratedNever();
+
             modelBuilder.Entity<Product>()
                         .HasOne(p => p.Category)
                         .WithMany(c => c.Products)
                         .HasForeignKey(p => p.CategoryID);
+
             modelBuilder.Entity<Product>()
                         .HasOne(p => p.Brand)
                         .WithMany(b => b.Products)
                         .HasForeignKey(p => p.BrandID);
+
             modelBuilder.Entity<Location>()
                         .HasKey(l => l.Id);
+
             modelBuilder.Entity<Role>()
                         .HasKey(r => r.Id);
+
             modelBuilder.Entity<Brand>()
                         .HasKey(b => b.Id);
+
             modelBuilder.Entity<Sale>()
                         .HasKey(s => s.Id);
-            
 
+            modelBuilder.Entity<Sale>()
+                        .HasOne(s => s.Product)
+                        .WithMany(s => s.Sales)
+                        .HasForeignKey(s => s.ProductID);
 
+            modelBuilder.Entity<Sale>()
+                        .HasOne(s => s.Location)
+                        .WithMany(s => s.Sales)
+                        .HasForeignKey(s => s.LocationID);
+
+            modelBuilder.Entity<User>()
+                        .HasKey(u => u.Id);
+
+            modelBuilder.Entity<User>()
+                        .HasOne(u => u.Role)
+                        .WithMany(u => u.Users)
+                        .HasForeignKey(u => u.RoleID);
 
         }
     }

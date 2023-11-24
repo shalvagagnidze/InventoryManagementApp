@@ -17,6 +17,6 @@ namespace InventoryManagementApp.Models
         public string UserPassword { get; set; }
         public int RoleID { get; set; }
 
-        public List<Role> Roles { get; set; }
+        public Role Role { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace InventoryManagementApp.Models
         public string PaymentType { get; set; }
         public int LocationID { get; set; }
 
-        public List<Product> Products { get; set; }
-        public List<Location> Locations { get; set; }
+        public Product Product { get; set; }
+        public Location Location { get; set; }
     }
 }
