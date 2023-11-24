@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace InventoryManagementApp.Models
 {
-    internal class Location
+    public class Location
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
+
+        public List<Sale> Sales { get; set; }
+
     }
 }
