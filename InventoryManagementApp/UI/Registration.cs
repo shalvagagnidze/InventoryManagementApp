@@ -22,5 +22,12 @@ namespace InventoryManagementApp.UI
         {
 
         }
+
+        private void Regist_Button_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Login login = new Login();
+            login.Show();
+        }
     }
 }

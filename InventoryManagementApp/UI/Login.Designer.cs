@@ -90,6 +90,7 @@
             kryptonCustomPaletteBase1.HeaderStyles.HeaderForm.StateCommon.Back.Color2 = Color.FromArgb(250, 252, 252);
             kryptonCustomPaletteBase1.HeaderStyles.HeaderForm.StateCommon.ButtonEdgeInset = 10;
             kryptonCustomPaletteBase1.HeaderStyles.HeaderForm.StateCommon.Content.Padding = new Padding(10, -1, -1, -1);
+            kryptonCustomPaletteBase1.HeaderStyles.HeaderForm.StateCommon.Content.ShortText.Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             kryptonCustomPaletteBase1.ThemeName = "";
             kryptonCustomPaletteBase1.UseKryptonFileDialogs = true;
             // 
@@ -137,7 +138,6 @@
             UPass_Text.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             UPass_Text.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             UPass_Text.TabIndex = 5;
-            UPass_Text.Text = "შეიყვანეთ მომხმარებლის პაროლი";
             // 
             // Sign_Button
             // 
@@ -240,6 +240,7 @@
             Regist_Button.StateTracking.Content.ShortText.Color1 = Color.White;
             Regist_Button.TabIndex = 7;
             Regist_Button.Values.Text = "რეგისტრაცია";
+            Regist_Button.Click += Regist_Button_Click;
             // 
             // pictureBox2
             // 
@@ -293,7 +294,7 @@
             PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Jani - Inventory Management";
+            Text = "ჯანი - მარაგების მენეჯმენტი";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();

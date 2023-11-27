@@ -1,3 +1,4 @@
+using InventoryManagementApp.UI;
 using Krypton.Toolkit;
 namespace InventoryManagementApp
 {
@@ -7,6 +8,13 @@ namespace InventoryManagementApp
         public Login()
         {
             InitializeComponent();
+        }
+
+        private void Regist_Button_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Registration registration = new Registration();
+            registration.Show();
         }
     }
 }

@@ -1,3 +1,5 @@
+using InventoryManagementApp.UI;
+
 namespace InventoryManagementApp
 {
     internal static class Program
