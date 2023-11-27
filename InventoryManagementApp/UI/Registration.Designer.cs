@@ -1,14 +1,14 @@
-﻿namespace InventoryManagementApp
+﻿namespace InventoryManagementApp.UI
 {
-    partial class Login
+    partial class Registration
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -23,14 +23,13 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
             kryptonCustomPaletteBase1 = new Krypton.Toolkit.KryptonCustomPaletteBase(components);
-            pictureBox1 = new PictureBox();
             UName_Text = new Krypton.Toolkit.KryptonTextBox();
             UPass_Text = new Krypton.Toolkit.KryptonTextBox();
             Sign_Button = new Krypton.Toolkit.KryptonButton();
@@ -38,7 +37,7 @@
             pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
             showPass = new Krypton.Toolkit.KryptonCheckBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
@@ -92,16 +91,6 @@
             kryptonCustomPaletteBase1.HeaderStyles.HeaderForm.StateCommon.Content.Padding = new Padding(10, -1, -1, -1);
             kryptonCustomPaletteBase1.ThemeName = "";
             kryptonCustomPaletteBase1.UseKryptonFileDialogs = true;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.Jani_Logo;
-            pictureBox1.Location = new Point(71, 64);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(437, 240);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 1;
-            pictureBox1.TabStop = false;
             // 
             // UName_Text
             // 
@@ -274,12 +263,24 @@
             showPass.TabIndex = 10;
             showPass.Values.Text = "პაროლის ჩვენება";
             // 
-            // Login
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(64, 64, 64);
+            label1.Location = new Point(153, 70);
+            label1.Name = "label1";
+            label1.Size = new Size(262, 45);
+            label1.TabIndex = 11;
+            label1.Text = "რეგისტრაცია";
+            // 
+            // Registration
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 252, 252);
             ClientSize = new Size(568, 618);
+            Controls.Add(label1);
             Controls.Add(showPass);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
@@ -287,14 +288,12 @@
             Controls.Add(Sign_Button);
             Controls.Add(UPass_Text);
             Controls.Add(UName_Text);
-            Controls.Add(pictureBox1);
-            Name = "Login";
+            Name = "Registration";
             Palette = kryptonCustomPaletteBase1;
             PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Jani - Inventory Management";
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
@@ -304,7 +303,6 @@
         #endregion
 
         private Krypton.Toolkit.KryptonCustomPaletteBase kryptonCustomPaletteBase1;
-        private PictureBox pictureBox1;
         private Krypton.Toolkit.KryptonTextBox UName_Text;
         private Krypton.Toolkit.KryptonTextBox UPass_Text;
         private Krypton.Toolkit.KryptonButton Sign_Button;
@@ -312,5 +310,6 @@
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
         private Krypton.Toolkit.KryptonCheckBox showPass;
+        private Label label1;
     }
 }
