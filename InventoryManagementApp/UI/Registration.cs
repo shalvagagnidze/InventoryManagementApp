@@ -22,7 +22,7 @@ namespace InventoryManagementApp.UI
         public Registration()
         {
             InitializeComponent();
-            
+
         }
 
         private void Registration_Load(object sender, EventArgs e)
@@ -115,7 +115,7 @@ namespace InventoryManagementApp.UI
                         BirthDate = birthDate,
                         UserName = userName,
                         UserPassword = userPass,
-                        Role= role
+                        Role = role
                     };
 
                     _db.Users.Add(user);

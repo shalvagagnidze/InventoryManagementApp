@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InventoryManagementApp.User_Controls;
+using Krypton.Toolkit;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +12,71 @@ using System.Windows.Forms;
 
 namespace InventoryManagementApp.UI
 {
-    public partial class AdminUI : Form
+    public partial class AdminUI : KryptonForm
     {
         public AdminUI()
         {
             InitializeComponent();
+            Dashboard_UC dashboard = new Dashboard_UC();
+            addUserControl(dashboard);
+        }
+
+        private void addUserControl(UserControl userControl)
+        {
+            userControl.Dock = DockStyle.Fill;
+            panelContainer.Controls.Clear();
+            panelContainer.Controls.Add(userControl);
+            userControl.BringToFront();
+        }
+
+        private void Regist_Button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Sign_Button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showPass_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AdminUI_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void home_Btn_Click(object sender, EventArgs e)
+        {
+            Dashboard_UC dashboard = new Dashboard_UC();
+            addUserControl(dashboard);
+        }
+
+        private void product_Btn_Click(object sender, EventArgs e)
+        {
+            Products_UC products_UC = new Products_UC();
+            addUserControl(products_UC);
+        }
+
+        private void sales_Btn_Click(object sender, EventArgs e)
+        {
+            Sales_UC salesUC = new Sales_UC();
+            addUserControl(salesUC);
+        }
+
+        private void invoice_Btn_Click(object sender, EventArgs e)
+        {
+            Invoice_UC invoiceUC = new Invoice_UC();
+            addUserControl(invoiceUC);
+        }
+
+        private void settings_Btn_Click(object sender, EventArgs e)
+        {
+            Settings_UC settingsUC = new Settings_UC();
+            addUserControl(settingsUC);
         }
     }
 }

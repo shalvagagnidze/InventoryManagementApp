@@ -569,7 +569,7 @@
             PaletteMode = Krypton.Toolkit.PaletteMode.Custom;
             ShowIcon = false;
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ჯანი - მარაგების მენეჯმენტი";
+            Text = "ჯანი - მარაგების მენეჯმენტი";          
             ResumeLayout(false);
             PerformLayout();
         }

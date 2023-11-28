@@ -121,23 +121,23 @@
   <data name="Green_28" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Green_28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="User_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\User_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Eye(X)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Eye(X).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Red_28" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Red_28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Password" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Password.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Jani_Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Jani_Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Orange_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Orange_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Red_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Red_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="User_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\User_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Dashboard_40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Dashboard_40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Eye(V)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Eye(V).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -145,10 +145,25 @@
   <data name="Orange_28" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Orange_28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Red_28" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Red_28.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Orange_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Orange_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Green_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Green_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Password" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Password.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Invoice_40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Invoice_40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Product_40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Product_40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sales_40" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sales_40.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Settings_35" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Settings_35.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
