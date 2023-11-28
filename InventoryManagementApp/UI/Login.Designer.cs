@@ -126,6 +126,7 @@
             // 
             UPass_Text.Location = new Point(117, 405);
             UPass_Text.Name = "UPass_Text";
+            UPass_Text.PasswordChar = '•';
             UPass_Text.Size = new Size(350, 35);
             UPass_Text.StateCommon.Back.Color1 = Color.White;
             UPass_Text.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
@@ -189,6 +190,7 @@
             Sign_Button.StateTracking.Border.Width = 1;
             Sign_Button.TabIndex = 6;
             Sign_Button.Values.Text = "შესვლა";
+            Sign_Button.Click += Sign_Button_Click;
             // 
             // Regist_Button
             // 
@@ -274,6 +276,7 @@
             showPass.StateCommon.ShortText.Font = new Font("Georgia", 8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             showPass.TabIndex = 10;
             showPass.Values.Text = "პაროლის ჩვენება";
+            showPass.CheckedChanged += showPass_CheckedChanged;
             // 
             // Login
             // 

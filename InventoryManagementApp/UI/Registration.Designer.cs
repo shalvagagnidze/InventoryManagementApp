@@ -49,15 +49,12 @@
             Pass_Label = new Label();
             PassConf_Txt = new Krypton.Toolkit.KryptonTextBox();
             UPass_Txt = new Krypton.Toolkit.KryptonTextBox();
-            panel1 = new Panel();
-            panel2 = new Panel();
-            panel3 = new Panel();
             passLab = new Label();
             checkAdmin = new CheckBox();
             checkModerator = new CheckBox();
-            smallpass = new Label();
-            bigPass = new Label();
-            numPass = new Label();
+            checkLen = new Label();
+            checkUpLow = new Label();
+            checkNum = new Label();
             Back_Btn = new Krypton.Toolkit.KryptonButton();
             SuspendLayout();
             // 
@@ -198,6 +195,7 @@
             Registration_Btn.StateTracking.Border.Width = 1;
             Registration_Btn.TabIndex = 6;
             Registration_Btn.Values.Text = "რეგისტრაცია";
+            Registration_Btn.Click += Registration_Btn_Click;
             // 
             // showPassword
             // 
@@ -211,6 +209,7 @@
             showPassword.StateCommon.ShortText.Font = new Font("Georgia", 8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             showPassword.TabIndex = 10;
             showPassword.Values.Text = "პაროლის ჩვენება";
+            showPassword.CheckedChanged += showPassword_CheckedChanged;
             // 
             // reg_Title_Lablel
             // 
@@ -315,9 +314,11 @@
             // 
             // BDate_Txt
             // 
+            BDate_Txt.AutoShift = true;
+            BDate_Txt.Format = DateTimePickerFormat.Short;
             BDate_Txt.Location = new Point(744, 227);
             BDate_Txt.Name = "BDate_Txt";
-            BDate_Txt.Size = new Size(268, 39);
+            BDate_Txt.Size = new Size(280, 39);
             BDate_Txt.StateCommon.Back.Color1 = Color.White;
             BDate_Txt.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
             BDate_Txt.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
@@ -376,7 +377,8 @@
             // 
             PassConf_Txt.Location = new Point(734, 413);
             PassConf_Txt.Name = "PassConf_Txt";
-            PassConf_Txt.Size = new Size(278, 35);
+            PassConf_Txt.PasswordChar = '•';
+            PassConf_Txt.Size = new Size(290, 35);
             PassConf_Txt.StateCommon.Back.Color1 = Color.White;
             PassConf_Txt.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
             PassConf_Txt.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
@@ -393,6 +395,7 @@
             // 
             UPass_Txt.Location = new Point(138, 413);
             UPass_Txt.Name = "UPass_Txt";
+            UPass_Txt.PasswordChar = '•';
             UPass_Txt.Size = new Size(325, 35);
             UPass_Txt.StateCommon.Back.Color1 = Color.White;
             UPass_Txt.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
@@ -405,34 +408,14 @@
             UPass_Txt.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             UPass_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             UPass_Txt.TabIndex = 23;
-            // 
-            // panel1
-            // 
-            panel1.Location = new Point(12, 468);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(148, 16);
-            panel1.TabIndex = 27;
-            // 
-            // panel2
-            // 
-            panel2.Location = new Point(160, 468);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(148, 16);
-            panel2.TabIndex = 28;
-            // 
-            // panel3
-            // 
-            panel3.Location = new Point(308, 468);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(148, 16);
-            panel3.TabIndex = 29;
+            UPass_Txt.TextChanged += UPass_Txt_TextChanged;
             // 
             // passLab
             // 
             passLab.AutoSize = true;
             passLab.Font = new Font("Segoe UI", 8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             passLab.ForeColor = Color.FromArgb(64, 64, 64);
-            passLab.Location = new Point(12, 500);
+            passLab.Location = new Point(7, 480);
             passLab.Name = "passLab";
             passLab.Size = new Size(231, 21);
             passLab.TabIndex = 30;
@@ -449,6 +432,7 @@
             checkAdmin.TabIndex = 31;
             checkAdmin.Text = "ადმინი";
             checkAdmin.UseVisualStyleBackColor = true;
+            checkAdmin.CheckedChanged += checkAdmin_CheckedChanged;
             // 
             // checkModerator
             // 
@@ -461,39 +445,40 @@
             checkModerator.TabIndex = 32;
             checkModerator.Text = "მოდერატორი";
             checkModerator.UseVisualStyleBackColor = true;
+            checkModerator.CheckedChanged += checkModerator_CheckedChanged;
             // 
-            // smallpass
+            // checkLen
             // 
-            smallpass.AutoSize = true;
-            smallpass.Font = new Font("Segoe UI", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            smallpass.ForeColor = Color.FromArgb(110, 110, 110);
-            smallpass.Location = new Point(12, 548);
-            smallpass.Name = "smallpass";
-            smallpass.Size = new Size(206, 19);
-            smallpass.TabIndex = 33;
-            smallpass.Text = "*პატარა ლათინურ ასოებს";
+            checkLen.AutoSize = true;
+            checkLen.Font = new Font("Segoe UI", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            checkLen.ForeColor = Color.FromArgb(110, 110, 110);
+            checkLen.Location = new Point(7, 537);
+            checkLen.Name = "checkLen";
+            checkLen.Size = new Size(170, 19);
+            checkLen.TabIndex = 33;
+            checkLen.Text = "*მინიმუმ 8 სიმბოლოს";
             // 
-            // bigPass
+            // checkUpLow
             // 
-            bigPass.AutoSize = true;
-            bigPass.Font = new Font("Segoe UI", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            bigPass.ForeColor = Color.FromArgb(110, 110, 110);
-            bigPass.Location = new Point(12, 588);
-            bigPass.Name = "bigPass";
-            bigPass.Size = new Size(191, 19);
-            bigPass.TabIndex = 34;
-            bigPass.Text = "**დიდ ლათინურ ასოებს";
+            checkUpLow.AutoSize = true;
+            checkUpLow.Font = new Font("Segoe UI", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            checkUpLow.ForeColor = Color.FromArgb(110, 110, 110);
+            checkUpLow.Location = new Point(7, 577);
+            checkUpLow.Name = "checkUpLow";
+            checkUpLow.Size = new Size(275, 19);
+            checkUpLow.TabIndex = 34;
+            checkUpLow.Text = "**დიდ და პატარა ლათინურ ასოებს";
             // 
-            // numPass
+            // checkNum
             // 
-            numPass.AutoSize = true;
-            numPass.Font = new Font("Segoe UI", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            numPass.ForeColor = Color.FromArgb(110, 110, 110);
-            numPass.Location = new Point(16, 628);
-            numPass.Name = "numPass";
-            numPass.Size = new Size(93, 19);
-            numPass.TabIndex = 35;
-            numPass.Text = "***ციფრებს";
+            checkNum.AutoSize = true;
+            checkNum.Font = new Font("Segoe UI", 7F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            checkNum.ForeColor = Color.FromArgb(110, 110, 110);
+            checkNum.Location = new Point(11, 617);
+            checkNum.Name = "checkNum";
+            checkNum.Size = new Size(93, 19);
+            checkNum.TabIndex = 35;
+            checkNum.Text = "***ციფრებს";
             // 
             // Back_Btn
             // 
@@ -554,15 +539,12 @@
             BackColor = Color.FromArgb(250, 252, 252);
             ClientSize = new Size(1048, 679);
             Controls.Add(Back_Btn);
-            Controls.Add(numPass);
-            Controls.Add(bigPass);
-            Controls.Add(smallpass);
+            Controls.Add(checkNum);
+            Controls.Add(checkUpLow);
+            Controls.Add(checkLen);
             Controls.Add(checkModerator);
             Controls.Add(checkAdmin);
             Controls.Add(passLab);
-            Controls.Add(panel3);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
             Controls.Add(passConf_Label);
             Controls.Add(Pass_Label);
             Controls.Add(PassConf_Txt);
@@ -614,15 +596,12 @@
         private Label Pass_Label;
         private Krypton.Toolkit.KryptonTextBox PassConf_Txt;
         private Krypton.Toolkit.KryptonTextBox UPass_Txt;
-        private Panel panel1;
-        private Panel panel2;
-        private Panel panel3;
         private Label passLab;
         private CheckBox checkAdmin;
         private CheckBox checkModerator;
-        private Label smallpass;
-        private Label bigPass;
-        private Label numPass;
+        private Label checkLen;
+        private Label checkUpLow;
+        private Label checkNum;
         private Krypton.Toolkit.KryptonButton Back_Btn;
     }
 }
