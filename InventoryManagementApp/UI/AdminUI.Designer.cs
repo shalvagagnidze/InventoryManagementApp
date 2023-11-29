@@ -99,15 +99,15 @@
             kryptonPanel1.Controls.Add(sales_Btn);
             kryptonPanel1.Controls.Add(product_Btn);
             kryptonPanel1.Controls.Add(home_Btn);
-            kryptonPanel1.Location = new Point(-2, 12);
+            kryptonPanel1.Location = new Point(0, 12);
             kryptonPanel1.Name = "kryptonPanel1";
-            kryptonPanel1.Size = new Size(1277, 70);
+            kryptonPanel1.Size = new Size(1375, 70);
             kryptonPanel1.StateCommon.Color1 = Color.FromArgb(250, 252, 252);
             kryptonPanel1.TabIndex = 11;
             // 
             // settings_Btn
             // 
-            settings_Btn.Location = new Point(1023, 0);
+            settings_Btn.Location = new Point(1121, 0);
             settings_Btn.Name = "settings_Btn";
             settings_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
             settings_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
@@ -161,7 +161,7 @@
             // 
             // invoice_Btn
             // 
-            invoice_Btn.Location = new Point(768, 0);
+            invoice_Btn.Location = new Point(845, 0);
             invoice_Btn.Name = "invoice_Btn";
             invoice_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
             invoice_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
@@ -215,7 +215,7 @@
             // 
             // sales_Btn
             // 
-            sales_Btn.Location = new Point(513, 0);
+            sales_Btn.Location = new Point(567, 0);
             sales_Btn.Name = "sales_Btn";
             sales_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
             sales_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
@@ -269,7 +269,7 @@
             // 
             // product_Btn
             // 
-            product_Btn.Location = new Point(258, 0);
+            product_Btn.Location = new Point(285, 0);
             product_Btn.Name = "product_Btn";
             product_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
             product_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
@@ -379,7 +379,7 @@
             // 
             panelContainer.Location = new Point(0, 88);
             panelContainer.Name = "panelContainer";
-            panelContainer.Size = new Size(1275, 655);
+            panelContainer.Size = new Size(1375, 755);
             panelContainer.TabIndex = 12;
             // 
             // AdminUI
@@ -387,7 +387,7 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 252, 252);
-            ClientSize = new Size(1278, 744);
+            ClientSize = new Size(1378, 844);
             Controls.Add(panelContainer);
             Controls.Add(kryptonPanel1);
             Name = "AdminUI";

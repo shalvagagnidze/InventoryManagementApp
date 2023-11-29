@@ -63,9 +63,49 @@ namespace InventoryManagementApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Add_48 {
+            get {
+                object obj = ResourceManager.GetObject("Add_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Add_Orange_48 {
+            get {
+                object obj = ResourceManager.GetObject("Add_Orange_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Add_Purple_48 {
+            get {
+                object obj = ResourceManager.GetObject("Add_Purple_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Dashboard_40 {
             get {
                 object obj = ResourceManager.GetObject("Dashboard_40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Edit_48 {
+            get {
+                object obj = ResourceManager.GetObject("Edit_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -196,6 +236,16 @@ namespace InventoryManagementApp.Properties {
         internal static System.Drawing.Bitmap Sales_40 {
             get {
                 object obj = ResourceManager.GetObject("Sales_40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Search_40 {
+            get {
+                object obj = ResourceManager.GetObject("Search_40", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

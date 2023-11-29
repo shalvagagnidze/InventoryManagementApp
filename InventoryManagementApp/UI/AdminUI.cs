@@ -29,24 +29,10 @@ namespace InventoryManagementApp.UI
             userControl.BringToFront();
         }
 
-        private void Regist_Button_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Sign_Button_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void showPass_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void AdminUI_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         private void home_Btn_Click(object sender, EventArgs e)
