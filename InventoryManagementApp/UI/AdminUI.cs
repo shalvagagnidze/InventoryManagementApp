@@ -27,6 +27,7 @@ namespace InventoryManagementApp.UI
             panelContainer.Controls.Clear();
             panelContainer.Controls.Add(userControl);
             userControl.BringToFront();
+            
         }
 
 

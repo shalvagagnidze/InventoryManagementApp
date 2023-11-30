@@ -103,6 +103,7 @@
             addProduct_Btn.Values.ExtraText = "  ";
             addProduct_Btn.Values.Image = Properties.Resources.Add_48;
             addProduct_Btn.Values.Text = "  პროდუქტის დამატება        ";
+            addProduct_Btn.Click += addProduct_Btn_Click;
             // 
             // addCategory_Btn
             // 
@@ -156,6 +157,7 @@
             addCategory_Btn.Values.ExtraText = "  ";
             addCategory_Btn.Values.Image = Properties.Resources.Add_Orange_48;
             addCategory_Btn.Values.Text = "  კატეგორიის დამატება";
+            addCategory_Btn.Click += addCategory_Btn_Click;
             // 
             // Search_Txt
             // 
@@ -344,6 +346,7 @@
             addBrand_Btn.Values.ExtraText = "  ";
             addBrand_Btn.Values.Image = Properties.Resources.Add_Purple_48;
             addBrand_Btn.Values.Text = "  ბრენდის დამატება";
+            addBrand_Btn.Click += addBrand_Btn_Click;
             // 
             // Products_UC
             // 

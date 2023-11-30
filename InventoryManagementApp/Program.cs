@@ -1,4 +1,5 @@
 using InventoryManagementApp.UI;
+using InventoryManagementApp.User_Controls;
 
 namespace InventoryManagementApp
 {
