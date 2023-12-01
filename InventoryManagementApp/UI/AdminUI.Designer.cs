@@ -269,7 +269,8 @@
             // 
             // product_Btn
             // 
-            product_Btn.Location = new Point(285, 0);
+            product_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Bottom;
+            product_Btn.Location = new Point(283, 0);
             product_Btn.Name = "product_Btn";
             product_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
             product_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
@@ -282,7 +283,7 @@
             product_Btn.OverrideDefault.Border.Rounding = 20F;
             product_Btn.OverrideDefault.Border.Width = 2;
             product_Btn.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
-            product_Btn.Size = new Size(252, 70);
+            product_Btn.Size = new Size(252, 67);
             product_Btn.StateCommon.Back.Color1 = Color.FromArgb(250, 252, 252);
             product_Btn.StateCommon.Back.Color2 = Color.FromArgb(250, 252, 252);
             product_Btn.StateCommon.Back.ColorAngle = 45F;
@@ -377,9 +378,9 @@
             // 
             // panelContainer
             // 
-            panelContainer.Location = new Point(0, 88);
+            panelContainer.Location = new Point(0, 89);
             panelContainer.Name = "panelContainer";
-            panelContainer.Size = new Size(1375, 755);
+            panelContainer.Size = new Size(1378, 755);
             panelContainer.TabIndex = 12;
             // 
             // AdminUI

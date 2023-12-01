@@ -26,7 +26,20 @@ namespace InventoryManagementApp.User_Controls
 
         private void Products_UC_Load(object sender, EventArgs e)
         {
-            productData.DataSource = _db.Products.Select(s => new { s.Id, s.Name, s.Brand, s.Price, s.Description, s.Category, s.Status, s.TotalAmount }).ToList();
+            productData.DataSource = _db.Products.Select(s => new {
+                                                                    კოდი = s.Id,
+                                                                    დასახელება = s.Name,
+                                                                    ბრენდი = s.Brand.Name,
+                                                                    ფასი = s.Price,
+                                                                    ნეტო = s.NetCost,
+                                                                    კატეგორია = s.Category.Name,
+                                                                    რაოდენობა = s.TotalAmount,
+                                                                    სტატუსი = s.Status,
+                                                                    აღწერა = s.Description
+                                                                    }).ToList();
+
+
+
         }
 
         private void addProduct_Btn_Click(object sender, EventArgs e)
@@ -46,6 +59,59 @@ namespace InventoryManagementApp.User_Controls
         {
             Add_Brand addBrand = new Add_Brand();
             addBrand.Show();
+        }
+
+        private void Search_Txt_TextChanged(object sender, EventArgs e)
+        {
+            if (Search_Txt.Text.Length > 0)
+            {
+                string searchText = Search_Txt.Text;
+
+                Search(searchText);
+            }
+            else
+            {
+                productData.DataSource = _db.Products.Select(s => new { კოდი = s.Id,
+                                                                        დასახელება = s.Name,
+                                                                        ბრენდი = s.Brand.Name,
+                                                                        ფასი = s.Price,
+                                                                        ნეტო = s.NetCost,
+                                                                        კატეგორია = s.Category.Name,                                                                      
+                                                                        რაოდენობა = s.TotalAmount,
+                                                                        სტატუსი = s.Status,
+                                                                        აღწერა = s.Description
+                                                                         }).ToList();
+
+            }
+
+        }
+
+        public void Search(string searchText)
+        {
+            var search = _db.Products.Where(s => s.Name.Contains(searchText) ||
+                                            s.Id.ToString().Contains(searchText) ||
+                                            s.Category.Name.Contains(searchText)||
+                                            s.Brand.Name.Contains(searchText))
+                                     .Select(s => new
+                                     {
+                                         კოდი = s.Id,
+                                         დასახელება = s.Name,
+                                         ბრენდი = s.Brand.Name,
+                                         ფასი = s.Price,
+                                         ნეტო = s.NetCost,
+                                         კატეგორია = s.Category.Name,
+                                         რაოდენობა = s.TotalAmount,
+                                         სტატუსი = s.Status,
+                                         აღწერა = s.Description
+                                     }).ToList();
+
+            productData.DataSource = search;
+
+        }
+
+        private void Search_Txt_Click(object sender, EventArgs e)
+        {
+            Search_Txt.Text = String.Empty;
         }
     }
 }

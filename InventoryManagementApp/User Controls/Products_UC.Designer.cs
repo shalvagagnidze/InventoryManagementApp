@@ -37,23 +37,34 @@
             edit_Btn = new Krypton.Toolkit.KryptonButton();
             delete_Btn = new Krypton.Toolkit.KryptonButton();
             addBrand_Btn = new Krypton.Toolkit.KryptonButton();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)productData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)search_Icon).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // productData
             // 
+            productData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             productData.BorderStyle = BorderStyle.None;
             productData.ColumnHeadersHeight = 51;
             productData.Location = new Point(3, 200);
             productData.Name = "productData";
+            productData.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             productData.RowHeadersWidth = 62;
             productData.Size = new Size(1369, 552);
+            productData.StateCommon.BackStyle = Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
+            productData.StateCommon.DataCell.Back.Color1 = Color.FromArgb(236, 231, 145);
+            productData.StateCommon.DataCell.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            productData.StateCommon.DataCell.Border.Rounding = 5F;
+            productData.StateCommon.DataCell.Border.Width = 1;
+            productData.StateCommon.HeaderColumn.Back.Color1 = Color.FromArgb(6, 234, 254);
             productData.TabIndex = 1;
             // 
             // addProduct_Btn
             // 
-            addProduct_Btn.Location = new Point(1050, 21);
+            addProduct_Btn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            addProduct_Btn.Location = new Point(352, 14);
             addProduct_Btn.Name = "addProduct_Btn";
             addProduct_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
             addProduct_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
@@ -107,7 +118,8 @@
             // 
             // addCategory_Btn
             // 
-            addCategory_Btn.Location = new Point(710, 21);
+            addCategory_Btn.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            addCategory_Btn.Location = new Point(12, 14);
             addCategory_Btn.Name = "addCategory_Btn";
             addCategory_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
             addCategory_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
@@ -177,6 +189,8 @@
             Search_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 7);
             Search_Txt.TabIndex = 15;
             Search_Txt.Text = "ძებნა...";
+            Search_Txt.TextChanged += Search_Txt_TextChanged;
+            Search_Txt.Click += Search_Txt_Click;
             // 
             // search_Icon
             // 
@@ -348,24 +362,33 @@
             addBrand_Btn.Values.Text = "  ბრენდის დამატება";
             addBrand_Btn.Click += addBrand_Btn_Click;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(addProduct_Btn);
+            panel1.Controls.Add(addCategory_Btn);
+            panel1.Location = new Point(694, 3);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(678, 102);
+            panel1.TabIndex = 20;
+            // 
             // Products_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 252, 252);
+            Controls.Add(panel1);
             Controls.Add(addBrand_Btn);
             Controls.Add(delete_Btn);
             Controls.Add(edit_Btn);
             Controls.Add(search_Icon);
             Controls.Add(Search_Txt);
-            Controls.Add(addCategory_Btn);
-            Controls.Add(addProduct_Btn);
             Controls.Add(productData);
             Name = "Products_UC";
             Size = new Size(1375, 755);
             Load += Products_UC_Load;
             ((System.ComponentModel.ISupportInitialize)productData).EndInit();
             ((System.ComponentModel.ISupportInitialize)search_Icon).EndInit();
+            panel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -381,5 +404,6 @@
         private Krypton.Toolkit.KryptonButton addBrand_Btn;
         private Krypton.Toolkit.KryptonButton delete_Btn;
         private Krypton.Toolkit.KryptonButton edit_Btn;
+        private Panel panel1;
     }
 }
