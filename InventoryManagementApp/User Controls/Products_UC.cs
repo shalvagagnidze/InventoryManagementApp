@@ -67,32 +67,70 @@ namespace InventoryManagementApp.User_Controls
 
         private void Search_Txt_TextChanged(object sender, EventArgs e)
         {
-            if (Search_Txt.Text.Length > 0)
+            if (sortProd_Btn.Location == new System.Drawing.Point(350, 8))
             {
-                string searchText = Search_Txt.Text;
 
-                Search(searchText);
-            }
-            else
-            {
-                productData.DataSource = _db.Products.Select(s => new
+
+                if (Search_Txt.Text.Length > 0)
                 {
-                    კოდი = s.Id,
-                    დასახელება = s.Name,
-                    ბრენდი = s.Brand.Name,
-                    ფასი = s.Price,
-                    თვითღირებულება = s.NetCost,
-                    კატეგორია = s.Category.Name,
-                    რაოდენობა = s.TotalAmount,
-                    სტატუსი = s.Status,
-                    აღწერა = s.Description
-                }).ToList();
+                    string searchText = Search_Txt.Text;
 
+                    SearchProduct(searchText);
+                }
+                else
+                {
+                    productData.DataSource = _db.Products.Select(s => new
+                    {
+                        კოდი = s.Id,
+                        დასახელება = s.Name,
+                        ბრენდი = s.Brand.Name,
+                        ფასი = s.Price,
+                        თვითღირებულება = s.NetCost,
+                        კატეგორია = s.Category.Name,
+                        რაოდენობა = s.TotalAmount,
+                        სტატუსი = s.Status,
+                        აღწერა = s.Description
+                    }).ToList();
+
+                }
+            }
+            else if (sortCat_Btn.Location == new System.Drawing.Point(350, 8))
+            {
+                if (Search_Txt.Text.Length > 0)
+                {
+                    string searchText = Search_Txt.Text;
+                    SearchCategory(searchText);
+                }
+                else
+                {
+                    productData.DataSource = _db.Categories.Select(c => new
+                    {
+                        დასახელება = c.Name,
+                        აღწერა = c.Description
+                    }).ToList();
+                }
+            }
+            else if (sortBrand_Btn.Location == new System.Drawing.Point(350, 8))
+            {
+                if (Search_Txt.Text.Length > 0)
+                {
+                    string searchText = Search_Txt.Text;
+                    SearchBrand(searchText);
+                }
+                else
+                {
+                    productData.DataSource = _db.Brands.Select(b => new
+                    {
+                        დასახელება = b.Name,
+                        მწარმოებელი = b.Origin,
+                        აღწერა = b.Description
+                    }).ToList();
+                }
             }
 
         }
 
-        public void Search(string searchText)
+        public void SearchProduct(string searchText)
         {
             var search = _db.Products.Where(s => s.Name.Contains(searchText) ||
                                             s.Id.ToString().Contains(searchText) ||
@@ -104,7 +142,7 @@ namespace InventoryManagementApp.User_Controls
                                          დასახელება = s.Name,
                                          ბრენდი = s.Brand.Name,
                                          ფასი = s.Price,
-                                         ნეტო = s.NetCost,
+                                         თვითღირებულება = s.NetCost,
                                          კატეგორია = s.Category.Name,
                                          რაოდენობა = s.TotalAmount,
                                          სტატუსი = s.Status,
@@ -113,6 +151,32 @@ namespace InventoryManagementApp.User_Controls
 
             productData.DataSource = search;
 
+        }
+
+        public void SearchCategory(string searchText)
+        {
+            var search = _db.Categories.Where(c => c.Name.Contains(searchText))
+                                       .Select(c => new
+                                       {
+                                           დასახელება = c.Name,
+                                           აღწერა = c.Description
+                                       }).ToList();
+
+            productData.DataSource = search;
+        }
+
+        public void SearchBrand(string searchText)
+        {
+            var search = _db.Brands.Where(b => b.Name.Contains(searchText) ||
+                                          b.Origin.Contains(searchText))
+                                   .Select(b => new
+                                   {
+                                       დასახელება = b.Name,
+                                       მწარმოებელი = b.Origin,
+                                       აღწერა = b.Description
+                                   }).ToList();
+
+            productData.DataSource = search;
         }
 
         private void Search_Txt_Click(object sender, EventArgs e)
@@ -129,11 +193,11 @@ namespace InventoryManagementApp.User_Controls
             sortProd_Btn.Visible = false;
             sortBrand_Btn.Visible = false;
 
-            sortCat_Btn.Location = new System.Drawing.Point(350,8);
+            sortCat_Btn.Location = new System.Drawing.Point(350, 8);
             sortProd_Btn.Location = new System.Drawing.Point(179, 8);
-            sortBrand_Btn.Location = new System.Drawing.Point(8,8);
+            sortBrand_Btn.Location = new System.Drawing.Point(8, 8);
 
-           
+
 
             productData.DataSource = _db.Categories.Select(c => new
             {
@@ -147,11 +211,11 @@ namespace InventoryManagementApp.User_Controls
             sortProd_Btn.Visible = false;
             sortCat_Btn.Visible = false;
 
-            sortBrand_Btn.Location = new System.Drawing.Point(350,8);
-            sortProd_Btn.Location = new System.Drawing.Point(179,8);
-            sortCat_Btn.Location = new System.Drawing.Point(8,8);          
+            sortBrand_Btn.Location = new System.Drawing.Point(350, 8);
+            sortProd_Btn.Location = new System.Drawing.Point(179, 8);
+            sortCat_Btn.Location = new System.Drawing.Point(8, 8);
 
-            
+
 
             productData.DataSource = _db.Brands.Select(c => new
             {
@@ -169,8 +233,8 @@ namespace InventoryManagementApp.User_Controls
             sortProd_Btn.Location = new System.Drawing.Point(350, 8);
             sortCat_Btn.Location = new System.Drawing.Point(179, 8);
             sortBrand_Btn.Location = new System.Drawing.Point(8, 8);
-           
-            
+
+
             panel2.SendToBack();
             productData.DataSource = _db.Products.Select(s => new
             {
@@ -186,12 +250,42 @@ namespace InventoryManagementApp.User_Controls
             }).ToList();
         }
 
-        private void kryptonButton1_Click(object sender, EventArgs e)
-        {           
+        private void sort_Btn_Click(object sender, EventArgs e)
+        {
             panel2.Visible = true;
             sortProd_Btn.Visible = true;
             sortCat_Btn.Visible = true;
             sortBrand_Btn.Visible = true;
+        }
+
+        private void delete_Btn_Click(object sender, EventArgs e)
+        {
+            var row = productData.CurrentRow;           
+            var prodIndex = productData.CurrentRow.Cells["კოდი"].Value.ToString();
+            var prodId = int.Parse(prodIndex);
+            var product = _db.Products.FirstOrDefault(p => p.Id == prodId);
+
+            productData.Rows.Remove(row);
+
+            _db.Products.Remove(product);
+
+            var result = _db.SaveChanges();
+
+            if(result > 0)
+            {
+                
+                MessageBox.Show("პროდუქტი წარმატებით წაიშალა!",
+                               "პროდუქტის წაშლა",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Information);              
+            }
+            else
+            {
+                MessageBox.Show("პროდუქტის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
+                               "შეცდომა წაშლისას",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Warning);
+            }
         }
     }
 }

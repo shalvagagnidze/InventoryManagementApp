@@ -42,7 +42,7 @@
             panel2 = new Panel();
             sortBrand_Btn = new Krypton.Toolkit.KryptonButton();
             sortCat_Btn = new Krypton.Toolkit.KryptonButton();
-            kryptonButton1 = new Krypton.Toolkit.KryptonButton();
+            sort_Btn = new Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)productData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)search_Icon).BeginInit();
             panel1.SuspendLayout();
@@ -58,7 +58,6 @@
             productData.Name = "productData";
             productData.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             productData.ReadOnly = true;
-            productData.RowHeadersVisible = false;
             productData.RowHeadersWidth = 62;
             productData.RowTemplate.DividerHeight = 3;
             productData.RowTemplate.Resizable = DataGridViewTriState.False;
@@ -317,6 +316,7 @@
             delete_Btn.Values.ExtraText = "       ";
             delete_Btn.Values.Image = (Image)resources.GetObject("delete_Btn.Values.Image");
             delete_Btn.Values.Text = "წაშლა";
+            delete_Btn.Click += delete_Btn_Click;
             // 
             // addBrand_Btn
             // 
@@ -553,66 +553,66 @@
             sortCat_Btn.Values.Text = "  კატეგორია";
             sortCat_Btn.Click += sortCat_Btn_Click;
             // 
-            // kryptonButton1
+            // sort_Btn
             // 
-            kryptonButton1.Location = new Point(1319, 136);
-            kryptonButton1.Name = "kryptonButton1";
-            kryptonButton1.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
-            kryptonButton1.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
-            kryptonButton1.OverrideDefault.Back.ColorAngle = 45F;
-            kryptonButton1.OverrideDefault.Border.Color1 = Color.FromArgb(8, 142, 254);
-            kryptonButton1.OverrideDefault.Border.Color2 = Color.FromArgb(8, 142, 254);
-            kryptonButton1.OverrideDefault.Border.ColorAngle = 45F;
-            kryptonButton1.OverrideDefault.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            kryptonButton1.OverrideDefault.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            kryptonButton1.OverrideDefault.Border.Rounding = 20F;
-            kryptonButton1.OverrideDefault.Border.Width = 2;
-            kryptonButton1.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
-            kryptonButton1.Size = new Size(53, 45);
-            kryptonButton1.StateCommon.Back.Color1 = Color.FromArgb(250, 252, 252);
-            kryptonButton1.StateCommon.Back.Color2 = Color.FromArgb(250, 252, 252);
-            kryptonButton1.StateCommon.Back.ColorAngle = 45F;
-            kryptonButton1.StateCommon.Border.Color1 = Color.FromArgb(233, 19, 69);
-            kryptonButton1.StateCommon.Border.Color2 = Color.FromArgb(210, 13, 59);
-            kryptonButton1.StateCommon.Border.ColorAngle = 45F;
-            kryptonButton1.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            kryptonButton1.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            kryptonButton1.StateCommon.Border.Rounding = 22F;
-            kryptonButton1.StateCommon.Border.Width = 2;
-            kryptonButton1.StateCommon.Content.ShortText.Color1 = Color.FromArgb(228, 9, 60);
-            kryptonButton1.StateCommon.Content.ShortText.Font = new Font("Georgia", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            kryptonButton1.StatePressed.Back.Color1 = Color.FromArgb(20, 145, 198);
-            kryptonButton1.StatePressed.Back.Color2 = Color.FromArgb(22, 121, 206);
-            kryptonButton1.StatePressed.Back.ColorAngle = 135F;
-            kryptonButton1.StatePressed.Border.Color1 = Color.FromArgb(20, 145, 198);
-            kryptonButton1.StatePressed.Border.Color2 = Color.FromArgb(22, 121, 206);
-            kryptonButton1.StatePressed.Border.ColorAngle = 135F;
-            kryptonButton1.StatePressed.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            kryptonButton1.StatePressed.Border.Rounding = 20F;
-            kryptonButton1.StatePressed.Border.Width = 1;
-            kryptonButton1.StateTracking.Back.Color1 = Color.FromArgb(8, 142, 254);
-            kryptonButton1.StateTracking.Back.Color2 = Color.FromArgb(6, 174, 244);
-            kryptonButton1.StateTracking.Back.ColorAngle = 45F;
-            kryptonButton1.StateTracking.Border.Color1 = Color.FromArgb(6, 174, 244);
-            kryptonButton1.StateTracking.Border.Color2 = Color.FromArgb(8, 142, 254);
-            kryptonButton1.StateTracking.Border.ColorAngle = 45F;
-            kryptonButton1.StateTracking.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            kryptonButton1.StateTracking.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            kryptonButton1.StateTracking.Border.Rounding = 20F;
-            kryptonButton1.StateTracking.Border.Width = 1;
-            kryptonButton1.StateTracking.Content.ShortText.Color1 = Color.White;
-            kryptonButton1.TabIndex = 23;
-            kryptonButton1.Values.ExtraText = "       ";
-            kryptonButton1.Values.Image = (Image)resources.GetObject("kryptonButton1.Values.Image");
-            kryptonButton1.Values.Text = "";
-            kryptonButton1.Click += kryptonButton1_Click;
+            sort_Btn.Location = new Point(1319, 136);
+            sort_Btn.Name = "sort_Btn";
+            sort_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
+            sort_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
+            sort_Btn.OverrideDefault.Back.ColorAngle = 45F;
+            sort_Btn.OverrideDefault.Border.Color1 = Color.FromArgb(8, 142, 254);
+            sort_Btn.OverrideDefault.Border.Color2 = Color.FromArgb(8, 142, 254);
+            sort_Btn.OverrideDefault.Border.ColorAngle = 45F;
+            sort_Btn.OverrideDefault.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            sort_Btn.OverrideDefault.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            sort_Btn.OverrideDefault.Border.Rounding = 20F;
+            sort_Btn.OverrideDefault.Border.Width = 2;
+            sort_Btn.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            sort_Btn.Size = new Size(53, 45);
+            sort_Btn.StateCommon.Back.Color1 = Color.FromArgb(250, 252, 252);
+            sort_Btn.StateCommon.Back.Color2 = Color.FromArgb(250, 252, 252);
+            sort_Btn.StateCommon.Back.ColorAngle = 45F;
+            sort_Btn.StateCommon.Border.Color1 = Color.FromArgb(233, 19, 69);
+            sort_Btn.StateCommon.Border.Color2 = Color.FromArgb(210, 13, 59);
+            sort_Btn.StateCommon.Border.ColorAngle = 45F;
+            sort_Btn.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            sort_Btn.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            sort_Btn.StateCommon.Border.Rounding = 22F;
+            sort_Btn.StateCommon.Border.Width = 2;
+            sort_Btn.StateCommon.Content.ShortText.Color1 = Color.FromArgb(228, 9, 60);
+            sort_Btn.StateCommon.Content.ShortText.Font = new Font("Georgia", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            sort_Btn.StatePressed.Back.Color1 = Color.FromArgb(20, 145, 198);
+            sort_Btn.StatePressed.Back.Color2 = Color.FromArgb(22, 121, 206);
+            sort_Btn.StatePressed.Back.ColorAngle = 135F;
+            sort_Btn.StatePressed.Border.Color1 = Color.FromArgb(20, 145, 198);
+            sort_Btn.StatePressed.Border.Color2 = Color.FromArgb(22, 121, 206);
+            sort_Btn.StatePressed.Border.ColorAngle = 135F;
+            sort_Btn.StatePressed.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            sort_Btn.StatePressed.Border.Rounding = 20F;
+            sort_Btn.StatePressed.Border.Width = 1;
+            sort_Btn.StateTracking.Back.Color1 = Color.FromArgb(8, 142, 254);
+            sort_Btn.StateTracking.Back.Color2 = Color.FromArgb(6, 174, 244);
+            sort_Btn.StateTracking.Back.ColorAngle = 45F;
+            sort_Btn.StateTracking.Border.Color1 = Color.FromArgb(6, 174, 244);
+            sort_Btn.StateTracking.Border.Color2 = Color.FromArgb(8, 142, 254);
+            sort_Btn.StateTracking.Border.ColorAngle = 45F;
+            sort_Btn.StateTracking.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            sort_Btn.StateTracking.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            sort_Btn.StateTracking.Border.Rounding = 20F;
+            sort_Btn.StateTracking.Border.Width = 1;
+            sort_Btn.StateTracking.Content.ShortText.Color1 = Color.White;
+            sort_Btn.TabIndex = 23;
+            sort_Btn.Values.ExtraText = "       ";
+            sort_Btn.Values.Image = (Image)resources.GetObject("sort_Btn.Values.Image");
+            sort_Btn.Values.Text = "";
+            sort_Btn.Click += sort_Btn_Click;
             // 
             // Products_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 252, 252);
-            Controls.Add(kryptonButton1);
+            Controls.Add(sort_Btn);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(addBrand_Btn);
@@ -648,6 +648,6 @@
         private Panel panel2;
         private Krypton.Toolkit.KryptonButton sortBrand_Btn;
         private Krypton.Toolkit.KryptonButton sortCat_Btn;
-        private Krypton.Toolkit.KryptonButton kryptonButton1;
+        private Krypton.Toolkit.KryptonButton sort_Btn;
     }
 }
