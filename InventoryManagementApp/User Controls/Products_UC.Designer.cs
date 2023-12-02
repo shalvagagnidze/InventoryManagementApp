@@ -555,7 +555,7 @@
             // 
             // sort_Btn
             // 
-            sort_Btn.Location = new Point(1319, 136);
+            sort_Btn.Location = new Point(1319, 132);
             sort_Btn.Name = "sort_Btn";
             sort_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
             sort_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);

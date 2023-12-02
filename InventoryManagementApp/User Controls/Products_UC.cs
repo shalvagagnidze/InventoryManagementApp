@@ -260,31 +260,118 @@ namespace InventoryManagementApp.User_Controls
 
         private void delete_Btn_Click(object sender, EventArgs e)
         {
-            var row = productData.CurrentRow;           
-            var prodIndex = productData.CurrentRow.Cells["კოდი"].Value.ToString();
-            var prodId = int.Parse(prodIndex);
-            var product = _db.Products.FirstOrDefault(p => p.Id == prodId);
 
-            productData.Rows.Remove(row);
-
-            _db.Products.Remove(product);
-
-            var result = _db.SaveChanges();
-
-            if(result > 0)
+            if (sortProd_Btn.Location == new System.Drawing.Point(350, 8))
             {
-                
-                MessageBox.Show("პროდუქტი წარმატებით წაიშალა!",
-                               "პროდუქტის წაშლა",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Information);              
+                var row = productData.CurrentRow;
+                var prodIndex = productData.CurrentRow.Cells["კოდი"].Value.ToString();               
+                var prodId = int.Parse(prodIndex);
+                var product = _db.Products.FirstOrDefault(p => p.Id == prodId);
+                              
+
+                _db.Products.Remove(product);
+                var result = _db.SaveChanges();
+
+                if (result > 0)
+                {
+
+                    MessageBox.Show("პროდუქტი წარმატებით წაიშალა!",
+                                   "პროდუქტის წაშლა",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Information);
+
+                    productData.DataSource = _db.Products.Select(s => new
+                    {
+                        კოდი = s.Id,
+                        დასახელება = s.Name,
+                        ბრენდი = s.Brand.Name,
+                        ფასი = s.Price,
+                        თვითღირებულება = s.NetCost,
+                        კატეგორია = s.Category.Name,
+                        რაოდენობა = s.TotalAmount,
+                        სტატუსი = s.Status,
+                        აღწერა = s.Description
+                    }).ToList();
+
+                }
+                else
+                {
+                    MessageBox.Show("პროდუქტის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
+                                   "შეცდომა წაშლისას",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Warning);
+                }
             }
-            else
+
+            if (sortCat_Btn.Location == new System.Drawing.Point(350, 8))
             {
-                MessageBox.Show("პროდუქტის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
-                               "შეცდომა წაშლისას",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Warning);
+                var row = productData.CurrentRow;
+                var catBrandName = productData.CurrentRow.Cells["დასახელება"].Value.ToString();              
+                var category = _db.Categories.FirstOrDefault(p => p.Name == catBrandName);
+
+
+                _db.Categories.Remove(category);
+
+                var result = _db.SaveChanges();
+
+                if (result > 0)
+                {
+
+                    MessageBox.Show("კატეგორია წარმატებით წაიშალა!",
+                                   "კატეგორიის წაშლა",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Information);
+
+                    productData.DataSource = _db.Categories.Select(c => new
+                    {                      
+                        დასახელება = c.Name,                      
+                        აღწერა = c.Description
+
+                    }).ToList();
+
+                }
+                else
+                {
+                    MessageBox.Show("კატეგორიის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
+                                   "შეცდომა წაშლისას",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Warning);
+                }
+            }
+
+            if (sortBrand_Btn.Location == new System.Drawing.Point(350, 8))
+            {
+                var row = productData.CurrentRow;
+                var catBrandName = productData.CurrentRow.Cells["დასახელება"].Value.ToString();
+                var brand = _db.Brands.FirstOrDefault(p => p.Name == catBrandName);
+
+                _db.Brands.Remove(brand);
+
+                var result = _db.SaveChanges();
+
+                if (result > 0)
+                {
+
+                    MessageBox.Show("ბრენდი წარმატებით წაიშალა!",
+                                   "ბრენდის წაშლა",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Information);
+
+                    productData.DataSource = _db.Brands.Select(c => new
+                    {
+                        დასახელება = c.Name,
+                        აღწერა = c.Description
+
+                    }).ToList();
+
+                }
+                else
+                {
+                    MessageBox.Show("ბრენდის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
+                                   "შეცდომა წაშლისას",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Warning);
+                }
             }
         }
     }
