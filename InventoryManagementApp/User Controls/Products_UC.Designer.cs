@@ -263,6 +263,7 @@
             edit_Btn.Values.ExtraText = "    ";
             edit_Btn.Values.Image = Properties.Resources.Edit_48;
             edit_Btn.Values.Text = "  რედაქტირება";
+            edit_Btn.Click += edit_Btn_Click;
             // 
             // delete_Btn
             // 

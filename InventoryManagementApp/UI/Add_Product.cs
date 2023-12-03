@@ -20,7 +20,7 @@ namespace InventoryManagementApp.UI
 
 
 
-        int id, categoryId, brandId, productPrice, productNetCost,productAmount;
+        int id, categoryId, brandId, productPrice, productNetCost, productAmount;
 
         string productName, productStatus = "მარაგში", productDescription, categoryName, brandName;
         public Add_Product()
@@ -81,7 +81,7 @@ namespace InventoryManagementApp.UI
                string.IsNullOrWhiteSpace(price_Txt.Text) ||
                string.IsNullOrWhiteSpace(netCost_Txt.Text) ||
                string.IsNullOrWhiteSpace(prodDesc_Txt.Text))
-                                                              
+
             {
                 MessageBox.Show("გთხოვთ, შეავსოთ მოცემული ყველა ველი",
                                 "შესავსები ველი ცარიელია",
@@ -93,7 +93,7 @@ namespace InventoryManagementApp.UI
                 AddProduct();
             }
 
-            
+
         }
 
         void AddProduct()
@@ -108,10 +108,10 @@ namespace InventoryManagementApp.UI
                 Name = productName,
                 Price = productPrice,
                 NetCost = productNetCost,
-                TotalAmount = productAmount,
+                //TotalAmount = productAmount,
                 Category = categories,
                 Brand = brands,
-                Status = productStatus,
+                //Status = productStatus,
                 Description = productDescription
 
             };
@@ -141,7 +141,7 @@ namespace InventoryManagementApp.UI
         private void categoryListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             //categoryName = categoryListBox.Text;
-           
+
         }
 
         private void brandList_SelectedIndexChanged(object sender, EventArgs e)

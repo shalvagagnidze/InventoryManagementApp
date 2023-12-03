@@ -46,13 +46,13 @@ namespace InventoryManagementApp
             if (user != null)
             {
                 this.Hide();
-                switch (user.RoleID)
+                switch (user.Role.ToString())
                 {
-                    case 1:
+                    case "Admin":
                         AdminUI adminUI = new AdminUI();
                         adminUI.Show();
                         break;
-                    case 2:
+                    case "Moderator":
                         ModeratorUI moderatorUI = new ModeratorUI();
                         moderatorUI.Show();
                         break;

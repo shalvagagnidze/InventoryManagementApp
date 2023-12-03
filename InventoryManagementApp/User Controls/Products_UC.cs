@@ -37,7 +37,7 @@ namespace InventoryManagementApp.User_Controls
                 ფასი = s.Price,
                 თვითღირებულება = s.NetCost,
                 კატეგორია = s.Category.Name,
-                რაოდენობა = s.TotalAmount,
+                //რაოდენობა = s.TotalAmount,
                 სტატუსი = s.Status,
                 აღწერა = s.Description
             }).ToList();
@@ -87,7 +87,7 @@ namespace InventoryManagementApp.User_Controls
                         ფასი = s.Price,
                         თვითღირებულება = s.NetCost,
                         კატეგორია = s.Category.Name,
-                        რაოდენობა = s.TotalAmount,
+                       // რაოდენობა = s.TotalAmount,
                         სტატუსი = s.Status,
                         აღწერა = s.Description
                     }).ToList();
@@ -144,7 +144,7 @@ namespace InventoryManagementApp.User_Controls
                                          ფასი = s.Price,
                                          თვითღირებულება = s.NetCost,
                                          კატეგორია = s.Category.Name,
-                                         რაოდენობა = s.TotalAmount,
+                                        // რაოდენობა = s.TotalAmount,
                                          სტატუსი = s.Status,
                                          აღწერა = s.Description
                                      }).ToList();
@@ -244,7 +244,7 @@ namespace InventoryManagementApp.User_Controls
                 ფასი = s.Price,
                 თვითღირებულება = s.NetCost,
                 კატეგორია = s.Category.Name,
-                რაოდენობა = s.TotalAmount,
+               // რაოდენობა = s.TotalAmount,
                 სტატუსი = s.Status,
                 აღწერა = s.Description
             }).ToList();
@@ -264,11 +264,11 @@ namespace InventoryManagementApp.User_Controls
             if (sortProd_Btn.Location == new System.Drawing.Point(350, 8))
             {
                 var row = productData.CurrentRow;
-                var prodIndex = productData.CurrentRow.Cells["კოდი"].Value.ToString();               
+                var prodIndex = productData.CurrentRow.Cells["კოდი"].Value.ToString();
                 var prodId = int.Parse(prodIndex);
                 var product = _db.Products.FirstOrDefault(p => p.Id == prodId);
-                              
 
+                
                 _db.Products.Remove(product);
                 var result = _db.SaveChanges();
 
@@ -288,7 +288,7 @@ namespace InventoryManagementApp.User_Controls
                         ფასი = s.Price,
                         თვითღირებულება = s.NetCost,
                         კატეგორია = s.Category.Name,
-                        რაოდენობა = s.TotalAmount,
+                        //რაოდენობა = s.TotalAmount,
                         სტატუსი = s.Status,
                         აღწერა = s.Description
                     }).ToList();
@@ -306,7 +306,7 @@ namespace InventoryManagementApp.User_Controls
             if (sortCat_Btn.Location == new System.Drawing.Point(350, 8))
             {
                 var row = productData.CurrentRow;
-                var catBrandName = productData.CurrentRow.Cells["დასახელება"].Value.ToString();              
+                var catBrandName = productData.CurrentRow.Cells["დასახელება"].Value.ToString();
                 var category = _db.Categories.FirstOrDefault(p => p.Name == catBrandName);
 
 
@@ -323,8 +323,8 @@ namespace InventoryManagementApp.User_Controls
                                    MessageBoxIcon.Information);
 
                     productData.DataSource = _db.Categories.Select(c => new
-                    {                      
-                        დასახელება = c.Name,                      
+                    {
+                        დასახელება = c.Name,
                         აღწერა = c.Description
 
                     }).ToList();
@@ -373,6 +373,11 @@ namespace InventoryManagementApp.User_Controls
                                    MessageBoxIcon.Warning);
                 }
             }
+        }
+
+        private void edit_Btn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

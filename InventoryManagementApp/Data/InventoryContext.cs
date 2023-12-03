@@ -1,89 +1,85 @@
 ﻿using InventoryManagementApp.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace InventoryManagementApp.Data
+namespace InventoryManagementApp.Data;
+
+public class InventoryContext : DbContext
 {
-    public class InventoryContext : DbContext
+    public InventoryContext()
     {
-        public InventoryContext()
-        {
 
-        }
-        public InventoryContext(DbContextOptions<InventoryContext> options) 
-            : base(options)
-        {
+    }
+    public InventoryContext(DbContextOptions<InventoryContext> options)
+        : base(options)
+    {
 
-        }
-        public DbSet<Brand> Brands { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Location> Locations { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<Sale> Sales { get; set; }
-        public DbSet<User> Users { get; set; }
+    }
+    public DbSet<Brand> Brands { get; set; }
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Product> Products { get; set; }
+    public DbSet<Sale> Sales { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<AddAmount> AddAmounts { get; set; }
+    public DbSet<Storage> Storages { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["InventoryDataBase"].ConnectionString);
-        }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["InventoryDataBase"].ConnectionString);
+    }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Product>()
-                        .HasKey(p => p.Id);
+        modelBuilder.Entity<Product>().HasQueryFilter(o => !o.IsDeleted);
+        modelBuilder.Entity<User>().HasQueryFilter(o => !o.IsDeleted);
 
-            modelBuilder.Entity<Product>()
-                        .Property(p => p.Id)
-                        .ValueGeneratedNever();
+        modelBuilder.Entity<Product>()
+                    .HasKey(p => p.Id);
 
-            modelBuilder.Entity<Product>()
-                        .HasOne(p => p.Category)
-                        .WithMany(c => c.Products)
-                        .HasForeignKey(p => p.CategoryID);
+        modelBuilder.Entity<Product>()
+                    .Property(p => p.Id)
+                    .ValueGeneratedNever();
 
-            modelBuilder.Entity<Product>()
-                        .HasOne(p => p.Brand)
-                        .WithMany(b => b.Products)
-                        .HasForeignKey(p => p.BrandID);
+        modelBuilder.Entity<Product>()
+                    .HasOne(p => p.Category)
+                    .WithMany(c => c.Products);
 
-            modelBuilder.Entity<Location>()
-                        .HasKey(l => l.Id);
+        modelBuilder.Entity<Product>()
+                    .HasOne(p => p.Storage);
 
-            modelBuilder.Entity<Role>()
-                        .HasKey(r => r.Id);
+        modelBuilder.Entity<Product>()
+                    .HasOne(p => p.AddAmount)
+                    .WithOne(a => a.Product)
+                    .HasForeignKey<AddAmount>(a => a.Id);
 
-            modelBuilder.Entity<Brand>()
-                        .HasKey(b => b.Id);
+        modelBuilder.Entity<Product>()
+                    .HasOne(p => p.Storage)
+                    .WithOne(s => s.Product)
+                    .HasForeignKey<Storage>(s => s.Id);
 
-            modelBuilder.Entity<Sale>()
-                        .HasKey(s => s.Id);
+        modelBuilder.Entity<Product>()
+                    .HasOne(p => p.Brand)
+                    .WithMany(b => b.Products);
 
-            modelBuilder.Entity<Sale>()
-                        .HasOne(s => s.Product)
-                        .WithMany(s => s.Sales)
-                        .HasForeignKey(s => s.ProductID);
+        modelBuilder.Entity<Brand>()
+                    .HasKey(b => b.Id);
 
-            modelBuilder.Entity<Sale>()
-                        .HasOne(s => s.Location)
-                        .WithMany(s => s.Sales)
-                        .HasForeignKey(s => s.LocationID);
+        modelBuilder.Entity<Sale>()
+                    .HasKey(s => s.Id);
 
-            modelBuilder.Entity<User>()
-                        .HasKey(u => u.Id);
+        modelBuilder.Entity<Sale>()
+                    .HasOne(s => s.Product)
+                    .WithMany(s => s.Sales);
 
-            modelBuilder.Entity<User>()
-                        .HasOne(u => u.Role)
-                        .WithMany(u => u.Users)
-                        .HasForeignKey(u => u.RoleID);
+        modelBuilder.Entity<User>()
+                    .HasKey(u => u.Id);
 
-        }
+        modelBuilder.Entity<Storage>()
+                    .HasKey(u => u.Id);
+
+        modelBuilder.Entity<AddAmount>()
+                    .HasKey(a => a.Id);
     }
 }
