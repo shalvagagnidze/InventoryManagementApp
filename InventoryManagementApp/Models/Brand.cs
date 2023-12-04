@@ -7,4 +7,9 @@ public class Brand
     public string? Origin { get; set; }
     public string? Description { get; set; }
     public List<Product>? Products { get; }
+    public bool IsDeleted { get; set; }
+    public void DeleteBrand()
+    {
+        IsDeleted = true;
+    }
 }

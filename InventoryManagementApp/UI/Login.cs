@@ -2,70 +2,70 @@
 using InventoryManagementApp.Models;
 using InventoryManagementApp.UI;
 using Krypton.Toolkit;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
-namespace InventoryManagementApp
-{
-    public partial class Login : KryptonForm
-    {
-        private InventoryContext _db = new InventoryContext();
-        
-        public Login()
-        {
-            InitializeComponent();
-        }
+namespace InventoryManagementApp;
 
-        private void Regist_Button_Click(object sender, EventArgs e)
+public partial class Login : KryptonForm
+{
+    private InventoryContext _db = new InventoryContext();
+
+    public Login()
+    {
+        InitializeComponent();
+    }
+
+    private void Regist_Button_Click(object sender, EventArgs e)
+    {
+        this.Hide();
+        Registration registration = new Registration();
+        registration.Show();
+    }
+
+    private void showPass_CheckedChanged(object sender, EventArgs e)
+    {
+        if (showPass.Checked)
+        {
+            UPass_Text.PasswordChar = '\0';
+
+        }
+        else
+        {
+            UPass_Text.PasswordChar = '•';
+        }
+    }
+
+    private void Sign_Button_Click(object sender, EventArgs e)
+    {
+        string userName, password;
+
+        userName = UName_Text.Text;
+        password = UPass_Text.Text;
+
+        User user = _db.Users.FirstOrDefault(u => u.UserName == userName);
+
+        bool isValidPassword = BCrypt.Net.BCrypt.EnhancedVerify(password, user.UserPassword);
+
+        if (user != null || !isValidPassword)
         {
             this.Hide();
-            Registration registration = new Registration();
-            registration.Show();
-        }
-
-        private void showPass_CheckedChanged(object sender, EventArgs e)
-        {
-            if (showPass.Checked)
-            {             
-                UPass_Text.PasswordChar = '\0';
-                
-            }
-            else
-            {               
-                UPass_Text.PasswordChar = '•';
+            switch (user.Role.ToString())
+            {
+                case "Admin":
+                    AdminUI adminUI = new AdminUI();
+                    adminUI.Show();
+                    break;
+                case "Moderator":
+                    ModeratorUI moderatorUI = new ModeratorUI();
+                    moderatorUI.Show();
+                    break;
             }
         }
-
-        private void Sign_Button_Click(object sender, EventArgs e)
+        else
         {
-            string userName, password;
-
-            userName = UName_Text.Text;
-            password = UPass_Text.Text;
-
-            User user = _db.Users.FirstOrDefault(u => u.UserName == userName && u.UserPassword == password);
-
-            if (user != null)
-            {
-                this.Hide();
-                switch (user.Role.ToString())
-                {
-                    case "Admin":
-                        AdminUI adminUI = new AdminUI();
-                        adminUI.Show();
-                        break;
-                    case "Moderator":
-                        ModeratorUI moderatorUI = new ModeratorUI();
-                        moderatorUI.Show();
-                        break;
-                }
-            }
-            else
-            {
-                MessageBox.Show("მომხმარებლის სახელი ან პაროლი არასწორია, თავიდან სცადეთ",
-                                "შესვლა ვერ მოხერხდა",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                userName = "";
-                password = "";
-            }
+            MessageBox.Show("მომხმარებლის სახელი ან პაროლი არასწორია, თავიდან სცადეთ",
+                            "შესვლა ვერ მოხერხდა",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+            userName = "";
+            password = "";
         }
     }
 }

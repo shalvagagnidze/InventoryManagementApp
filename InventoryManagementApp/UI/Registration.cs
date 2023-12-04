@@ -39,7 +39,7 @@ public partial class Registration : KryptonForm
 
     private void Registration_Btn_Click(object sender, EventArgs e)
     {
-        string firstName, lastName, email, userName, userPass, confPass;
+        string firstName, lastName, email, userName, userPass, confPass, passHash;
         DateTime birthDate;
 
 
@@ -95,6 +95,8 @@ public partial class Registration : KryptonForm
         {
             if (userPass == confPass)
             {
+                passHash = BCrypt.Net.BCrypt.EnhancedHashPassword(userPass, 13);
+
                 User user = new User()
                 {
                     FirstName = firstName,
@@ -102,8 +104,8 @@ public partial class Registration : KryptonForm
                     Email = email,
                     BirthDate = birthDate,
                     UserName = userName,
-                    UserPassword = userPass,
-                    Role = role,
+                    UserPassword = passHash,
+                    Role = Role.Admin,
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 };

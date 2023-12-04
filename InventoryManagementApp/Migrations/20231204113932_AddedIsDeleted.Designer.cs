@@ -4,6 +4,7 @@ using InventoryManagementApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryManagementApp.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    partial class InventoryContextModelSnapshot : ModelSnapshot
+    [Migration("20231204113932_AddedIsDeleted")]
+    partial class AddedIsDeleted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,19 +181,6 @@ namespace InventoryManagementApp.Migrations
                     b.ToTable("Storages");
                 });
 
-            modelBuilder.Entity("InventoryManagementApp.Models.TotalSold", b =>
-                {
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TotalSoldAmount")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TotalSolds");
-                });
-
             modelBuilder.Entity("InventoryManagementApp.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -277,17 +267,6 @@ namespace InventoryManagementApp.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("InventoryManagementApp.Models.TotalSold", b =>
-                {
-                    b.HasOne("InventoryManagementApp.Models.Product", "Product")
-                        .WithOne("TotalSold")
-                        .HasForeignKey("InventoryManagementApp.Models.TotalSold", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("InventoryManagementApp.Models.Brand", b =>
                 {
                     b.Navigation("Products");
@@ -305,8 +284,6 @@ namespace InventoryManagementApp.Migrations
                     b.Navigation("Sales");
 
                     b.Navigation("Storage");
-
-                    b.Navigation("TotalSold");
                 });
 #pragma warning restore 612, 618
         }

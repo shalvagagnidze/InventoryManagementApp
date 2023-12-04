@@ -10,6 +10,7 @@ public class Product
     public decimal Price { get; set; }
     public decimal NetCost { get; set; }
     public Storage? Storage { get; set; }
+    public TotalSold? TotalSold { get; set; }
     public AddAmount? AddAmount { get; set; }
     public StockStatus? Status { get; set; }
     public string? Description { get; set; }

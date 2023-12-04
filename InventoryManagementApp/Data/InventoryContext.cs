@@ -22,6 +22,7 @@ public class InventoryContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<AddAmount> AddAmounts { get; set; }
     public DbSet<Storage> Storages { get; set; }
+    public DbSet<TotalSold> TotalSolds { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -34,6 +35,8 @@ public class InventoryContext : DbContext
 
         modelBuilder.Entity<Product>().HasQueryFilter(o => !o.IsDeleted);
         modelBuilder.Entity<User>().HasQueryFilter(o => !o.IsDeleted);
+        modelBuilder.Entity<Category>().HasQueryFilter(o => !o.IsDeleted);
+        modelBuilder.Entity<Brand>().HasQueryFilter(o => !o.IsDeleted);
 
         modelBuilder.Entity<Product>()
                     .HasKey(p => p.Id);
@@ -50,6 +53,9 @@ public class InventoryContext : DbContext
                     .HasOne(p => p.Storage);
 
         modelBuilder.Entity<Product>()
+                    .HasOne(p => p.TotalSold);
+
+        modelBuilder.Entity<Product>()
                     .HasOne(p => p.AddAmount)
                     .WithOne(a => a.Product)
                     .HasForeignKey<AddAmount>(a => a.Id);
@@ -58,6 +64,11 @@ public class InventoryContext : DbContext
                     .HasOne(p => p.Storage)
                     .WithOne(s => s.Product)
                     .HasForeignKey<Storage>(s => s.Id);
+
+        modelBuilder.Entity<Product>()
+                    .HasOne(p => p.TotalSold)
+                    .WithOne(s => s.Product)
+                    .HasForeignKey<TotalSold>(s => s.Id);
 
         modelBuilder.Entity<Product>()
                     .HasOne(p => p.Brand)
@@ -80,6 +91,9 @@ public class InventoryContext : DbContext
                     .HasKey(u => u.Id);
 
         modelBuilder.Entity<AddAmount>()
+                    .HasKey(a => a.Id);
+
+        modelBuilder.Entity<TotalSold>()
                     .HasKey(a => a.Id);
     }
 }

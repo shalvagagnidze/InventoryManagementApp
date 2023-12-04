@@ -2,6 +2,6 @@
 
 public enum StockStatus
 {
-    InStock,
-    SoldOut
+    მარაგშია,
+    ამოიწურა   
 }

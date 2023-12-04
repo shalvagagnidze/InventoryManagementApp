@@ -9,4 +9,9 @@ public class Category
     public string? Name { get; set; }
     public string? Description { get; set; }
     public List<Product>? Products { get; }
+    public bool IsDeleted { get; set; }
+    public void DeleteCategory()
+    {
+        IsDeleted = true;
+    }
 }

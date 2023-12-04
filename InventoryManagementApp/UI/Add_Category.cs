@@ -39,7 +39,8 @@ namespace InventoryManagementApp.UI
             Category category = new Category()
             {
                 Name = categoryName,
-                Description = categoryDescription
+                Description = categoryDescription,
+                IsDeleted = false
             };
 
             _db.Categories.Add(category);
