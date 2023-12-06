@@ -1,19 +1,23 @@
-﻿using InventoryManagementApp.Common.Enums;
-using InventoryManagementApp.Data;
+﻿using InventoryManagementApp.Data;
 using InventoryManagementApp.Models;
 using InventoryManagementApp.UI;
+using Krypton.Toolkit;
 using System.Data;
 
 namespace InventoryManagementApp.User_Controls;
 
 public partial class Products_UC : UserControl
 {
+    public static Products_UC instance;
+    public static Product transferProduct;
+    public static Category transferCategory;
+    public static Brand transferBrand;
     InventoryContext _db = new InventoryContext();
-
 
     public Products_UC()
     {
         InitializeComponent();
+        instance = this;
         panel2.BringToFront();
         sortCat_Btn.Visible = false;
         sortBrand_Btn.Visible = false;
@@ -22,6 +26,16 @@ public partial class Products_UC : UserControl
 
     private void Products_UC_Load(object sender, EventArgs e)
     {
+        KryptonDataGridViewButtonColumn c = (KryptonDataGridViewButtonColumn)productData.Columns["გაყიდვა"];
+        c = new KryptonDataGridViewButtonColumn
+        {
+            Name = "Sell",
+            HeaderText = "Buttons",
+            Text = "გაყიდვა",
+            UseColumnTextForButtonValue = true
+        };
+
+        productData.CellContentClick += new DataGridViewCellEventHandler(ProductData_CellContentClick);
 
         productData.DataSource = _db.Products.Select(s => new
         {
@@ -34,7 +48,8 @@ public partial class Products_UC : UserControl
             რაოდენობა = s.Storage.TotalAmount,
             დამატების_თარიღი = s.CreateDate,
             სტატუსი = s.Status,
-            აღწერა = s.Description
+            აღწერა = s.Description,
+            გაყიდვა = c.Text
         }).ToList();
 
 
@@ -375,6 +390,45 @@ public partial class Products_UC : UserControl
 
     private void edit_Btn_Click(object sender, EventArgs e)
     {
+        if (sortProd_Btn.Location == new System.Drawing.Point(350, 8))
+        {
+            var row = productData.CurrentRow;
+            var prodIndex = productData.CurrentRow.Cells["კოდი"].Value.ToString();
+            var product = _db.Products.FirstOrDefault(p => p.Code == prodIndex);
+            transferProduct = product;
+            Edit_Product edit_Product = new Edit_Product();
+            edit_Product.Show();
+        }
+        else if (sortCat_Btn.Location == new System.Drawing.Point(350, 8))
+        {
+            var row = productData.CurrentRow;
+            var catBrandName = productData.CurrentRow.Cells["დასახელება"].Value.ToString();
+            var category = _db.Categories.FirstOrDefault(p => p.Name == catBrandName);
+            transferCategory = category;
+            Edit_Category edit_Category = new Edit_Category();
+            edit_Category.Show();
+        }
+        else if (sortBrand_Btn.Location == new System.Drawing.Point(350, 8))
+        {
+            var row = productData.CurrentRow;
+            var catBrandName = productData.CurrentRow.Cells["დასახელება"].Value.ToString();
+            var brand = _db.Brands.FirstOrDefault(p => p.Name == catBrandName);
+            transferBrand = brand;
+            Edit_Brand edit_Brand = new Edit_Brand();
+            edit_Brand.Show();
+        }
+    }
 
+    private void ProductData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+    {
+
+        DataGridView grid = (DataGridView)sender;
+
+
+        if (grid.Columns[e.ColumnIndex].Name == "გაყიდვა" && e.RowIndex >= 0)
+        {
+            // Do something with the data
+
+        }
     }
 }

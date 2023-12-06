@@ -42,10 +42,6 @@ public class InventoryContext : DbContext
                     .HasKey(p => p.Id);
 
         modelBuilder.Entity<Product>()
-                    .Property(p => p.Id)
-                    .ValueGeneratedNever();
-
-        modelBuilder.Entity<Product>()
                     .HasOne(p => p.Category)
                     .WithMany(c => c.Products);
 
@@ -56,19 +52,27 @@ public class InventoryContext : DbContext
                     .HasOne(p => p.TotalSold);
 
         modelBuilder.Entity<Product>()
-                    .HasOne(p => p.AddAmount)
-                    .WithOne(a => a.Product)
-                    .HasForeignKey<AddAmount>(a => a.Id);
+                    .HasMany(p => p.AddAmount);
+
+        modelBuilder.Entity<Product>()
+                    .HasMany(p => p.AddAmount)
+                    .WithOne(a => a.Product);
 
         modelBuilder.Entity<Product>()
                     .HasOne(p => p.Storage)
                     .WithOne(s => s.Product)
-                    .HasForeignKey<Storage>(s => s.Id);
+                    .HasForeignKey<Storage>(s => s.Id)
+                    .HasPrincipalKey<Product>(p => p.Id);
+
+
 
         modelBuilder.Entity<Product>()
                     .HasOne(p => p.TotalSold)
                     .WithOne(s => s.Product)
-                    .HasForeignKey<TotalSold>(s => s.Id);
+                    .HasForeignKey<TotalSold>(p => p.Id)
+                    .HasPrincipalKey<Product>(s => s.Id);
+
+                    
 
         modelBuilder.Entity<Product>()
                     .HasOne(p => p.Brand)
@@ -92,6 +96,11 @@ public class InventoryContext : DbContext
 
         modelBuilder.Entity<AddAmount>()
                     .HasKey(a => a.Id);
+
+        modelBuilder.Entity<AddAmount>()
+                    .HasOne(a => a.Product)
+                    .WithMany(a => a.AddAmount);
+                    
 
         modelBuilder.Entity<TotalSold>()
                     .HasKey(a => a.Id);

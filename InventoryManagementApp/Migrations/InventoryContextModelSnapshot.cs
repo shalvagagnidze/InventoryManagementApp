@@ -25,7 +25,10 @@ namespace InventoryManagementApp.Migrations
             modelBuilder.Entity("InventoryManagementApp.Models.AddAmount", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("AdditionCreateDate")
                         .HasColumnType("datetime2");
@@ -33,7 +36,12 @@ namespace InventoryManagementApp.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("AddAmounts");
                 });
@@ -88,7 +96,10 @@ namespace InventoryManagementApp.Migrations
             modelBuilder.Entity("InventoryManagementApp.Models.Product", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("BrandId")
                         .HasColumnType("int");
@@ -234,10 +245,8 @@ namespace InventoryManagementApp.Migrations
             modelBuilder.Entity("InventoryManagementApp.Models.AddAmount", b =>
                 {
                     b.HasOne("InventoryManagementApp.Models.Product", "Product")
-                        .WithOne("AddAmount")
-                        .HasForeignKey("InventoryManagementApp.Models.AddAmount", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("AddAmount")
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Product");
                 });

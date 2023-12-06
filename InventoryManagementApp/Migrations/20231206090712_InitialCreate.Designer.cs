@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryManagementApp.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    [Migration("20231203210732_ChangedProperties")]
-    partial class ChangedProperties
+    [Migration("20231206090712_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,7 +28,10 @@ namespace InventoryManagementApp.Migrations
             modelBuilder.Entity("InventoryManagementApp.Models.AddAmount", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("AdditionCreateDate")
                         .HasColumnType("datetime2");
@@ -36,7 +39,12 @@ namespace InventoryManagementApp.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
 
                     b.ToTable("AddAmounts");
                 });
@@ -51,6 +59,9 @@ namespace InventoryManagementApp.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -74,6 +85,9 @@ namespace InventoryManagementApp.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -85,7 +99,10 @@ namespace InventoryManagementApp.Migrations
             modelBuilder.Entity("InventoryManagementApp.Models.Product", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("BrandId")
                         .HasColumnType("int");
@@ -175,6 +192,19 @@ namespace InventoryManagementApp.Migrations
                     b.ToTable("Storages");
                 });
 
+            modelBuilder.Entity("InventoryManagementApp.Models.TotalSold", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalSoldAmount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TotalSolds");
+                });
+
             modelBuilder.Entity("InventoryManagementApp.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -218,10 +248,8 @@ namespace InventoryManagementApp.Migrations
             modelBuilder.Entity("InventoryManagementApp.Models.AddAmount", b =>
                 {
                     b.HasOne("InventoryManagementApp.Models.Product", "Product")
-                        .WithOne("AddAmount")
-                        .HasForeignKey("InventoryManagementApp.Models.AddAmount", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("AddAmount")
+                        .HasForeignKey("ProductId");
 
                     b.Navigation("Product");
                 });
@@ -261,6 +289,17 @@ namespace InventoryManagementApp.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("InventoryManagementApp.Models.TotalSold", b =>
+                {
+                    b.HasOne("InventoryManagementApp.Models.Product", "Product")
+                        .WithOne("TotalSold")
+                        .HasForeignKey("InventoryManagementApp.Models.TotalSold", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("InventoryManagementApp.Models.Brand", b =>
                 {
                     b.Navigation("Products");
@@ -278,6 +317,8 @@ namespace InventoryManagementApp.Migrations
                     b.Navigation("Sales");
 
                     b.Navigation("Storage");
+
+                    b.Navigation("TotalSold");
                 });
 #pragma warning restore 612, 618
         }

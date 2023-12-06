@@ -1,4 +1,6 @@
-﻿namespace InventoryManagementApp.User_Controls
+﻿using System.Windows.Forms;
+
+namespace InventoryManagementApp.User_Controls
 {
     partial class Products_UC
     {
@@ -54,6 +56,7 @@
             productData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             productData.BorderStyle = BorderStyle.None;
             productData.ColumnHeadersHeight = 51;
+            productData.ImeMode = ImeMode.On;
             productData.Location = new Point(3, 200);
             productData.Name = "productData";
             productData.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
