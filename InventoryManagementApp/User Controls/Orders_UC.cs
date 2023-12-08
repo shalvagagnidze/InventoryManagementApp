@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace InventoryManagementApp.User_Controls
 {
-    public partial class Sales_UC : UserControl
+    public partial class Orders_UC : UserControl
     {
-        public Sales_UC()
+        public Orders_UC()
         {
             InitializeComponent();
         }

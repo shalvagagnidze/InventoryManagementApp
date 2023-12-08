@@ -1,6 +1,6 @@
 ﻿namespace InventoryManagementApp.User_Controls
 {
-    partial class Sales_UC
+    partial class Orders_UC
     {
         /// <summary> 
         /// Required designer variable.

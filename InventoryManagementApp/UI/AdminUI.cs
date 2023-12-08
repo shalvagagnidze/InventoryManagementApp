@@ -50,7 +50,7 @@ namespace InventoryManagementApp.UI
 
         private void sales_Btn_Click(object sender, EventArgs e)
         {
-            Sales_UC salesUC = new Sales_UC();
+            Orders_UC salesUC = new Orders_UC();
             addUserControl(salesUC);
         }
 

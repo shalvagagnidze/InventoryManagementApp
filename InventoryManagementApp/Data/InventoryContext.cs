@@ -39,7 +39,7 @@ public class InventoryContext : DbContext
         modelBuilder.Entity<Brand>().HasQueryFilter(o => !o.IsDeleted);
 
         modelBuilder.Entity<Product>()
-                    .HasKey(p => p.Id);
+                    .HasKey(p => p.Id);                 
 
         modelBuilder.Entity<Product>()
                     .HasOne(p => p.Category)
@@ -55,6 +55,13 @@ public class InventoryContext : DbContext
                     .HasMany(p => p.AddAmount);
 
         modelBuilder.Entity<Product>()
+                    .HasMany(p => p.Sales);
+
+        modelBuilder.Entity<Product>()
+                    .HasMany(p => p.Sales)
+                    .WithOne(s => s.Product);
+
+        modelBuilder.Entity<Product>()
                     .HasMany(p => p.AddAmount)
                     .WithOne(a => a.Product);
 
@@ -64,15 +71,11 @@ public class InventoryContext : DbContext
                     .HasForeignKey<Storage>(s => s.Id)
                     .HasPrincipalKey<Product>(p => p.Id);
 
-
-
         modelBuilder.Entity<Product>()
                     .HasOne(p => p.TotalSold)
                     .WithOne(s => s.Product)
                     .HasForeignKey<TotalSold>(p => p.Id)
-                    .HasPrincipalKey<Product>(s => s.Id);
-
-                    
+                    .HasPrincipalKey<Product>(s => s.Id);            
 
         modelBuilder.Entity<Product>()
                     .HasOne(p => p.Brand)
@@ -101,7 +104,6 @@ public class InventoryContext : DbContext
                     .HasOne(a => a.Product)
                     .WithMany(a => a.AddAmount);
                     
-
         modelBuilder.Entity<TotalSold>()
                     .HasKey(a => a.Id);
     }

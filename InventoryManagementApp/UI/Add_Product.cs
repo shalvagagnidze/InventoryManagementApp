@@ -94,8 +94,11 @@ public partial class Add_Product : KryptonForm
         Models.Storage storage = new Models.Storage();
         storage.TotalAmount = productAmount;
 
+        TotalSold totalSold = new TotalSold();
+        totalSold.TotalSoldAmount = 0;
         StockStatus status = StockStatus.მარაგშია;
         DateTime createDate = DateTime.Now;
+        int a = 0;
         Product product = new Product()
         {
             Code = code,
@@ -107,6 +110,7 @@ public partial class Add_Product : KryptonForm
             Brand = brands,
             Status = status,
             CreateDate = createDate,
+            TotalSold = totalSold,
             IsDeleted = false,
             Description = productDescription
 
