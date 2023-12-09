@@ -69,7 +69,8 @@ namespace InventoryManagementApp.UI
             totalSold.TotalSoldAmount += soldAmount;
             var storage = _db.Storages.FirstOrDefault(s => s.Product == products);
             storage.TotalAmount -= soldAmount;
-
+           // if(storage.TotalAmount< )
+            _db.Update(products);
             var response = _db.SaveChanges();
 
             if (response > 0)

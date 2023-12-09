@@ -28,31 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            ordersData = new Krypton.Toolkit.KryptonDataGridView();
+            ((System.ComponentModel.ISupportInitialize)ordersData).BeginInit();
             SuspendLayout();
             // 
-            // label1
+            // ordersData
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(548, 300);
-            label1.Name = "label1";
-            label1.Size = new Size(52, 25);
-            label1.TabIndex = 0;
-            label1.Text = "Sales";
+            ordersData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ordersData.BorderStyle = BorderStyle.None;
+            ordersData.ColumnHeadersHeight = 51;
+            ordersData.ImeMode = ImeMode.On;
+            ordersData.Location = new Point(0, 148);
+            ordersData.Name = "ordersData";
+            ordersData.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
+            ordersData.ReadOnly = true;
+            ordersData.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            ordersData.RowTemplate.DividerHeight = 3;
+            ordersData.RowTemplate.Resizable = DataGridViewTriState.False;
+            ordersData.Size = new Size(1275, 507);
+            ordersData.StateCommon.BackStyle = Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
+            ordersData.StateCommon.DataCell.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            ordersData.StateCommon.DataCell.Border.Rounding = 5F;
+            ordersData.StateCommon.DataCell.Border.Width = 1;
+            ordersData.StateCommon.DataCell.Content.Color1 = Color.FromArgb(64, 64, 64);
+            ordersData.StateCommon.DataCell.Content.Font = new Font("Georgia", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ordersData.TabIndex = 2;
             // 
-            // Sales_UC
+            // Orders_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label1);
-            Name = "Sales_UC";
+            Controls.Add(ordersData);
+            Name = "Orders_UC";
             Size = new Size(1275, 655);
+            ((System.ComponentModel.ISupportInitialize)ordersData).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Label label1;
+        private Krypton.Toolkit.KryptonDataGridView ordersData;
     }
 }
