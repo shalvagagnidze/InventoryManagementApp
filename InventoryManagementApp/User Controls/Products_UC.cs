@@ -13,15 +13,14 @@ public partial class Products_UC : UserControl
     public static Category transferCategory;
     public static Brand transferBrand;
     InventoryContext _db = new InventoryContext();
-
+    
     public Products_UC()
     {
         InitializeComponent();
         instance = this;
         panel2.BringToFront();
         sortCat_Btn.Visible = false;
-        sortBrand_Btn.Visible = false;
-
+        sortBrand_Btn.Visible = false;       
     }
 
     private void Products_UC_Load(object sender, EventArgs e)
@@ -39,6 +38,7 @@ public partial class Products_UC : UserControl
             თვითღირებულება = s.NetCost,
             კატეგორია = s.Category.Name,
             რაოდენობა = s.Storage.TotalAmount,
+            ჯამური_გაყიდვა = s.TotalSold.TotalSoldAmount,
             დამატების_თარიღი = s.CreateDate,
             სტატუსი = s.Status,
             აღწერა = s.Description,
@@ -93,6 +93,7 @@ public partial class Products_UC : UserControl
                     თვითღირებულება = s.NetCost,
                     კატეგორია = s.Category.Name,
                     რაოდენობა = s.Storage.TotalAmount,
+                    ჯამური_გაყიდვა = s.TotalSold.TotalSoldAmount,
                     დამატების_თარიღი = s.CreateDate,
                     სტატუსი = s.Status,
                     აღწერა = s.Description,
@@ -154,6 +155,7 @@ public partial class Products_UC : UserControl
                                      თვითღირებულება = s.NetCost,
                                      კატეგორია = s.Category.Name,
                                      რაოდენობა = s.Storage.TotalAmount,
+                                     ჯამური_გაყიდვა = s.TotalSold.TotalSoldAmount,
                                      დამატების_თარიღი = s.CreateDate,
                                      სტატუსი = s.Status,
                                      აღწერა = s.Description,
@@ -258,6 +260,7 @@ public partial class Products_UC : UserControl
             თვითღირებულება = s.NetCost,
             კატეგორია = s.Category.Name,
             რაოდენობა = s.Storage.TotalAmount,
+            ჯამური_გაყიდვა = s.TotalSold.TotalSoldAmount,
             დამატების_თარიღი = s.CreateDate,
             სტატუსი = s.Status,
             აღწერა = s.Description,
@@ -275,7 +278,6 @@ public partial class Products_UC : UserControl
 
     private void delete_Btn_Click(object sender, EventArgs e)
     {
-
         if (sortProd_Btn.Location == new System.Drawing.Point(350, 8))
         {
             var row = productData.CurrentRow;
@@ -295,7 +297,7 @@ public partial class Products_UC : UserControl
                                "პროდუქტის წაშლა",
                                MessageBoxButtons.OK,
                                MessageBoxIcon.Information);
-                KryptonDataGridViewButtonColumn sell = (KryptonDataGridViewButtonColumn)productData.Columns["გაყიდვა"];
+                
 
                 productData.DataSource = _db.Products.Select(s => new
                 {
@@ -306,10 +308,10 @@ public partial class Products_UC : UserControl
                     თვითღირებულება = s.NetCost,
                     კატეგორია = s.Category.Name,
                     რაოდენობა = s.Storage.TotalAmount,
+                    ჯამური_გაყიდვა = s.TotalSold.TotalSoldAmount,
                     დამატების_თარიღი = s.CreateDate,
                     სტატუსი = s.Status,
-                    აღწერა = s.Description,
-                    გაყიდვა = createSellButton(sell).Text
+                    აღწერა = s.Description
                 }).ToList();
 
             }

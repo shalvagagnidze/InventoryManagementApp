@@ -27,7 +27,7 @@ namespace InventoryManagementApp.UI
         private void save_Btn_Click(object sender, EventArgs e)
         {
 
-            date = soldDate.Value;
+            date = soldDate.Value.Date;
             soldAmount = (int)amountNumeric.Value;
             location = locationListBox.SelectedItem.ToString();
             payArea = payAreaListBox.SelectedItem.ToString();
@@ -61,7 +61,8 @@ namespace InventoryManagementApp.UI
                 Location = (Location)Enum.Parse(typeof(Location), location),
                 PaymentArea = (PaymentArea)Enum.Parse(typeof(PaymentArea), payArea),
                 PaymentMethod = (PaymentMethod)Enum.Parse(typeof(PaymentMethod), payType),
-                Product = products
+                Product = products,
+                IsDeleted = false,               
             };
 
             _db.Sales.Add(sale);
@@ -69,7 +70,7 @@ namespace InventoryManagementApp.UI
             totalSold.TotalSoldAmount += soldAmount;
             var storage = _db.Storages.FirstOrDefault(s => s.Product == products);
             storage.TotalAmount -= soldAmount;
-           // if(storage.TotalAmount< )
+           
             _db.Update(products);
             var response = _db.SaveChanges();
 
@@ -79,6 +80,7 @@ namespace InventoryManagementApp.UI
                            "წარმატებული დამატება",
                            MessageBoxButtons.OK,
                            MessageBoxIcon.Information);
+                this.Hide();
             }
             else
             {

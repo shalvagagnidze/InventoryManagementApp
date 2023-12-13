@@ -364,7 +364,7 @@
             // 
             productNumeric.Increment = new decimal(new int[] { 1, 0, 0, 0 });
             productNumeric.Location = new Point(277, 638);
-            productNumeric.Maximum = new decimal(new int[] { 100, 0, 0, 0 });
+            productNumeric.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
             productNumeric.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
             productNumeric.Name = "productNumeric";
             productNumeric.Size = new Size(228, 34);

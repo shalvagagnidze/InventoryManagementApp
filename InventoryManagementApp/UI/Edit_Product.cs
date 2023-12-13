@@ -11,7 +11,7 @@ namespace InventoryManagementApp.UI
 
         InventoryContext _db = new InventoryContext();
 
-        string code, price, netCost, name, description;
+        string code, price, netCost, name, description,firstCat,firstBrand;
         int addAmount;
         bool isModified = false;
         public Edit_Product()
@@ -19,6 +19,8 @@ namespace InventoryManagementApp.UI
             InitializeComponent();
             instance = this;
             var products = Products_UC.transferProduct;
+            var categoryName = _db.Categories.FirstOrDefault(c => c.Products.Contains(products));
+            var brandName = _db.Brands.FirstOrDefault(b => b.Products.Contains(products));
             var categoryBox = _db.Categories.Select(x => x.Name).ToList();
             var brandBox = _db.Brands.Select(x => x.Name).ToList();
             categoryListBox.DataSource = categoryBox;
@@ -30,7 +32,8 @@ namespace InventoryManagementApp.UI
             prodDesc_Txt.Text = products.Description;
             categoryListBox.DataSource = categoryBox;
             brandList.DataSource = brandBox;
-
+            firstCat = categoryName.Name;
+            firstBrand = brandName.Name;
         }
 
 
@@ -44,6 +47,8 @@ namespace InventoryManagementApp.UI
             name = productName_Txt.Text;
             description = prodDesc_Txt.Text;
             addAmount = (int)productNumeric.Value;
+            var category = categoryListBox.SelectedItem;
+            var brand = brandList.SelectedItem;
 
             if (prodID_Txt.Modified)
             {
@@ -68,6 +73,16 @@ namespace InventoryManagementApp.UI
             if (prodDesc_Txt.Modified)
             {
                 products.Description = description;
+            }
+
+            if(category.ToString() != firstCat)
+            {
+                products.Category = _db.Categories.FirstOrDefault(c => c.Name == category.ToString()); 
+            }
+
+            if(brand.ToString() != firstBrand)
+            {
+                products.Brand = _db.Brands.FirstOrDefault(b => b.Name == brand.ToString());
             }
 
             if (isModified)
