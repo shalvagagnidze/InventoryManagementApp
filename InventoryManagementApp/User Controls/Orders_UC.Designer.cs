@@ -34,17 +34,17 @@
             edit_Btn = new Krypton.Toolkit.KryptonButton();
             fromDate = new Krypton.Toolkit.KryptonDateTimePicker();
             toDate = new Krypton.Toolkit.KryptonDateTimePicker();
-            searchButton = new Krypton.Toolkit.KryptonButton();
             productName_Label = new Label();
             label1 = new Label();
             dateCheck = new CheckBox();
             Search_Txt = new Krypton.Toolkit.KryptonTextBox();
+            dateButton = new Krypton.Toolkit.KryptonCheckBox();
             ((System.ComponentModel.ISupportInitialize)ordersData).BeginInit();
             SuspendLayout();
             // 
             // ordersData
             // 
-            ordersData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            ordersData.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             ordersData.BorderStyle = BorderStyle.None;
             ordersData.ColumnHeadersHeight = 51;
             ordersData.ImeMode = ImeMode.On;
@@ -55,7 +55,7 @@
             ordersData.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             ordersData.RowTemplate.DividerHeight = 3;
             ordersData.RowTemplate.Resizable = DataGridViewTriState.False;
-            ordersData.Size = new Size(1375, 642);
+            ordersData.Size = new Size(1372, 642);
             ordersData.StateCommon.BackStyle = Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
             ordersData.StateCommon.DataCell.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
             ordersData.StateCommon.DataCell.Border.Rounding = 5F;
@@ -188,6 +188,7 @@
             fromDate.StateCommon.Content.Color1 = Color.Gray;
             fromDate.StateCommon.Content.Font = new Font("Segoe UI Symbol", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             fromDate.TabIndex = 21;
+            fromDate.ValueChanged += fromDate_ValueChanged;
             // 
             // toDate
             // 
@@ -205,60 +206,7 @@
             toDate.StateCommon.Content.Color1 = Color.Gray;
             toDate.StateCommon.Content.Font = new Font("Segoe UI Symbol", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             toDate.TabIndex = 22;
-            // 
-            // searchButton
-            // 
-            searchButton.Location = new Point(1308, 16);
-            searchButton.Name = "searchButton";
-            searchButton.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
-            searchButton.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
-            searchButton.OverrideDefault.Back.ColorAngle = 45F;
-            searchButton.OverrideDefault.Border.Color1 = Color.FromArgb(8, 142, 254);
-            searchButton.OverrideDefault.Border.Color2 = Color.FromArgb(8, 142, 254);
-            searchButton.OverrideDefault.Border.ColorAngle = 45F;
-            searchButton.OverrideDefault.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            searchButton.OverrideDefault.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            searchButton.OverrideDefault.Border.Rounding = 20F;
-            searchButton.OverrideDefault.Border.Width = 2;
-            searchButton.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
-            searchButton.Size = new Size(64, 70);
-            searchButton.StateCommon.Back.Color1 = Color.FromArgb(250, 252, 252);
-            searchButton.StateCommon.Back.Color2 = Color.FromArgb(250, 252, 252);
-            searchButton.StateCommon.Back.ColorAngle = 45F;
-            searchButton.StateCommon.Border.Color1 = Color.FromArgb(120, 120, 120);
-            searchButton.StateCommon.Border.Color2 = Color.FromArgb(140, 150, 180);
-            searchButton.StateCommon.Border.ColorAngle = 45F;
-            searchButton.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            searchButton.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            searchButton.StateCommon.Border.Rounding = 22F;
-            searchButton.StateCommon.Border.Width = 2;
-            searchButton.StateCommon.Content.ShortText.Color1 = Color.FromArgb(228, 9, 60);
-            searchButton.StateCommon.Content.ShortText.Font = new Font("Georgia", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            searchButton.StatePressed.Back.Color1 = Color.FromArgb(20, 145, 198);
-            searchButton.StatePressed.Back.Color2 = Color.FromArgb(22, 121, 206);
-            searchButton.StatePressed.Back.ColorAngle = 135F;
-            searchButton.StatePressed.Border.Color1 = Color.FromArgb(20, 145, 198);
-            searchButton.StatePressed.Border.Color2 = Color.FromArgb(22, 121, 206);
-            searchButton.StatePressed.Border.ColorAngle = 135F;
-            searchButton.StatePressed.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            searchButton.StatePressed.Border.Rounding = 20F;
-            searchButton.StatePressed.Border.Width = 1;
-            searchButton.StateTracking.Back.Color1 = Color.FromArgb(8, 142, 254);
-            searchButton.StateTracking.Back.Color2 = Color.FromArgb(6, 174, 244);
-            searchButton.StateTracking.Back.ColorAngle = 45F;
-            searchButton.StateTracking.Border.Color1 = Color.FromArgb(6, 174, 244);
-            searchButton.StateTracking.Border.Color2 = Color.FromArgb(8, 142, 254);
-            searchButton.StateTracking.Border.ColorAngle = 45F;
-            searchButton.StateTracking.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            searchButton.StateTracking.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            searchButton.StateTracking.Border.Rounding = 20F;
-            searchButton.StateTracking.Border.Width = 1;
-            searchButton.StateTracking.Content.ShortText.Color1 = Color.White;
-            searchButton.TabIndex = 23;
-            searchButton.Values.ExtraText = "           ";
-            searchButton.Values.Image = Properties.Resources.Search_40;
-            searchButton.Values.Text = "";
-            searchButton.Click += searchButton_Click;
+            toDate.ValueChanged += toDate_ValueChanged;
             // 
             // productName_Label
             // 
@@ -286,7 +234,7 @@
             // 
             dateCheck.AutoSize = true;
             dateCheck.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dateCheck.Location = new Point(1188, 82);
+            dateCheck.Location = new Point(1258, 77);
             dateCheck.Name = "dateCheck";
             dateCheck.Size = new Size(104, 25);
             dateCheck.TabIndex = 40;
@@ -314,15 +262,26 @@
             Search_Txt.Text = "ძებნა...";
             Search_Txt.TextChanged += Search_Txt_TextChanged;
             // 
+            // dateButton
+            // 
+            dateButton.Images.CheckedNormal = Properties.Resources.Date_Dark_48;
+            dateButton.Images.Common = Properties.Resources.Date_48;
+            dateButton.Location = new Point(1308, 23);
+            dateButton.Name = "dateButton";
+            dateButton.Size = new Size(54, 48);
+            dateButton.TabIndex = 42;
+            dateButton.Values.Text = "";
+            dateButton.CheckedChanged += dateButton_CheckedChanged;
+            // 
             // Orders_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(dateButton);
             Controls.Add(Search_Txt);
             Controls.Add(dateCheck);
             Controls.Add(label1);
             Controls.Add(productName_Label);
-            Controls.Add(searchButton);
             Controls.Add(toDate);
             Controls.Add(fromDate);
             Controls.Add(delete_Btn);
@@ -347,5 +306,6 @@
         private Label label1;
         private CheckBox dateCheck;
         private Krypton.Toolkit.KryptonTextBox Search_Txt;
+        private Krypton.Toolkit.KryptonCheckBox dateButton;
     }
 }

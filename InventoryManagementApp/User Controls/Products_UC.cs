@@ -13,20 +13,21 @@ public partial class Products_UC : UserControl
     public static Category transferCategory;
     public static Brand transferBrand;
     InventoryContext _db = new InventoryContext();
-    
+
     public Products_UC()
     {
         InitializeComponent();
         instance = this;
         panel2.BringToFront();
         sortCat_Btn.Visible = false;
-        sortBrand_Btn.Visible = false;       
+        sortBrand_Btn.Visible = false;
+
     }
 
     private void Products_UC_Load(object sender, EventArgs e)
     {
         KryptonDataGridViewButtonColumn sell = (KryptonDataGridViewButtonColumn)productData.Columns["გაყიდვა"];
-       
+
         productData.CellContentClick += new DataGridViewCellEventHandler(ProductData_CellContentClick);
 
         productData.DataSource = _db.Products.Select(s => new
@@ -72,8 +73,6 @@ public partial class Products_UC : UserControl
     {
         if (sortProd_Btn.Location == new System.Drawing.Point(350, 8))
         {
-
-
             if (Search_Txt.Text.Length > 0)
             {
                 string searchText = Search_Txt.Text;
@@ -82,11 +81,9 @@ public partial class Products_UC : UserControl
             }
             else
             {
-                KryptonDataGridViewButtonColumn sell = (KryptonDataGridViewButtonColumn)productData.Columns["გაყიდვა"];
-
                 productData.DataSource = _db.Products.Select(s => new
                 {
-                    კოდი = s.Id,
+                    კოდი = s.Code,
                     დასახელება = s.Name,
                     ბრენდი = s.Brand.Name,
                     ფასი = s.Price,
@@ -97,9 +94,8 @@ public partial class Products_UC : UserControl
                     დამატების_თარიღი = s.CreateDate,
                     სტატუსი = s.Status,
                     აღწერა = s.Description,
-                    გაყიდვა = createSellButton(sell).Text
+                    // გაყიდვა = createSellButton(sell).Text
                 }).ToList();
-
             }
         }
         else if (sortCat_Btn.Location == new System.Drawing.Point(350, 8))
@@ -140,7 +136,8 @@ public partial class Products_UC : UserControl
 
     public void SearchProduct(string searchText)
     {
-        KryptonDataGridViewButtonColumn sell = (KryptonDataGridViewButtonColumn)productData.Columns["გაყიდვა"];
+        //KryptonDataGridViewButtonColumn sell = (KryptonDataGridViewButtonColumn)productData.Columns["გაყიდვა"];
+
 
         var search = _db.Products.Where(s => s.Name.Contains(searchText) ||
                                         s.Id.ToString().Contains(searchText) ||
@@ -159,7 +156,7 @@ public partial class Products_UC : UserControl
                                      დამატების_თარიღი = s.CreateDate,
                                      სტატუსი = s.Status,
                                      აღწერა = s.Description,
-                                     გაყიდვა = createSellButton(sell).Text
+                                     //გაყიდვა = createSellButton(sell).Text
                                  }).ToList();
 
         productData.DataSource = search;
@@ -240,7 +237,7 @@ public partial class Products_UC : UserControl
 
     private void sortProd_Btn_Click_1(object sender, EventArgs e)
     {
-        KryptonDataGridViewButtonColumn sell = (KryptonDataGridViewButtonColumn)productData.Columns["გაყიდვა"];
+        //KryptonDataGridViewButtonColumn sell = (KryptonDataGridViewButtonColumn)productData.Columns["გაყიდვა"];
 
         sortCat_Btn.Visible = false;
         sortBrand_Btn.Visible = false;
@@ -264,7 +261,7 @@ public partial class Products_UC : UserControl
             დამატების_თარიღი = s.CreateDate,
             სტატუსი = s.Status,
             აღწერა = s.Description,
-            გაყიდვა = createSellButton(sell).Text
+            //გაყიდვა = createSellButton(sell).Text
         }).ToList();
     }
 
@@ -297,7 +294,7 @@ public partial class Products_UC : UserControl
                                "პროდუქტის წაშლა",
                                MessageBoxButtons.OK,
                                MessageBoxIcon.Information);
-                
+
 
                 productData.DataSource = _db.Products.Select(s => new
                 {
@@ -445,7 +442,7 @@ public partial class Products_UC : UserControl
 
     KryptonDataGridViewButtonColumn createSellButton(KryptonDataGridViewButtonColumn sell)
     {
-        
+
         sell = new KryptonDataGridViewButtonColumn
         {
             Name = "Sell",
@@ -456,4 +453,5 @@ public partial class Products_UC : UserControl
 
         return sell;
     }
+
 }
