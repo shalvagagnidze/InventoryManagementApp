@@ -26,12 +26,13 @@ namespace InventoryManagementApp.UI
 
         private void save_Btn_Click(object sender, EventArgs e)
         {
-
             date = soldDate.Value.Date;
             soldAmount = (int)amountNumeric.Value;
             location = locationListBox.SelectedItem.ToString();
             payArea = payAreaListBox.SelectedItem.ToString();
             payType = payTypeListBox.SelectedItem.ToString();
+            var products = Products_UC.transferProduct;
+            var storage = _db.Storages.FirstOrDefault(s => s.Product == products);
 
             if (!isModified || !isChanged || locationListBox.SelectedIndex == -1 ||
                 payAreaListBox.SelectedIndex == -1 || payTypeListBox.SelectedIndex == -1)
@@ -43,7 +44,18 @@ namespace InventoryManagementApp.UI
             }
             else
             {
-                Sell();
+                if(storage.TotalAmount - soldAmount < 0)
+                {
+                    MessageBox.Show("მარაგში არ გაქვთ საკმარისი პროდუქტი, სცადეთ თავიდან!",
+                           "გაყიდვა ვერ მოხერხდა",
+                           MessageBoxButtons.OK,
+                           MessageBoxIcon.Information);
+                }
+                else
+                {
+                   Sell();
+                }
+                
             }
         }
 
@@ -70,7 +82,10 @@ namespace InventoryManagementApp.UI
             totalSold.TotalSoldAmount += soldAmount;
             var storage = _db.Storages.FirstOrDefault(s => s.Product == products);
             storage.TotalAmount -= soldAmount;
-           
+           if(storage.TotalAmount == 0)
+            {
+                products.Status = StockStatus.ამოიწურა;
+            }
             _db.Update(products);
             var response = _db.SaveChanges();
 

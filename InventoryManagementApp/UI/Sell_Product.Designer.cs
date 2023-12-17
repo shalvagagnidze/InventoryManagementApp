@@ -236,7 +236,7 @@
             // 
             amountNumeric.Increment = new decimal(new int[] { 1, 0, 0, 0 });
             amountNumeric.Location = new Point(1069, 120);
-            amountNumeric.Maximum = new decimal(new int[] { 100, 0, 0, 0 });
+            amountNumeric.Maximum = new decimal(new int[] { 1215752191, 23, 0, 0 });
             amountNumeric.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
             amountNumeric.Name = "amountNumeric";
             amountNumeric.Size = new Size(228, 34);

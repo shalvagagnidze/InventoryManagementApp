@@ -147,7 +147,22 @@ public partial class Orders_UC : UserControl
         if (Search_Txt.Text.Length > 0)
         {
             string searchText = Search_Txt.Text;
-            SearchOrder(searchText);           
+            SearchOrder(searchText);
+        }
+        else
+        {
+            ordersData.DataSource = _db.Sales.Select(o => new
+            {
+                კოდი = o.Id,
+                პროდუქტი = o.Product.Name,
+                კატეგორია = o.Product.Category.Name,
+                ბრენდი = o.Product.Brand.Name,
+                რაოდენობა = o.Amount,
+                ლოკაცია = o.Location,
+                გადახდის_ტიპი = o.PaymentMethod,
+                შეკვეთის_ადგილი = o.PaymentArea,
+                თარიღი = o.Date
+            }).ToList();
         }
 
     }

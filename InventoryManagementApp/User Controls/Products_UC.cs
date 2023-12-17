@@ -140,12 +140,12 @@ public partial class Products_UC : UserControl
 
 
         var search = _db.Products.Where(s => s.Name.Contains(searchText) ||
-                                        s.Id.ToString().Contains(searchText) ||
+                                        s.Code.ToString().Contains(searchText) ||
                                         s.Category.Name.Contains(searchText) ||
                                         s.Brand.Name.Contains(searchText))
                                  .Select(s => new
                                  {
-                                     კოდი = s.Id,
+                                     კოდი = s.Code,
                                      დასახელება = s.Name,
                                      ბრენდი = s.Brand.Name,
                                      ფასი = s.Price,

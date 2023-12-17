@@ -1,4 +1,5 @@
-﻿using InventoryManagementApp.Data;
+﻿using InventoryManagementApp.Common.Enums;
+using InventoryManagementApp.Data;
 using InventoryManagementApp.Models;
 using InventoryManagementApp.User_Controls;
 using Krypton.Toolkit;
@@ -93,7 +94,7 @@ namespace InventoryManagementApp.UI
                     AdditionCreateDate = DateTime.Now,
                     Product = products
                 };
-
+                products.Status = StockStatus.მარაგშია;
                 _db.AddAmounts.Add(addamounts);
                 var storage = _db.Storages.FirstOrDefault(s => s.Product == products);
                 storage.TotalAmount += addAmount;
