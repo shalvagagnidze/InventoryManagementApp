@@ -23,6 +23,7 @@ public class InventoryContext : DbContext
     public DbSet<AddAmount> AddAmounts { get; set; }
     public DbSet<Storage> Storages { get; set; }
     public DbSet<TotalSold> TotalSolds { get; set; }
+    public DbSet<Customer> Customers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -92,6 +93,10 @@ public class InventoryContext : DbContext
                     .HasOne(s => s.Product)
                     .WithMany(s => s.Sales);
 
+        modelBuilder.Entity<Sale>()
+                    .HasOne(s => s.Customer)
+                    .WithMany(s => s.Sales);
+
         modelBuilder.Entity<User>()
                     .HasKey(u => u.Id);
 
@@ -107,5 +112,12 @@ public class InventoryContext : DbContext
                     
         modelBuilder.Entity<TotalSold>()
                     .HasKey(a => a.Id);
+
+        modelBuilder.Entity<Customer>()
+                    .HasKey (c => c.Id);
+
+        modelBuilder.Entity<Customer>()
+                    .HasMany(c => c.Sales)
+                    .WithOne(c => c.Customer);
     }
 }

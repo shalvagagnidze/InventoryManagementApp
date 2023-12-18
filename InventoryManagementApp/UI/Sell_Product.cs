@@ -13,7 +13,7 @@ namespace InventoryManagementApp.UI
         bool isChanged = false, isModified = false;
         DateTime date;
         int soldAmount;
-        string location, payArea, payType;
+        string location, payArea, payType,custFirstName,custLastName,custNumber;
         public Sell_Product()
         {
             InitializeComponent();
@@ -65,6 +65,16 @@ namespace InventoryManagementApp.UI
             location = locationListBox.SelectedItem.ToString();
             payArea = payAreaListBox.SelectedItem.ToString();
             payType = payTypeListBox.SelectedItem.ToString();
+            custFirstName = customerFirstName.Text;
+            custLastName = customerLastName.Text;
+            custNumber = phoneNumber.Text;
+
+            Customer customer = new Customer()
+            {
+                FirstName = custFirstName,
+                LastName = custLastName,
+                PhoneNumber = custNumber,
+            };
 
             Sale sale = new Sale()
             {
@@ -74,10 +84,14 @@ namespace InventoryManagementApp.UI
                 PaymentArea = (PaymentArea)Enum.Parse(typeof(PaymentArea), payArea),
                 PaymentMethod = (PaymentMethod)Enum.Parse(typeof(PaymentMethod), payType),
                 Product = products,
-                IsDeleted = false,               
+                IsDeleted = false,   
+                Customer = customer
             };
 
+            
+
             _db.Sales.Add(sale);
+            _db.Customers.Add(customer);
             var totalSold = _db.TotalSolds.FirstOrDefault(x => x.Product == products);
             totalSold.TotalSoldAmount += soldAmount;
             var storage = _db.Storages.FirstOrDefault(s => s.Product == products);
@@ -87,6 +101,7 @@ namespace InventoryManagementApp.UI
                 products.Status = StockStatus.ამოიწურა;
             }
             _db.Update(products);
+            
             var response = _db.SaveChanges();
 
             if (response > 0)

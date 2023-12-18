@@ -45,6 +45,13 @@
             payAreaListBox = new Krypton.Toolkit.KryptonListBox();
             soldDate = new Krypton.Toolkit.KryptonDateTimePicker();
             soldDate_Label = new Label();
+            customerLabel = new Label();
+            customerFirstName = new Krypton.Toolkit.KryptonTextBox();
+            label1 = new Label();
+            label2 = new Label();
+            numberLabel = new Label();
+            customerLastName = new Krypton.Toolkit.KryptonTextBox();
+            phoneNumber = new Krypton.Toolkit.KryptonTextBox();
             SuspendLayout();
             // 
             // kryptonCustomPaletteBase1
@@ -114,7 +121,7 @@
             // 
             // save_Btn
             // 
-            save_Btn.Location = new Point(1098, 431);
+            save_Btn.Location = new Point(1100, 562);
             save_Btn.Name = "save_Btn";
             save_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
             save_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
@@ -293,12 +300,114 @@
             soldDate_Label.TabIndex = 98;
             soldDate_Label.Text = "გაყიდვის თარიღი: \r\n";
             // 
+            // customerLabel
+            // 
+            customerLabel.AutoSize = true;
+            customerLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            customerLabel.ForeColor = Color.FromArgb(64, 64, 64);
+            customerLabel.Location = new Point(3, 499);
+            customerLabel.Name = "customerLabel";
+            customerLabel.Size = new Size(103, 28);
+            customerLabel.TabIndex = 99;
+            customerLabel.Text = "სახელი:";
+            // 
+            // customerFirstName
+            // 
+            customerFirstName.Location = new Point(130, 499);
+            customerFirstName.Name = "customerFirstName";
+            customerFirstName.Size = new Size(229, 38);
+            customerFirstName.StateCommon.Back.Color1 = Color.White;
+            customerFirstName.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
+            customerFirstName.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
+            customerFirstName.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            customerFirstName.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            customerFirstName.StateCommon.Border.Rounding = 20F;
+            customerFirstName.StateCommon.Border.Width = 1;
+            customerFirstName.StateCommon.Content.Color1 = Color.Gray;
+            customerFirstName.StateCommon.Content.Font = new Font("Georgia", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            customerFirstName.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
+            customerFirstName.TabIndex = 100;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.FromArgb(64, 64, 64);
+            label1.Location = new Point(400, 499);
+            label1.Name = "label1";
+            label1.Size = new Size(84, 28);
+            label1.TabIndex = 101;
+            label1.Text = "გვარი:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.FromArgb(64, 64, 64);
+            label2.Location = new Point(466, 423);
+            label2.Name = "label2";
+            label2.Size = new Size(392, 32);
+            label2.TabIndex = 103;
+            label2.Text = "მომხმარებლის ინფორმაცია";
+            // 
+            // numberLabel
+            // 
+            numberLabel.AutoSize = true;
+            numberLabel.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            numberLabel.ForeColor = Color.FromArgb(64, 64, 64);
+            numberLabel.Location = new Point(763, 499);
+            numberLabel.Name = "numberLabel";
+            numberLabel.Size = new Size(247, 28);
+            numberLabel.TabIndex = 104;
+            numberLabel.Text = "მობილურის ნომერი:";
+            // 
+            // customerLastName
+            // 
+            customerLastName.Location = new Point(490, 499);
+            customerLastName.Name = "customerLastName";
+            customerLastName.Size = new Size(229, 38);
+            customerLastName.StateCommon.Back.Color1 = Color.White;
+            customerLastName.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
+            customerLastName.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
+            customerLastName.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            customerLastName.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            customerLastName.StateCommon.Border.Rounding = 20F;
+            customerLastName.StateCommon.Border.Width = 1;
+            customerLastName.StateCommon.Content.Color1 = Color.Gray;
+            customerLastName.StateCommon.Content.Font = new Font("Georgia", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            customerLastName.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
+            customerLastName.TabIndex = 105;
+            // 
+            // phoneNumber
+            // 
+            phoneNumber.Location = new Point(1033, 499);
+            phoneNumber.Name = "phoneNumber";
+            phoneNumber.Size = new Size(264, 38);
+            phoneNumber.StateCommon.Back.Color1 = Color.White;
+            phoneNumber.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
+            phoneNumber.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
+            phoneNumber.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            phoneNumber.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
+            phoneNumber.StateCommon.Border.Rounding = 20F;
+            phoneNumber.StateCommon.Border.Width = 1;
+            phoneNumber.StateCommon.Content.Color1 = Color.Gray;
+            phoneNumber.StateCommon.Content.Font = new Font("Georgia", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            phoneNumber.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
+            phoneNumber.TabIndex = 106;
+            // 
             // Sell_Product
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 252, 252);
-            ClientSize = new Size(1307, 511);
+            ClientSize = new Size(1307, 644);
+            Controls.Add(phoneNumber);
+            Controls.Add(customerLastName);
+            Controls.Add(numberLabel);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(customerFirstName);
+            Controls.Add(customerLabel);
             Controls.Add(soldDate_Label);
             Controls.Add(soldDate);
             Controls.Add(payAreaListBox);
@@ -339,5 +448,13 @@
         private Krypton.Toolkit.KryptonListBox payAreaListBox;
         private Krypton.Toolkit.KryptonDateTimePicker soldDate;
         private Label soldDate_Label;
+        private Label customerLabel;
+        private Krypton.Toolkit.KryptonTextBox customerFirstName;
+        private Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
+        private Label label1;
+        private Label label2;
+        private Label numberLabel;
+        private Krypton.Toolkit.KryptonTextBox customerLastName;
+        private Krypton.Toolkit.KryptonTextBox phoneNumber;
     }
 }
