@@ -21,13 +21,14 @@ public partial class Products_UC : UserControl
         panel2.BringToFront();
         sortCat_Btn.Visible = false;
         sortBrand_Btn.Visible = false;
+        productData.RowPrePaint += productData_RowPrePaint;
 
     }
 
     private void Products_UC_Load(object sender, EventArgs e)
     {
-        KryptonDataGridViewButtonColumn sell = (KryptonDataGridViewButtonColumn)productData.Columns["გაყიდვა"];
 
+        var sell = createSellButton();
         productData.CellContentClick += new DataGridViewCellEventHandler(ProductData_CellContentClick);
 
         productData.DataSource = _db.Products.Select(s => new
@@ -43,7 +44,7 @@ public partial class Products_UC : UserControl
             დამატების_თარიღი = s.CreateDate,
             სტატუსი = s.Status,
             აღწერა = s.Description,
-            გაყიდვა = createSellButton(sell).Text
+            გაყიდვა = "გაყიდვა"
         }).ToList();
 
         productData.Columns["გაყიდვა"].DefaultCellStyle.ForeColor = Color.Green;
@@ -81,6 +82,7 @@ public partial class Products_UC : UserControl
             }
             else
             {
+                var sell = createSellButton();
                 productData.DataSource = _db.Products.Select(s => new
                 {
                     კოდი = s.Code,
@@ -94,7 +96,7 @@ public partial class Products_UC : UserControl
                     დამატების_თარიღი = s.CreateDate,
                     სტატუსი = s.Status,
                     აღწერა = s.Description,
-                    // გაყიდვა = createSellButton(sell).Text
+                    გაყიდვა = "გაყიდვა"
                 }).ToList();
             }
         }
@@ -136,7 +138,7 @@ public partial class Products_UC : UserControl
 
     public void SearchProduct(string searchText)
     {
-        //KryptonDataGridViewButtonColumn sell = (KryptonDataGridViewButtonColumn)productData.Columns["გაყიდვა"];
+        var sell = createSellButton();
 
 
         var search = _db.Products.Where(s => s.Name.Contains(searchText) ||
@@ -156,7 +158,7 @@ public partial class Products_UC : UserControl
                                      დამატების_თარიღი = s.CreateDate,
                                      სტატუსი = s.Status,
                                      აღწერა = s.Description,
-                                     //გაყიდვა = createSellButton(sell).Text
+                                     გაყიდვა = "გაყიდვა"
                                  }).ToList();
 
         productData.DataSource = search;
@@ -237,7 +239,7 @@ public partial class Products_UC : UserControl
 
     private void sortProd_Btn_Click_1(object sender, EventArgs e)
     {
-        //KryptonDataGridViewButtonColumn sell = (KryptonDataGridViewButtonColumn)productData.Columns["გაყიდვა"];
+        var sell = createSellButton();
 
         sortCat_Btn.Visible = false;
         sortBrand_Btn.Visible = false;
@@ -261,7 +263,7 @@ public partial class Products_UC : UserControl
             დამატების_თარიღი = s.CreateDate,
             სტატუსი = s.Status,
             აღწერა = s.Description,
-            //გაყიდვა = createSellButton(sell).Text
+            გაყიდვა = "გაყიდვა"
         }).ToList();
     }
 
@@ -275,118 +277,126 @@ public partial class Products_UC : UserControl
 
     private void delete_Btn_Click(object sender, EventArgs e)
     {
-        if (sortProd_Btn.Location == new System.Drawing.Point(350, 8))
+        if (MessageBox.Show("დარწმუნებული ხართ, რომ გსურთ წაშლა?", "ფრთხილად წაშლამდე!"
+                           , MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
         {
-            var row = productData.CurrentRow;
-            var prodIndex = productData.CurrentRow.Cells["კოდი"].Value.ToString();
-            var prodId = prodIndex;
-            var product = _db.Products.FirstOrDefault(p => p.Code == prodId);
 
-            product.DeleteProduct();
-            product.DeleteTime = DateTime.Now;
 
-            var result = _db.SaveChanges();
-
-            if (result > 0)
+            if (sortProd_Btn.Location == new System.Drawing.Point(350, 8))
             {
+                var row = productData.CurrentRow;
+                var prodIndex = productData.CurrentRow.Cells["კოდი"].Value.ToString();
+                var prodId = prodIndex;
+                var product = _db.Products.FirstOrDefault(p => p.Code == prodId);
 
-                MessageBox.Show("პროდუქტი წარმატებით წაიშალა!",
-                               "პროდუქტის წაშლა",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Information);
+                product.DeleteProduct();
+                product.DeleteTime = DateTime.Now;
 
+                var result = _db.SaveChanges();
 
-                productData.DataSource = _db.Products.Select(s => new
+                if (result > 0)
                 {
-                    კოდი = s.Id,
-                    დასახელება = s.Name,
-                    ბრენდი = s.Brand.Name,
-                    ფასი = s.Price,
-                    თვითღირებულება = s.NetCost,
-                    კატეგორია = s.Category.Name,
-                    რაოდენობა = s.Storage.TotalAmount,
-                    ჯამური_გაყიდვა = s.TotalSold.TotalSoldAmount,
-                    დამატების_თარიღი = s.CreateDate,
-                    სტატუსი = s.Status,
-                    აღწერა = s.Description
-                }).ToList();
 
-            }
-            else
-            {
-                MessageBox.Show("პროდუქტის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
-                               "შეცდომა წაშლისას",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Warning);
-            }
-        }
+                    MessageBox.Show("პროდუქტი წარმატებით წაიშალა!",
+                                   "პროდუქტის წაშლა",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Information);
 
-        if (sortCat_Btn.Location == new System.Drawing.Point(350, 8))
-        {
-            var row = productData.CurrentRow;
-            var catBrandName = productData.CurrentRow.Cells["დასახელება"].Value.ToString();
-            var category = _db.Categories.FirstOrDefault(p => p.Name == catBrandName);
+                    var sell = createSellButton();
+                    productData.DataSource = _db.Products.Select(s => new
+                    {
+                        კოდი = s.Id,
+                        დასახელება = s.Name,
+                        ბრენდი = s.Brand.Name,
+                        ფასი = s.Price,
+                        თვითღირებულება = s.NetCost,
+                        კატეგორია = s.Category.Name,
+                        რაოდენობა = s.Storage.TotalAmount,
+                        ჯამური_გაყიდვა = s.TotalSold.TotalSoldAmount,
+                        დამატების_თარიღი = s.CreateDate,
+                        სტატუსი = s.Status,
+                        აღწერა = s.Description,
+                        გაყიდვა = "გაყიდვა"
+                    }).ToList();
 
-            category.DeleteCategory();
-            var result = _db.SaveChanges();
-
-            if (result > 0)
-            {
-
-                MessageBox.Show("კატეგორია წარმატებით წაიშალა!",
-                               "კატეგორიის წაშლა",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Information);
-
-                productData.DataSource = _db.Categories.Select(c => new
+                }
+                else
                 {
-                    დასახელება = c.Name,
-                    აღწერა = c.Description
-
-                }).ToList();
-
+                    MessageBox.Show("პროდუქტის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
+                                   "შეცდომა წაშლისას",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Warning);
+                }
             }
-            else
+
+            if (sortCat_Btn.Location == new System.Drawing.Point(350, 8))
             {
-                MessageBox.Show("კატეგორიის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
-                               "შეცდომა წაშლისას",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Warning);
-            }
-        }
+                var row = productData.CurrentRow;
+                var catBrandName = productData.CurrentRow.Cells["დასახელება"].Value.ToString();
+                var category = _db.Categories.FirstOrDefault(p => p.Name == catBrandName);
 
-        if (sortBrand_Btn.Location == new System.Drawing.Point(350, 8))
-        {
-            var row = productData.CurrentRow;
-            var catBrandName = productData.CurrentRow.Cells["დასახელება"].Value.ToString();
-            var brand = _db.Brands.FirstOrDefault(p => p.Name == catBrandName);
+                category.DeleteCategory();
+                var result = _db.SaveChanges();
 
-            brand.DeleteBrand();
-
-            var result = _db.SaveChanges();
-
-            if (result > 0)
-            {
-
-                MessageBox.Show("ბრენდი წარმატებით წაიშალა!",
-                               "ბრენდის წაშლა",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Information);
-
-                productData.DataSource = _db.Brands.Select(c => new
+                if (result > 0)
                 {
-                    დასახელება = c.Name,
-                    აღწერა = c.Description
 
-                }).ToList();
+                    MessageBox.Show("კატეგორია წარმატებით წაიშალა!",
+                                   "კატეგორიის წაშლა",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Information);
+
+                    productData.DataSource = _db.Categories.Select(c => new
+                    {
+                        დასახელება = c.Name,
+                        აღწერა = c.Description
+
+                    }).ToList();
+
+                }
+                else
+                {
+                    MessageBox.Show("კატეგორიის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
+                                   "შეცდომა წაშლისას",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Warning);
+                }
 
             }
-            else
+
+            if (sortBrand_Btn.Location == new System.Drawing.Point(350, 8))
             {
-                MessageBox.Show("ბრენდის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
-                               "შეცდომა წაშლისას",
-                               MessageBoxButtons.OK,
-                               MessageBoxIcon.Warning);
+                var row = productData.CurrentRow;
+                var catBrandName = productData.CurrentRow.Cells["დასახელება"].Value.ToString();
+                var brand = _db.Brands.FirstOrDefault(p => p.Name == catBrandName);
+
+                brand.DeleteBrand();
+
+                var result = _db.SaveChanges();
+
+                if (result > 0)
+                {
+
+                    MessageBox.Show("ბრენდი წარმატებით წაიშალა!",
+                                   "ბრენდის წაშლა",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Information);
+
+                    productData.DataSource = _db.Brands.Select(c => new
+                    {
+                        დასახელება = c.Name,
+                        აღწერა = c.Description
+
+                    }).ToList();
+
+                }
+                else
+                {
+                    MessageBox.Show("ბრენდის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
+                                   "შეცდომა წაშლისას",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Warning);
+                }
             }
         }
     }
@@ -440,10 +450,10 @@ public partial class Products_UC : UserControl
         }
     }
 
-    KryptonDataGridViewButtonColumn createSellButton(KryptonDataGridViewButtonColumn sell)
+    KryptonDataGridViewButtonColumn createSellButton()
     {
 
-        sell = new KryptonDataGridViewButtonColumn
+        var sell = new KryptonDataGridViewButtonColumn
         {
             Name = "Sell",
             HeaderText = "Buttons",
@@ -454,4 +464,22 @@ public partial class Products_UC : UserControl
         return sell;
     }
 
+    private void productData_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+    {
+        DataGridViewRow row = productData.Rows[e.RowIndex];
+
+        if (row.Cells["სტატუსი"] is DataGridViewTextBoxCell cell)
+        {
+            string state = cell.Value.ToString();
+
+            if (state == "მარაგშია")
+            {
+                cell.Style.ForeColor = Color.DarkGreen;
+            }
+            else if (state == "ამოიწურა")
+            {
+                cell.Style.ForeColor = Color.Red;
+            }         
+        }
+    }
 }

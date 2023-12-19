@@ -10,8 +10,9 @@ public class Sale
     public int Amount { get; set; }
     public PaymentMethod? PaymentMethod { get; set; }
     public PaymentArea? PaymentArea { get; set; }
-    public Product? Product { get; set; }
     public Location? Location { get; set; }
+    public Activity Activity { get; set; }
+    public Product? Product { get; set; }
     public Customer? Customer { get; set; }
     public bool IsDeleted { get; set; }
     public void DeleteOrder()

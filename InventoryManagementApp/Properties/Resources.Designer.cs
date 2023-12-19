@@ -123,6 +123,16 @@ namespace InventoryManagementApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Delivery_28 {
+            get {
+                object obj = ResourceManager.GetObject("Delivery_28", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Edit_48 {
             get {
                 object obj = ResourceManager.GetObject("Edit_48", resourceCulture);
@@ -213,6 +223,16 @@ namespace InventoryManagementApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Package_28 {
+            get {
+                object obj = ResourceManager.GetObject("Package_28", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Password {
             get {
                 object obj = ResourceManager.GetObject("Password", resourceCulture);
@@ -276,6 +296,16 @@ namespace InventoryManagementApp.Properties {
         internal static System.Drawing.Bitmap Settings_35 {
             get {
                 object obj = ResourceManager.GetObject("Settings_35", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Shipping_28 {
+            get {
+                object obj = ResourceManager.GetObject("Shipping_28", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -45,6 +45,10 @@
             location_Label = new Label();
             productName_Label = new Label();
             sellProd_Label = new Label();
+            activity_Label = new Label();
+            toBePacked = new CheckBox();
+            shipped = new CheckBox();
+            delivered = new CheckBox();
             SuspendLayout();
             // 
             // kryptonCustomPaletteBase1
@@ -292,12 +296,66 @@
             sellProd_Label.TabIndex = 99;
             sellProd_Label.Text = "შეკვეთის რედაქტირება";
             // 
+            // activity_Label
+            // 
+            activity_Label.AutoSize = true;
+            activity_Label.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            activity_Label.ForeColor = Color.FromArgb(64, 64, 64);
+            activity_Label.Location = new Point(7, 455);
+            activity_Label.Name = "activity_Label";
+            activity_Label.Size = new Size(289, 28);
+            activity_Label.TabIndex = 114;
+            activity_Label.Text = "შეკვეთის მდგომარეობა:";
+            // 
+            // toBePacked
+            // 
+            toBePacked.AutoSize = true;
+            toBePacked.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            toBePacked.ForeColor = Color.Red;
+            toBePacked.Location = new Point(317, 457);
+            toBePacked.Name = "toBePacked";
+            toBePacked.Size = new Size(142, 29);
+            toBePacked.TabIndex = 117;
+            toBePacked.Text = "მზადდება";
+            toBePacked.UseVisualStyleBackColor = true;
+            toBePacked.CheckedChanged += toBePacked_CheckedChanged;
+            // 
+            // shipped
+            // 
+            shipped.AutoSize = true;
+            shipped.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            shipped.ForeColor = Color.FromArgb(255, 128, 0);
+            shipped.Location = new Point(483, 457);
+            shipped.Name = "shipped";
+            shipped.Size = new Size(113, 29);
+            shipped.TabIndex = 118;
+            shipped.Text = "გზაშია";
+            shipped.UseVisualStyleBackColor = true;
+            shipped.CheckedChanged += shipped_CheckedChanged;
+            // 
+            // delivered
+            // 
+            delivered.AutoSize = true;
+            delivered.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            delivered.ForeColor = Color.FromArgb(0, 192, 0);
+            delivered.Location = new Point(626, 457);
+            delivered.Name = "delivered";
+            delivered.Size = new Size(187, 29);
+            delivered.TabIndex = 119;
+            delivered.Text = "მიწოდებულია";
+            delivered.UseVisualStyleBackColor = true;
+            delivered.CheckedChanged += delivered_CheckedChanged;
+            // 
             // Edit_Order
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 252, 252);
             ClientSize = new Size(1307, 511);
+            Controls.Add(delivered);
+            Controls.Add(shipped);
+            Controls.Add(toBePacked);
+            Controls.Add(activity_Label);
             Controls.Add(soldDate_Label);
             Controls.Add(soldDate);
             Controls.Add(payAreaListBox);
@@ -339,5 +397,9 @@
         private Label location_Label;
         private Label productName_Label;
         private Label sellProd_Label;
+        private Label activity_Label;
+        private CheckBox toBePacked;
+        private CheckBox shipped;
+        private CheckBox delivered;
     }
 }

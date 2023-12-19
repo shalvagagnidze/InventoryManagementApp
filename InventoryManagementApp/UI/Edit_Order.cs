@@ -13,6 +13,7 @@ namespace InventoryManagementApp.UI
         string location, payArea, payType, firstLoc, firstArea, firstType;
         DateTime date, firstDate;
         bool isNumericModified;
+        DataGridView ordersData = new DataGridView();
         public Edit_Order()
         {
             InitializeComponent();
@@ -81,6 +82,21 @@ namespace InventoryManagementApp.UI
                 sale.PaymentMethod = (PaymentMethod)Enum.Parse(typeof(PaymentMethod), payType);
             }
 
+            if (toBePacked.Checked)
+            {
+                sale.Activity = Activity.მზადდება;
+            }
+
+            if (shipped.Checked)
+            {
+                sale.Activity = Activity.გზაშია;
+            }
+
+            if (delivered.Checked)
+            {
+                sale.Activity = Activity.მიწოდებულია;
+            }
+
 
             _db.Update(sale);
             var response = _db.SaveChanges();
@@ -90,7 +106,7 @@ namespace InventoryManagementApp.UI
                 MessageBox.Show("შეკვეთა წარმატებით განახლდა!",
                                 "წარმატებული შენახვა",
                                 MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);
+                                MessageBoxIcon.Information);               
                 this.Hide();
             }
             else
@@ -105,6 +121,24 @@ namespace InventoryManagementApp.UI
         private void amountNumeric_ValueChanged(object sender, EventArgs e)
         {
             isNumericModified = true;
+        }
+
+        private void toBePacked_CheckedChanged(object sender, EventArgs e)
+        {
+            shipped.Checked = false;
+            delivered.Checked = false;
+        }
+
+        private void shipped_CheckedChanged(object sender, EventArgs e)
+        {
+            toBePacked.Checked = false;
+            delivered.Checked = false;
+        }
+
+        private void delivered_CheckedChanged(object sender, EventArgs e)
+        {
+            toBePacked.Checked = false;
+            shipped.Checked = false;
         }
     }
 }
