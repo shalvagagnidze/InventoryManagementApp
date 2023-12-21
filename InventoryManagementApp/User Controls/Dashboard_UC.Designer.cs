@@ -54,7 +54,14 @@
             Guna.Charts.WinForms.LPoint lPoint3 = new Guna.Charts.WinForms.LPoint();
             Guna.Charts.WinForms.LPoint lPoint4 = new Guna.Charts.WinForms.LPoint();
             Guna.Charts.WinForms.LPoint lPoint5 = new Guna.Charts.WinForms.LPoint();
-            addProd_Label = new Label();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             packPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
             packIcon = new PictureBox();
             packLabel = new Label();
@@ -67,8 +74,13 @@
             deliveredIcon = new PictureBox();
             deliveredLabel = new Label();
             deliveryText = new Label();
-            gunaChart1 = new Guna.Charts.WinForms.GunaChart();
-            gunaSplineAreaDataset1 = new Guna.Charts.WinForms.GunaSplineAreaDataset();
+            chart = new Guna.Charts.WinForms.GunaChart();
+            saleChart = new Guna.Charts.WinForms.GunaSplineAreaDataset();
+            productCombo = new Guna.UI2.WinForms.Guna2ComboBox();
+            dateCombo = new Guna.UI2.WinForms.Guna2ComboBox();
+            fromDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            toDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            netCost_Label = new Label();
             packPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)packIcon).BeginInit();
             shippedPanel.SuspendLayout();
@@ -76,17 +88,6 @@
             deliveredPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)deliveredIcon).BeginInit();
             SuspendLayout();
-            // 
-            // addProd_Label
-            // 
-            addProd_Label.AutoSize = true;
-            addProd_Label.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            addProd_Label.ForeColor = Color.FromArgb(64, 64, 64);
-            addProd_Label.Location = new Point(3, 9);
-            addProd_Label.Name = "addProd_Label";
-            addProd_Label.Size = new Size(320, 32);
-            addProd_Label.TabIndex = 36;
-            addProd_Label.Text = "შეკვეთების აქტივობა:";
             // 
             // packPanel
             // 
@@ -98,7 +99,7 @@
             packPanel.FillColor = Color.FromArgb(238, 39, 39);
             packPanel.FillColor2 = Color.FromArgb(238, 39, 39);
             packPanel.GradientMode = System.Drawing.Drawing2D.LinearGradientMode.BackwardDiagonal;
-            packPanel.Location = new Point(10, 70);
+            packPanel.Location = new Point(10, 19);
             packPanel.Name = "packPanel";
             packPanel.ShadowDecoration.CustomizableEdges = customizableEdges2;
             packPanel.Size = new Size(201, 134);
@@ -149,7 +150,7 @@
             shippedPanel.CustomizableEdges = customizableEdges3;
             shippedPanel.FillColor = Color.FromArgb(248, 137, 15);
             shippedPanel.FillColor2 = Color.FromArgb(248, 137, 15);
-            shippedPanel.Location = new Point(267, 70);
+            shippedPanel.Location = new Point(274, 19);
             shippedPanel.Name = "shippedPanel";
             shippedPanel.ShadowDecoration.CustomizableEdges = customizableEdges4;
             shippedPanel.Size = new Size(201, 134);
@@ -200,7 +201,7 @@
             deliveredPanel.CustomizableEdges = customizableEdges5;
             deliveredPanel.FillColor = Color.FromArgb(29, 206, 61);
             deliveredPanel.FillColor2 = Color.FromArgb(29, 206, 61);
-            deliveredPanel.Location = new Point(510, 70);
+            deliveredPanel.Location = new Point(540, 19);
             deliveredPanel.Name = "deliveredPanel";
             deliveredPanel.ShadowDecoration.CustomizableEdges = customizableEdges6;
             deliveredPanel.Size = new Size(201, 134);
@@ -242,63 +243,156 @@
             deliveryText.Text = "0";
             deliveryText.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // gunaChart1
+            // chart
             // 
+            chart.BackColor = Color.GhostWhite;
+            chart.Datasets.AddRange(new Guna.Charts.Interfaces.IGunaDataset[] { saleChart });
             chartFont1.FontName = "Arial";
-            gunaChart1.Legend.LabelFont = chartFont1;
-            gunaChart1.Location = new Point(28, 235);
-            gunaChart1.Name = "gunaChart1";
-            gunaChart1.Size = new Size(628, 390);
-            gunaChart1.TabIndex = 39;
+            chart.Legend.LabelFont = chartFont1;
+            chart.Location = new Point(10, 235);
+            chart.Name = "chart";
+            chart.Size = new Size(731, 517);
+            chart.TabIndex = 39;
             chartFont2.FontName = "Arial";
             chartFont2.Size = 12;
             chartFont2.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
-            gunaChart1.Title.Font = chartFont2;
+            chart.Title.Font = chartFont2;
             chartFont3.FontName = "Arial";
-            gunaChart1.Tooltips.BodyFont = chartFont3;
+            chart.Tooltips.BodyFont = chartFont3;
             chartFont4.FontName = "Arial";
             chartFont4.Size = 9;
             chartFont4.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
-            gunaChart1.Tooltips.TitleFont = chartFont4;
-            gunaChart1.XAxes.GridLines = grid1;
+            chart.Tooltips.TitleFont = chartFont4;
+            chart.XAxes.GridLines = grid1;
             chartFont5.FontName = "Arial";
             tick1.Font = chartFont5;
-            gunaChart1.XAxes.Ticks = tick1;
-            gunaChart1.YAxes.GridLines = grid2;
+            chart.XAxes.Ticks = tick1;
+            chart.YAxes.GridLines = grid2;
             chartFont6.FontName = "Arial";
             tick2.Font = chartFont6;
-            gunaChart1.YAxes.Ticks = tick2;
-            gunaChart1.ZAxes.GridLines = grid3;
+            chart.YAxes.Ticks = tick2;
+            chart.ZAxes.GridLines = grid3;
             chartFont7.FontName = "Arial";
             pointLabel1.Font = chartFont7;
-            gunaChart1.ZAxes.PointLabels = pointLabel1;
+            chart.ZAxes.PointLabels = pointLabel1;
             chartFont8.FontName = "Arial";
             tick3.Font = chartFont8;
-            gunaChart1.ZAxes.Ticks = tick3;
+            chart.ZAxes.Ticks = tick3;
             // 
-            // gunaSplineAreaDataset1
+            // saleChart
             // 
-            gunaSplineAreaDataset1.BorderColor = Color.Empty;
-            lPoint1.Y = 0D;
-            lPoint2.Y = 5D;
-            lPoint3.Y = 10D;
+            saleChart.BorderColor = Color.RebeccaPurple;
+            lPoint1.Y = 5D;
+            lPoint2.Y = 10D;
+            lPoint3.Y = 0D;
             lPoint4.Y = 20D;
             lPoint5.Y = 50D;
-            gunaSplineAreaDataset1.DataPoints.AddRange(new Guna.Charts.WinForms.LPoint[] { lPoint1, lPoint2, lPoint3, lPoint4, lPoint5 });
-            gunaSplineAreaDataset1.FillColor = Color.Empty;
-            gunaSplineAreaDataset1.Label = "SplineArea1";
+            saleChart.DataPoints.AddRange(new Guna.Charts.WinForms.LPoint[] { lPoint1, lPoint2, lPoint3, lPoint4, lPoint5 });
+            saleChart.FillColor = Color.MediumPurple;
+            saleChart.Label = "გაყიდვების რაოდენობა";
+            saleChart.PointRadius = 5;
+            saleChart.TargetChart = chart;
+            // 
+            // productCombo
+            // 
+            productCombo.BackColor = Color.Transparent;
+            productCombo.CustomizableEdges = customizableEdges7;
+            productCombo.DrawMode = DrawMode.OwnerDrawFixed;
+            productCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            productCombo.FocusedColor = Color.FromArgb(94, 148, 255);
+            productCombo.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            productCombo.Font = new Font("Segoe UI", 10F);
+            productCombo.ForeColor = Color.FromArgb(68, 88, 112);
+            productCombo.ItemHeight = 30;
+            productCombo.Location = new Point(10, 182);
+            productCombo.Name = "productCombo";
+            productCombo.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            productCombo.Size = new Size(237, 36);
+            productCombo.TabIndex = 40;
+            productCombo.SelectedIndexChanged += productCombo_SelectedIndexChanged;
+            // 
+            // dateCombo
+            // 
+            dateCombo.BackColor = Color.Transparent;
+            dateCombo.CustomizableEdges = customizableEdges9;
+            dateCombo.DrawMode = DrawMode.OwnerDrawFixed;
+            dateCombo.DropDownStyle = ComboBoxStyle.DropDownList;
+            dateCombo.FocusedColor = Color.FromArgb(94, 148, 255);
+            dateCombo.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            dateCombo.Font = new Font("Segoe UI", 10F);
+            dateCombo.ForeColor = Color.FromArgb(68, 88, 112);
+            dateCombo.ItemHeight = 30;
+            dateCombo.Items.AddRange(new object[] { "1 კვირა", "1 თვე", "3 თვე", "6 თვე", "1 წელი", "Custom" });
+            dateCombo.Location = new Point(263, 182);
+            dateCombo.Name = "dateCombo";
+            dateCombo.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            dateCombo.Size = new Size(126, 36);
+            dateCombo.StartIndex = 0;
+            dateCombo.TabIndex = 41;
+            dateCombo.SelectedIndexChanged += dateCombo_SelectedIndexChanged;
+            // 
+            // fromDate
+            // 
+            fromDate.BorderRadius = 5;
+            fromDate.Checked = true;
+            fromDate.CustomizableEdges = customizableEdges11;
+            fromDate.FillColor = Color.FromArgb(192, 255, 255);
+            fromDate.Font = new Font("Segoe UI", 9F);
+            fromDate.Format = DateTimePickerFormat.Short;
+            fromDate.Location = new Point(406, 185);
+            fromDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            fromDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            fromDate.Name = "fromDate";
+            fromDate.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            fromDate.Size = new Size(151, 30);
+            fromDate.TabIndex = 42;
+            fromDate.Value = new DateTime(2023, 12, 21, 13, 49, 2, 728);
+            fromDate.ValueChanged += fromDate_ValueChanged;
+            // 
+            // toDate
+            // 
+            toDate.BorderRadius = 5;
+            toDate.Checked = true;
+            toDate.CustomizableEdges = customizableEdges13;
+            toDate.FillColor = Color.FromArgb(192, 255, 255);
+            toDate.Font = new Font("Segoe UI", 9F);
+            toDate.Format = DateTimePickerFormat.Short;
+            toDate.Location = new Point(587, 185);
+            toDate.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            toDate.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            toDate.Name = "toDate";
+            toDate.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            toDate.Size = new Size(151, 30);
+            toDate.TabIndex = 43;
+            toDate.Value = new DateTime(2023, 12, 21, 13, 49, 2, 728);
+            toDate.ValueChanged += toDate_ValueChanged;
+            // 
+            // netCost_Label
+            // 
+            netCost_Label.AutoSize = true;
+            netCost_Label.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            netCost_Label.ForeColor = Color.FromArgb(64, 64, 64);
+            netCost_Label.Location = new Point(560, 182);
+            netCost_Label.Name = "netCost_Label";
+            netCost_Label.Size = new Size(24, 32);
+            netCost_Label.TabIndex = 44;
+            netCost_Label.Text = "-";
             // 
             // Dashboard_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(gunaChart1);
+            Controls.Add(netCost_Label);
+            Controls.Add(toDate);
+            Controls.Add(fromDate);
+            Controls.Add(dateCombo);
+            Controls.Add(productCombo);
+            Controls.Add(chart);
             Controls.Add(deliveredPanel);
             Controls.Add(shippedPanel);
             Controls.Add(packPanel);
-            Controls.Add(addProd_Label);
             Name = "Dashboard_UC";
-            Size = new Size(1275, 655);
+            Size = new Size(1375, 755);
             packPanel.ResumeLayout(false);
             packPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)packIcon).EndInit();
@@ -313,8 +407,6 @@
         }
 
         #endregion
-
-        private Label addProd_Label;
         private Guna.UI2.WinForms.Guna2GradientPanel packPanel;
         private Guna.UI2.WinForms.Guna2GradientPanel shippedPanel;
         private Guna.UI2.WinForms.Guna2GradientPanel deliveredPanel;
@@ -327,7 +419,12 @@
         private Label shippingLabel;
         private PictureBox deliveredIcon;
         private Label deliveredLabel;
-        private Guna.Charts.WinForms.GunaChart gunaChart1;
-        private Guna.Charts.WinForms.GunaSplineAreaDataset gunaSplineAreaDataset1;
+        private Guna.Charts.WinForms.GunaChart chart;
+        private Guna.Charts.WinForms.GunaSplineAreaDataset saleChart;
+        private Guna.UI2.WinForms.Guna2ComboBox productCombo;
+        private Guna.UI2.WinForms.Guna2ComboBox dateCombo;
+        private Guna.UI2.WinForms.Guna2DateTimePicker fromDate;
+        private Guna.UI2.WinForms.Guna2DateTimePicker toDate;
+        private Label netCost_Label;
     }
 }
