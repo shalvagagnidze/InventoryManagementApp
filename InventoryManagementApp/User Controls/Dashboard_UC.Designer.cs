@@ -49,11 +49,6 @@
             Guna.Charts.WinForms.ChartFont chartFont7 = new Guna.Charts.WinForms.ChartFont();
             Guna.Charts.WinForms.Tick tick3 = new Guna.Charts.WinForms.Tick();
             Guna.Charts.WinForms.ChartFont chartFont8 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.LPoint lPoint1 = new Guna.Charts.WinForms.LPoint();
-            Guna.Charts.WinForms.LPoint lPoint2 = new Guna.Charts.WinForms.LPoint();
-            Guna.Charts.WinForms.LPoint lPoint3 = new Guna.Charts.WinForms.LPoint();
-            Guna.Charts.WinForms.LPoint lPoint4 = new Guna.Charts.WinForms.LPoint();
-            Guna.Charts.WinForms.LPoint lPoint5 = new Guna.Charts.WinForms.LPoint();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -62,6 +57,25 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.Charts.WinForms.ChartFont chartFont9 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont10 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont11 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.ChartFont chartFont12 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid4 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.Tick tick4 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont13 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid5 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.Tick tick5 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont14 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Grid grid6 = new Guna.Charts.WinForms.Grid();
+            Guna.Charts.WinForms.PointLabel pointLabel2 = new Guna.Charts.WinForms.PointLabel();
+            Guna.Charts.WinForms.ChartFont chartFont15 = new Guna.Charts.WinForms.ChartFont();
+            Guna.Charts.WinForms.Tick tick6 = new Guna.Charts.WinForms.Tick();
+            Guna.Charts.WinForms.ChartFont chartFont16 = new Guna.Charts.WinForms.ChartFont();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             packPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
             packIcon = new PictureBox();
             packLabel = new Label();
@@ -81,12 +95,24 @@
             fromDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
             toDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
             netCost_Label = new Label();
+            topChart = new Guna.Charts.WinForms.GunaChart();
+            salesChart = new Guna.Charts.WinForms.GunaPieDataset();
+            guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            pictureBox1 = new PictureBox();
+            label2 = new Label();
+            guna2GradientPanel2 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            pictureBox2 = new PictureBox();
+            label1 = new Label();
             packPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)packIcon).BeginInit();
             shippedPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)shippingIcon).BeginInit();
             deliveredPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)deliveredIcon).BeginInit();
+            guna2GradientPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            guna2GradientPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // packPanel
@@ -282,12 +308,6 @@
             // saleChart
             // 
             saleChart.BorderColor = Color.RebeccaPurple;
-            lPoint1.Y = 5D;
-            lPoint2.Y = 10D;
-            lPoint3.Y = 0D;
-            lPoint4.Y = 20D;
-            lPoint5.Y = 50D;
-            saleChart.DataPoints.AddRange(new Guna.Charts.WinForms.LPoint[] { lPoint1, lPoint2, lPoint3, lPoint4, lPoint5 });
             saleChart.FillColor = Color.MediumPurple;
             saleChart.Label = "გაყიდვების რაოდენობა";
             saleChart.PointRadius = 5;
@@ -378,10 +398,129 @@
             netCost_Label.TabIndex = 44;
             netCost_Label.Text = "-";
             // 
+            // topChart
+            // 
+            topChart.Datasets.AddRange(new Guna.Charts.Interfaces.IGunaDataset[] { salesChart });
+            chartFont9.FontName = "Arial";
+            topChart.Legend.LabelFont = chartFont9;
+            topChart.Location = new Point(935, 247);
+            topChart.Name = "topChart";
+            topChart.Size = new Size(347, 324);
+            topChart.TabIndex = 45;
+            chartFont10.FontName = "Arial";
+            chartFont10.Size = 12;
+            chartFont10.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
+            topChart.Title.Font = chartFont10;
+            chartFont11.FontName = "Arial";
+            topChart.Tooltips.BodyFont = chartFont11;
+            chartFont12.FontName = "Arial";
+            chartFont12.Size = 9;
+            chartFont12.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
+            topChart.Tooltips.TitleFont = chartFont12;
+            topChart.XAxes.Display = false;
+            topChart.XAxes.GridLines = grid4;
+            chartFont13.FontName = "Arial";
+            tick4.Font = chartFont13;
+            topChart.XAxes.Ticks = tick4;
+            topChart.YAxes.Display = false;
+            topChart.YAxes.GridLines = grid5;
+            chartFont14.FontName = "Arial";
+            tick5.Font = chartFont14;
+            topChart.YAxes.Ticks = tick5;
+            topChart.ZAxes.GridLines = grid6;
+            chartFont15.FontName = "Arial";
+            pointLabel2.Font = chartFont15;
+            topChart.ZAxes.PointLabels = pointLabel2;
+            chartFont16.FontName = "Arial";
+            tick6.Font = chartFont16;
+            topChart.ZAxes.Ticks = tick6;
+            // 
+            // salesChart
+            // 
+            salesChart.Label = "Pie1";
+            salesChart.TargetChart = topChart;
+            // 
+            // guna2GradientPanel1
+            // 
+            guna2GradientPanel1.BorderRadius = 10;
+            guna2GradientPanel1.Controls.Add(pictureBox1);
+            guna2GradientPanel1.Controls.Add(label2);
+            guna2GradientPanel1.CustomizableEdges = customizableEdges15;
+            guna2GradientPanel1.FillColor = Color.MediumAquamarine;
+            guna2GradientPanel1.FillColor2 = Color.MediumAquamarine;
+            guna2GradientPanel1.Location = new Point(874, 19);
+            guna2GradientPanel1.Name = "guna2GradientPanel1";
+            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            guna2GradientPanel1.Size = new Size(498, 51);
+            guna2GradientPanel1.TabIndex = 46;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.MediumAquamarine;
+            pictureBox1.Image = Properties.Resources.Storage_28;
+            pictureBox1.Location = new Point(12, 10);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(28, 28);
+            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox1.TabIndex = 47;
+            pictureBox1.TabStop = false;
+            // 
+            // label2
+            // 
+            label2.BackColor = Color.MediumAquamarine;
+            label2.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(32, 9);
+            label2.Name = "label2";
+            label2.Size = new Size(313, 33);
+            label2.TabIndex = 40;
+            label2.Text = "პროდუქტების ჯამური მარაგი:";
+            label2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // guna2GradientPanel2
+            // 
+            guna2GradientPanel2.BorderRadius = 10;
+            guna2GradientPanel2.Controls.Add(pictureBox2);
+            guna2GradientPanel2.Controls.Add(label1);
+            guna2GradientPanel2.CustomizableEdges = customizableEdges17;
+            guna2GradientPanel2.FillColor = Color.MediumAquamarine;
+            guna2GradientPanel2.FillColor2 = Color.MediumAquamarine;
+            guna2GradientPanel2.Location = new Point(874, 102);
+            guna2GradientPanel2.Name = "guna2GradientPanel2";
+            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            guna2GradientPanel2.Size = new Size(498, 51);
+            guna2GradientPanel2.TabIndex = 47;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackColor = Color.MediumAquamarine;
+            pictureBox2.Image = Properties.Resources.Sold_28;
+            pictureBox2.Location = new Point(12, 10);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(28, 28);
+            pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
+            pictureBox2.TabIndex = 47;
+            pictureBox2.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.BackColor = Color.MediumAquamarine;
+            label1.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(46, 8);
+            label1.Name = "label1";
+            label1.Size = new Size(313, 33);
+            label1.TabIndex = 40;
+            label1.Text = "ჯამური გაყიდვების რაოდენობა:";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Dashboard_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(guna2GradientPanel2);
+            Controls.Add(guna2GradientPanel1);
+            Controls.Add(topChart);
             Controls.Add(netCost_Label);
             Controls.Add(toDate);
             Controls.Add(fromDate);
@@ -402,6 +541,12 @@
             deliveredPanel.ResumeLayout(false);
             deliveredPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)deliveredIcon).EndInit();
+            guna2GradientPanel1.ResumeLayout(false);
+            guna2GradientPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            guna2GradientPanel2.ResumeLayout(false);
+            guna2GradientPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -426,5 +571,13 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker fromDate;
         private Guna.UI2.WinForms.Guna2DateTimePicker toDate;
         private Label netCost_Label;
+        private Guna.Charts.WinForms.GunaChart topChart;
+        private Guna.Charts.WinForms.GunaPieDataset salesChart;
+        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
+        private Label label2;
+        private PictureBox pictureBox1;
+        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel2;
+        private PictureBox pictureBox2;
+        private Label label1;
     }
 }

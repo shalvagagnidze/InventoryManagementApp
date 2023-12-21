@@ -1,6 +1,4 @@
-﻿using Guna.Charts.WinForms;
-using InventoryManagementApp.Data;
-using System;
+﻿using InventoryManagementApp.Data;
 using System.Globalization;
 
 namespace InventoryManagementApp.User_Controls;
@@ -22,7 +20,7 @@ public partial class Dashboard_UC : UserControl
         toDate.Enabled = false;
 
 
-        //SevenDays();
+        SevenDays();
         //ThreeMonth();
         // OneMonth();
         //OneYear();
@@ -135,7 +133,7 @@ public partial class Dashboard_UC : UserControl
             .Distinct()
             .ToList();
 
-        saleChart.DataPoints.Clear();
+        salesChart.DataPoints.Clear();
 
         foreach (var day in daysInRange)
         {
@@ -143,10 +141,10 @@ public partial class Dashboard_UC : UserControl
                 .Where(s => s.Date?.ToString("dddd") == day)
                 .Sum(s => s?.Amount ?? 0);
 
-            saleChart.DataPoints.Add(day, totalAmount);
+            salesChart.DataPoints.Add(day, totalAmount);
         }
 
-        saleChart.Invalidate();
+        salesChart.Invalidate();
 
     }
 
@@ -193,14 +191,22 @@ public partial class Dashboard_UC : UserControl
             .OrderBy(s => s.Date)
             .ToList();
 
+        var daysInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
+                                        .Select(offset => startDate.AddDays(offset))
+                                        .Distinct()
+                                        .Select(day => day.ToString("MMM-dd"))
+                                        .ToList();
+
+
         saleChart.DataPoints.Clear();
 
-        foreach (var sale in sales)
+        foreach (var day in daysInRange)
         {
-            var date = sale.Date?.ToString("MM-dd");
-            var totalAmount = sale.Amount;
+            var totalAmount = sales
+                .Where(s => s.Date?.ToString("MMM-dd") == day)
+                .Sum(s => s?.Amount ?? 0);
 
-            saleChart.DataPoints.Add(date, totalAmount);
+            saleChart.DataPoints.Add(day, totalAmount);
         }
 
         saleChart.Invalidate();
@@ -219,17 +225,26 @@ public partial class Dashboard_UC : UserControl
             .OrderBy(s => s.Date)
             .ToList();
 
+        var daysInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
+                                        .Select(offset => startDate.AddDays(offset))
+                                        .Distinct()
+                                        .Select(day => day.ToString("MMM-dd"))
+                                        .ToList();
+
+
         saleChart.DataPoints.Clear();
 
-        foreach (var sale in sales)
+        foreach (var day in daysInRange)
         {
-            var date = sale.Date?.ToString("MM-dd");
-            var totalAmount = sale.Amount;
+            var totalAmount = sales
+                .Where(s => s.Date?.ToString("MMM-dd") == day)
+                .Sum(s => s?.Amount ?? 0);
 
-            saleChart.DataPoints.Add(date, totalAmount);
+            saleChart.DataPoints.Add(day, totalAmount);
         }
 
         saleChart.Invalidate();
+
     }
 
     public void SixMonths()
@@ -262,8 +277,7 @@ public partial class Dashboard_UC : UserControl
                                             Month = month,
                                             TotalAmount = monthSales.Sum(s => s?.Amount ?? 0)
                                         })
-                                    .OrderBy(g => g.Month)
-                                    .Reverse()
+                                    .OrderBy(g => DateTime.ParseExact(g.Month, "MMM", CultureInfo.InvariantCulture).Month)
                                     .ToList();
 
         saleChart.DataPoints.Clear();
@@ -556,7 +570,7 @@ public partial class Dashboard_UC : UserControl
         {
             CustomDate();
         }
-        
+
     }
 
     private void toDate_ValueChanged(object sender, EventArgs e)
@@ -587,83 +601,295 @@ public partial class Dashboard_UC : UserControl
                             .Where(s => s.Date >= startDate && s.Date <= endDate)
                             .OrderBy(s => s.Date)
                             .ToList();
-
-        //if()
-        var weeksAndMonthsData = sales
-                            .GroupBy(s => new { Year = s.Date.Value.Year, Month = s.Date.Value.Month })
-                            .OrderBy(group => group.Key.Year)
-                            .ThenBy(group => group.Key.Month)
-                            .Select(group => new
-                            {
-                                Year = group.Key.Year,
-                                Month = group.Key.Month,
-                                WeekData = group
-                            .GroupBy(s => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear((DateTime)s.Date, CalendarWeekRule.FirstDay, DayOfWeek.Sunday))
-                            .Select(weekGroup => new
-                            {
-                                WeekNumber = weekGroup.Key,
-                                TotalAmount = weekGroup.Sum(s => s.Amount)
-                            })
-                            })
-                            .ToList();
-
-        saleChart.DataPoints.Clear();
-        foreach (var monthData in weeksAndMonthsData)
+        if (startDate <= endDate)
         {
-
-            saleChart.DataPoints.Add($"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthData.Month)} {monthData.Year}", 0);
-
-
-            foreach (var weekData in monthData.WeekData)
+            if (daysDifference <= 7)
             {
-                saleChart.DataPoints.Add($"Week {weekData.WeekNumber}", weekData.TotalAmount);
+                var daysInRange = Enumerable.Range(0, daysDifference + 1)
+                                            .Select(offset => startDate.AddDays(offset))
+                                            .Distinct()
+                                            .Select(day => day.ToString("dddd"))
+                                            .ToList();
+
+
+                saleChart.DataPoints.Clear();
+
+                foreach (var day in daysInRange)
+                {
+                    var totalAmount = sales
+                        .Where(s => s.Date?.ToString("dddd") == day)
+                        .Sum(s => s?.Amount ?? 0);
+
+                    saleChart.DataPoints.Add(day, totalAmount);
+                }
+
+                saleChart.Invalidate();
+            }
+
+            if (daysDifference > 7 && daysDifference <= 31)
+            {
+                var daysInRange = Enumerable.Range(0, daysDifference + 1)
+                                            .Select(offset => startDate.AddDays(offset))
+                                            .Distinct()
+                                            .Select(day => day.ToString("MMM-dd"))
+                                            .ToList();
+
+
+                saleChart.DataPoints.Clear();
+
+                foreach (var day in daysInRange)
+                {
+                    var totalAmount = sales
+                        .Where(s => s.Date?.ToString("MMM-dd") == day)
+                        .Sum(s => s?.Amount ?? 0);
+
+                    saleChart.DataPoints.Add(day, totalAmount);
+                }
+
+                saleChart.Invalidate();
+            }
+
+            if (daysDifference > 31 && daysDifference <= 93)
+            {
+                var weeksAndMonthsData = sales
+                                            .GroupBy(s => new { Year = s.Date.Value.Year, Month = s.Date.Value.Month })
+                                            .OrderBy(group => group.Key.Year)
+                                            .ThenBy(group => group.Key.Month)
+                                            .Select(group => new
+                                            {
+                                                Year = group.Key.Year,
+                                                Month = group.Key.Month,
+                                                WeekData = GetWeeksInMonth(group.Key.Year, group.Key.Month, DayOfWeek.Sunday)
+                                                    .GroupJoin(
+                                                        group,
+                                                        week => week,
+                                                        sale => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(sale.Date.Value, CalendarWeekRule.FirstDay, DayOfWeek.Sunday),
+                                                        (week, sales) => new
+                                                        {
+                                                            WeekNumber = week,
+                                                            TotalAmount = sales.Sum(s => s.Amount)
+                                                        })
+                                                    .ToList()
+                                            })
+                                                    .ToList();
+
+
+                List<int> GetWeeksInMonth(int year, int month, DayOfWeek startOfWeek)
+                {
+                    var firstDayOfMonth = new DateTime(year, month, 1);
+                    var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+                    return Enumerable.Range(0, (lastDayOfMonth - firstDayOfMonth).Days + 1)
+                        .Select(offset => firstDayOfMonth.AddDays(offset))
+                        .Where(day => day.DayOfWeek == startOfWeek)
+                        .Select(day => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(day, CalendarWeekRule.FirstDay, DayOfWeek.Sunday))
+                        .Distinct()
+                        .ToList();
+                }
+
+
+                saleChart.DataPoints.Clear();
+                foreach (var monthData in weeksAndMonthsData)
+                {
+
+                    saleChart.DataPoints.Add($"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthData.Month)} {monthData.Year}", 0);
+
+
+                    foreach (var weekData in monthData.WeekData)
+                    {
+                        saleChart.DataPoints.Add($"Week {weekData.WeekNumber}", weekData.TotalAmount);
+                    }
+                }
+
+                saleChart.Invalidate();
+            }
+
+            if (daysDifference > 93 && daysDifference <= 365)
+            {
+                var monthsInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
+                                              .Select(offset => startDate.AddDays(offset).ToString("MMM"))
+                                              .Distinct()
+                                              .OrderBy(m => DateTime.ParseExact(m, "MMM", null))
+                                              .ToList();
+
+                var chartData = monthsInRange.GroupJoin(sales,
+                                                month => month,
+                                                sale => sale.Date?.ToString("MMM"),
+                                                (month, monthSales) => new
+                                                {
+                                                    Month = month,
+                                                    TotalAmount = monthSales.Sum(s => s?.Amount ?? 0)
+                                                })
+                                            .OrderBy(g => DateTime.ParseExact(g.Month, "MMM", CultureInfo.InvariantCulture).Month)
+                                            .ToList();
+
+                saleChart.DataPoints.Clear();
+                foreach (var dataPoint in chartData)
+                {
+
+                    saleChart.DataPoints.Add(dataPoint.Month, dataPoint.TotalAmount);
+
+                }
+
+                saleChart.Invalidate();
             }
         }
-
-        saleChart.Invalidate();
+        else
+        {
+            saleChart.DataPoints.Clear();
+        }
     }
 
     public void CustomDateDetailed(string name)
     {
         var startDate = fromDate.Value.Date;
         var endDate = toDate.Value.Date;
+        TimeSpan differenceInDays = endDate - startDate;
+        int daysDifference = differenceInDays.Days;
+        int monthsDifference = (endDate.Month - startDate.Month) + 12 * (endDate.Year - startDate.Year);
+
         var sales = _db.Sales
                             .Where(s => s.IsDeleted == false)
                             .Where(s => s.Product.Name == name)
                             .Where(s => s.Date >= startDate && s.Date <= endDate)
                             .OrderBy(s => s.Date)
                             .ToList();
-        var weeksAndMonthsData = sales
-                            .GroupBy(s => new { Year = s.Date.Value.Year, Month = s.Date.Value.Month })
-                            .OrderBy(group => group.Key.Year)
-                            .ThenBy(group => group.Key.Month)
-                            .Select(group => new
-                            {
-                                Year = group.Key.Year,
-                                Month = group.Key.Month,
-                                WeekData = group
-                            .GroupBy(s => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear((DateTime)s.Date, CalendarWeekRule.FirstDay, DayOfWeek.Sunday))
-                            .Select(weekGroup => new
-                            {
-                                WeekNumber = weekGroup.Key,
-                                TotalAmount = weekGroup.Sum(s => s.Amount)
-                            })
-                            })
-                            .ToList();
-
-        saleChart.DataPoints.Clear();
-        foreach (var monthData in weeksAndMonthsData)
+        if (startDate <= endDate)
         {
-
-            saleChart.DataPoints.Add($"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthData.Month)} {monthData.Year}", 0);
-
-
-            foreach (var weekData in monthData.WeekData)
+            if (daysDifference <= 7)
             {
-                saleChart.DataPoints.Add($"Week {weekData.WeekNumber}", weekData.TotalAmount);
+                var daysInRange = Enumerable.Range(0, daysDifference + 1)
+                                            .Select(offset => startDate.AddDays(offset))
+                                            .Distinct()
+                                            .Select(day => day.ToString("dddd"))
+                                            .ToList();
+
+
+                saleChart.DataPoints.Clear();
+
+                foreach (var day in daysInRange)
+                {
+                    var totalAmount = sales
+                        .Where(s => s.Date?.ToString("dddd") == day)
+                        .Sum(s => s?.Amount ?? 0);
+
+                    saleChart.DataPoints.Add(day, totalAmount);
+                }
+
+                saleChart.Invalidate();
+            }
+
+            if (daysDifference > 7 && daysDifference <= 31)
+            {
+                var daysInRange = Enumerable.Range(0, daysDifference + 1)
+                                            .Select(offset => startDate.AddDays(offset))
+                                            .Distinct()
+                                            .Select(day => day.ToString("MMM-dd"))
+                                            .ToList();
+
+
+                saleChart.DataPoints.Clear();
+
+                foreach (var day in daysInRange)
+                {
+                    var totalAmount = sales
+                        .Where(s => s.Date?.ToString("MMM-dd") == day)
+                        .Sum(s => s?.Amount ?? 0);
+
+                    saleChart.DataPoints.Add(day, totalAmount);
+                }
+
+                saleChart.Invalidate();
+            }
+
+            if (daysDifference > 31 && daysDifference <= 93)
+            {
+                var weeksAndMonthsData = sales
+                                            .GroupBy(s => new { Year = s.Date.Value.Year, Month = s.Date.Value.Month })
+                                            .OrderBy(group => group.Key.Year)
+                                            .ThenBy(group => group.Key.Month)
+                                            .Select(group => new
+                                            {
+                                                Year = group.Key.Year,
+                                                Month = group.Key.Month,
+                                                WeekData = GetWeeksInMonth(group.Key.Year, group.Key.Month, DayOfWeek.Sunday)
+                                                    .GroupJoin(
+                                                        group,
+                                                        week => week,
+                                                        sale => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(sale.Date.Value, CalendarWeekRule.FirstDay, DayOfWeek.Sunday),
+                                                        (week, sales) => new
+                                                        {
+                                                            WeekNumber = week,
+                                                            TotalAmount = sales.Sum(s => s.Amount)
+                                                        })
+                                                    .ToList()
+                                            })
+                                                    .ToList();
+
+
+                List<int> GetWeeksInMonth(int year, int month, DayOfWeek startOfWeek)
+                {
+                    var firstDayOfMonth = new DateTime(year, month, 1);
+                    var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+
+                    return Enumerable.Range(0, (lastDayOfMonth - firstDayOfMonth).Days + 1)
+                        .Select(offset => firstDayOfMonth.AddDays(offset))
+                        .Where(day => day.DayOfWeek == startOfWeek)
+                        .Select(day => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(day, CalendarWeekRule.FirstDay, DayOfWeek.Sunday))
+                        .Distinct()
+                        .ToList();
+                }
+
+
+                saleChart.DataPoints.Clear();
+                foreach (var monthData in weeksAndMonthsData)
+                {
+
+                    saleChart.DataPoints.Add($"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthData.Month)} {monthData.Year}", 0);
+
+
+                    foreach (var weekData in monthData.WeekData)
+                    {
+                        saleChart.DataPoints.Add($"Week {weekData.WeekNumber}", weekData.TotalAmount);
+                    }
+                }
+
+                saleChart.Invalidate();
+            }
+
+            if (daysDifference > 93 && daysDifference <= 365)
+            {
+                var monthsInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
+                                              .Select(offset => startDate.AddDays(offset).ToString("MMM"))
+                                              .Distinct()
+                                              .OrderBy(m => DateTime.ParseExact(m, "MMM", null))
+                                              .ToList();
+
+                var chartData = monthsInRange.GroupJoin(sales,
+                                                month => month,
+                                                sale => sale.Date?.ToString("MMM"),
+                                                (month, monthSales) => new
+                                                {
+                                                    Month = month,
+                                                    TotalAmount = monthSales.Sum(s => s?.Amount ?? 0)
+                                                })
+                                            .OrderBy(g => DateTime.ParseExact(g.Month, "MMM", CultureInfo.InvariantCulture).Month)
+                                            .ToList();
+
+                saleChart.DataPoints.Clear();
+                foreach (var dataPoint in chartData)
+                {
+
+                    saleChart.DataPoints.Add(dataPoint.Month, dataPoint.TotalAmount);
+
+                }
+
+                saleChart.Invalidate();
             }
         }
-
-        saleChart.Invalidate();
+        else
+        {
+            saleChart.DataPoints.Clear();
+        }
     }
 }
