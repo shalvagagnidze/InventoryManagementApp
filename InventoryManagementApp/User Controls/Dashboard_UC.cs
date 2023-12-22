@@ -1,5 +1,7 @@
 ﻿using InventoryManagementApp.Data;
 using System.Globalization;
+using System.Linq;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace InventoryManagementApp.User_Controls;
 
@@ -19,8 +21,24 @@ public partial class Dashboard_UC : UserControl
         fromDate.Enabled = false;
         toDate.Enabled = false;
 
+        
 
-        SevenDays();
+        var totalSold = _db.Sales.Where(s => s.IsDeleted == false).ToList().Sum(s => s.Amount);
+
+        var storage = _db.Storages.Where(s => s.Product.IsDeleted == false)
+                                  .ToList()
+                                  .Sum(s => s.TotalAmount);
+
+        
+
+
+
+
+
+        storage_Text.Text = storage.ToString();
+        totalSold_Text.Text = totalSold.ToString();
+
+        
         //ThreeMonth();
         // OneMonth();
         //OneYear();
@@ -29,9 +47,61 @@ public partial class Dashboard_UC : UserControl
         productNames.Insert(0, "ყველა პროდუქტი");
         productCombo.DataSource = productNames;
 
-
+        SevenDays();
+        TopSales();
+        //ProfitLoss();
     }
 
+
+    public void ProfitLoss()
+    {
+        
+    }
+
+    public void TopSales()
+    {
+        topChart.Title.Text = "Top 3 გაყიდვადი პროდუქტი";
+        var topProducts = _db.Products
+                                      .Where(p => !p.IsDeleted && p.Sales
+                                      .Any(s => !s.IsDeleted))
+                                      .GroupBy(p => p, (key, group) => new
+                                      {
+                                        Product = group.First().Name.ToString(),
+                                        TotalAmount = group.SelectMany(s => s.Sales
+                                                           .Where(s => !s.IsDeleted)
+                                                           .Select(s => s.Amount)).Sum()
+                                      })
+                                      .OrderBy(result => result.TotalAmount)
+                                      .ToList();
+        int i = 0;
+        foreach(var product in topProducts)
+        {
+            if(i == 0)
+            {
+                MiddePie.DataPoints.Add(product.Product, product.TotalAmount);
+                MiddePie.Label = product.Product;
+                
+            }else if(i == 1)
+            {
+                MinPie.DataPoints.Add(product.Product, product.TotalAmount);
+                MinPie.Label = product.Product;
+            }
+            else if(i == 2)
+            {
+                MaxPie.DataPoints.Add(product.Product, product.TotalAmount);
+                MaxPie.Label = product.Product;
+            }
+
+            if (i > 2)
+            {               
+                break;
+            }
+            i++;
+        }
+
+        
+       
+    }
     public void ThreeMonth()
     {
         DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -133,7 +203,7 @@ public partial class Dashboard_UC : UserControl
             .Distinct()
             .ToList();
 
-        salesChart.DataPoints.Clear();
+        saleChart.DataPoints.Clear();
 
         foreach (var day in daysInRange)
         {
@@ -141,10 +211,10 @@ public partial class Dashboard_UC : UserControl
                 .Where(s => s.Date?.ToString("dddd") == day)
                 .Sum(s => s?.Amount ?? 0);
 
-            salesChart.DataPoints.Add(day, totalAmount);
+            saleChart.DataPoints.Add(day, totalAmount);
         }
 
-        salesChart.Invalidate();
+        saleChart.Invalidate();
 
     }
 
@@ -423,7 +493,8 @@ public partial class Dashboard_UC : UserControl
     {
         var selectedDateRange = dateCombo.SelectedIndex;
         var selectedBox = productCombo.Text;
-        if (selectedBox != "ყველა პროდუქტი")
+        var selectedBoxIndex = productCombo.SelectedIndex;
+        if (selectedBoxIndex != 0)
         {
 
 
