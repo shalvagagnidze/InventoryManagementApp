@@ -20,8 +20,9 @@ public partial class Dashboard_UC : UserControl
         deliveryText.Text = deliveredCount.ToString();
         fromDate.Enabled = false;
         toDate.Enabled = false;
-
-        
+        fromProfit.Visible = false;
+        toProfit.Visible = false;
+        dash.Visible = false;
 
         var totalSold = _db.Sales.Where(s => s.IsDeleted == false).ToList().Sum(s => s.Amount);
 
@@ -29,33 +30,15 @@ public partial class Dashboard_UC : UserControl
                                   .ToList()
                                   .Sum(s => s.TotalAmount);
 
-        
-
-
-
-
-
         storage_Text.Text = storage.ToString();
         totalSold_Text.Text = totalSold.ToString();
-
-        
-        //ThreeMonth();
-        // OneMonth();
-        //OneYear();
-
         var productNames = _db.Products.Select(s => s.Name).ToList();
         productNames.Insert(0, "ყველა პროდუქტი");
         productCombo.DataSource = productNames;
 
         SevenDays();
         TopSales();
-        //ProfitLoss();
-    }
-
-
-    public void ProfitLoss()
-    {
-        
+        AllProfitLoss();
     }
 
     public void TopSales()
@@ -66,41 +49,39 @@ public partial class Dashboard_UC : UserControl
                                       .Any(s => !s.IsDeleted))
                                       .GroupBy(p => p, (key, group) => new
                                       {
-                                        Product = group.First().Name.ToString(),
-                                        TotalAmount = group.SelectMany(s => s.Sales
-                                                           .Where(s => !s.IsDeleted)
-                                                           .Select(s => s.Amount)).Sum()
+                                          Product = group.First().Name.ToString(),
+                                          TotalAmount = group.SelectMany(s => s.Sales
+                                                             .Where(s => !s.IsDeleted)
+                                                             .Select(s => s.Amount)).Sum()
                                       })
                                       .OrderBy(result => result.TotalAmount)
                                       .ToList();
         int i = 0;
-        foreach(var product in topProducts)
+        foreach (var product in topProducts)
         {
-            if(i == 0)
+            if (i == 0)
             {
                 MiddePie.DataPoints.Add(product.Product, product.TotalAmount);
                 MiddePie.Label = product.Product;
-                
-            }else if(i == 1)
+
+            }
+            else if (i == 1)
             {
                 MinPie.DataPoints.Add(product.Product, product.TotalAmount);
                 MinPie.Label = product.Product;
             }
-            else if(i == 2)
+            else if (i == 2)
             {
                 MaxPie.DataPoints.Add(product.Product, product.TotalAmount);
                 MaxPie.Label = product.Product;
             }
 
             if (i > 2)
-            {               
+            {
                 break;
             }
             i++;
         }
-
-        
-       
     }
     public void ThreeMonth()
     {
@@ -157,7 +138,6 @@ public partial class Dashboard_UC : UserControl
             .OrderBy(s => s.Date)
             .ToList();
 
-
         var monthsInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
                                       .Select(offset => startDate.AddDays(offset).ToString("MMM"))
                                       .Distinct()
@@ -183,7 +163,6 @@ public partial class Dashboard_UC : UserControl
             saleChart.DataPoints.Add(dataPoint.Month, dataPoint.TotalAmount);
 
         }
-
         saleChart.Invalidate();
     }
     public void SevenDays()
@@ -196,7 +175,6 @@ public partial class Dashboard_UC : UserControl
             .Where(s => s.Date >= startDate && s.Date <= endDate)
             .OrderBy(s => s.Date)
             .ToList();
-
 
         var daysInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
             .Select(offset => startDate.AddDays(offset).ToString("dddd"))
@@ -213,9 +191,7 @@ public partial class Dashboard_UC : UserControl
 
             saleChart.DataPoints.Add(day, totalAmount);
         }
-
         saleChart.Invalidate();
-
     }
 
     public void SevenDaysDetailed(string name)
@@ -230,7 +206,6 @@ public partial class Dashboard_UC : UserControl
             .OrderBy(s => s.Date)
             .ToList();
 
-
         var daysInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
             .Select(offset => startDate.AddDays(offset).ToString("dddd"))
             .Distinct()
@@ -246,7 +221,6 @@ public partial class Dashboard_UC : UserControl
 
             saleChart.DataPoints.Add(day, totalAmount);
         }
-
         saleChart.Invalidate();
     }
 
@@ -267,7 +241,6 @@ public partial class Dashboard_UC : UserControl
                                         .Select(day => day.ToString("MMM-dd"))
                                         .ToList();
 
-
         saleChart.DataPoints.Clear();
 
         foreach (var day in daysInRange)
@@ -278,9 +251,7 @@ public partial class Dashboard_UC : UserControl
 
             saleChart.DataPoints.Add(day, totalAmount);
         }
-
         saleChart.Invalidate();
-
     }
 
     public void OneMonthDetailed(string name)
@@ -301,7 +272,6 @@ public partial class Dashboard_UC : UserControl
                                         .Select(day => day.ToString("MMM-dd"))
                                         .ToList();
 
-
         saleChart.DataPoints.Clear();
 
         foreach (var day in daysInRange)
@@ -312,9 +282,7 @@ public partial class Dashboard_UC : UserControl
 
             saleChart.DataPoints.Add(day, totalAmount);
         }
-
         saleChart.Invalidate();
-
     }
 
     public void SixMonths()
@@ -325,13 +293,11 @@ public partial class Dashboard_UC : UserControl
 
         DateTime endDate = startDate.AddMonths(6).AddDays(-1);
 
-
         var sales = _db.Sales
             .Where(s => s.IsDeleted == false)
             .Where(s => s.Date >= startDate && s.Date <= endDate)
             .OrderBy(s => s.Date)
             .ToList();
-
 
         var monthsInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
                                       .Select(offset => startDate.AddDays(offset).ToString("MMM"))
@@ -357,9 +323,7 @@ public partial class Dashboard_UC : UserControl
             saleChart.DataPoints.Add(dataPoint.Month, dataPoint.TotalAmount);
 
         }
-
         saleChart.Invalidate();
-
     }
 
     public void SixMonthsDetailed(string name)
@@ -402,9 +366,7 @@ public partial class Dashboard_UC : UserControl
         {
             saleChart.DataPoints.Add(dataPoint.Month, dataPoint.TotalAmount);
         }
-
         saleChart.Invalidate();
-
     }
 
     public void OneYear()
@@ -442,9 +404,7 @@ public partial class Dashboard_UC : UserControl
         {
             saleChart.DataPoints.Add(dataPoint.Month, dataPoint.TotalAmount);
         }
-
         saleChart.Invalidate();
-
     }
 
     public void OneYearDetailed(string name)
@@ -483,10 +443,7 @@ public partial class Dashboard_UC : UserControl
         {
             saleChart.DataPoints.Add(dataPoint.Month, dataPoint.TotalAmount);
         }
-
         saleChart.Invalidate();
-
-
     }
 
     private void productCombo_SelectedIndexChanged(object sender, EventArgs e)
@@ -496,8 +453,6 @@ public partial class Dashboard_UC : UserControl
         var selectedBoxIndex = productCombo.SelectedIndex;
         if (selectedBoxIndex != 0)
         {
-
-
             var product = _db.Products.FirstOrDefault(p => p.Name == selectedBox);
 
             if (selectedBox == product.Name)
@@ -520,7 +475,6 @@ public partial class Dashboard_UC : UserControl
                         OneYearDetailed(selectedBox);
                         break;
                 }
-
             }
         }
         else
@@ -553,8 +507,6 @@ public partial class Dashboard_UC : UserControl
         var product = _db.Products.FirstOrDefault(p => p.Name == selectedBox);
         if (selectedBox != "ყველა პროდუქტი")
         {
-
-
             if (selectedBox == product.Name)
             {
                 switch (selectedDateRange)
@@ -641,7 +593,6 @@ public partial class Dashboard_UC : UserControl
         {
             CustomDate();
         }
-
     }
 
     private void toDate_ValueChanged(object sender, EventArgs e)
@@ -682,7 +633,6 @@ public partial class Dashboard_UC : UserControl
                                             .Select(day => day.ToString("dddd"))
                                             .ToList();
 
-
                 saleChart.DataPoints.Clear();
 
                 foreach (var day in daysInRange)
@@ -693,7 +643,6 @@ public partial class Dashboard_UC : UserControl
 
                     saleChart.DataPoints.Add(day, totalAmount);
                 }
-
                 saleChart.Invalidate();
             }
 
@@ -705,7 +654,6 @@ public partial class Dashboard_UC : UserControl
                                             .Select(day => day.ToString("MMM-dd"))
                                             .ToList();
 
-
                 saleChart.DataPoints.Clear();
 
                 foreach (var day in daysInRange)
@@ -716,7 +664,6 @@ public partial class Dashboard_UC : UserControl
 
                     saleChart.DataPoints.Add(day, totalAmount);
                 }
-
                 saleChart.Invalidate();
             }
 
@@ -744,7 +691,6 @@ public partial class Dashboard_UC : UserControl
                                             })
                                                     .ToList();
 
-
                 List<int> GetWeeksInMonth(int year, int month, DayOfWeek startOfWeek)
                 {
                     var firstDayOfMonth = new DateTime(year, month, 1);
@@ -758,20 +704,16 @@ public partial class Dashboard_UC : UserControl
                         .ToList();
                 }
 
-
                 saleChart.DataPoints.Clear();
                 foreach (var monthData in weeksAndMonthsData)
                 {
-
                     saleChart.DataPoints.Add($"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthData.Month)} {monthData.Year}", 0);
-
 
                     foreach (var weekData in monthData.WeekData)
                     {
                         saleChart.DataPoints.Add($"Week {weekData.WeekNumber}", weekData.TotalAmount);
                     }
                 }
-
                 saleChart.Invalidate();
             }
 
@@ -801,7 +743,6 @@ public partial class Dashboard_UC : UserControl
                     saleChart.DataPoints.Add(dataPoint.Month, dataPoint.TotalAmount);
 
                 }
-
                 saleChart.Invalidate();
             }
         }
@@ -835,7 +776,6 @@ public partial class Dashboard_UC : UserControl
                                             .Select(day => day.ToString("dddd"))
                                             .ToList();
 
-
                 saleChart.DataPoints.Clear();
 
                 foreach (var day in daysInRange)
@@ -846,7 +786,6 @@ public partial class Dashboard_UC : UserControl
 
                     saleChart.DataPoints.Add(day, totalAmount);
                 }
-
                 saleChart.Invalidate();
             }
 
@@ -857,7 +796,6 @@ public partial class Dashboard_UC : UserControl
                                             .Distinct()
                                             .Select(day => day.ToString("MMM-dd"))
                                             .ToList();
-
 
                 saleChart.DataPoints.Clear();
 
@@ -897,7 +835,6 @@ public partial class Dashboard_UC : UserControl
                                             })
                                                     .ToList();
 
-
                 List<int> GetWeeksInMonth(int year, int month, DayOfWeek startOfWeek)
                 {
                     var firstDayOfMonth = new DateTime(year, month, 1);
@@ -911,20 +848,16 @@ public partial class Dashboard_UC : UserControl
                         .ToList();
                 }
 
-
                 saleChart.DataPoints.Clear();
                 foreach (var monthData in weeksAndMonthsData)
                 {
-
                     saleChart.DataPoints.Add($"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(monthData.Month)} {monthData.Year}", 0);
-
 
                     foreach (var weekData in monthData.WeekData)
                     {
                         saleChart.DataPoints.Add($"Week {weekData.WeekNumber}", weekData.TotalAmount);
                     }
                 }
-
                 saleChart.Invalidate();
             }
 
@@ -950,11 +883,8 @@ public partial class Dashboard_UC : UserControl
                 saleChart.DataPoints.Clear();
                 foreach (var dataPoint in chartData)
                 {
-
                     saleChart.DataPoints.Add(dataPoint.Month, dataPoint.TotalAmount);
-
                 }
-
                 saleChart.Invalidate();
             }
         }
@@ -962,5 +892,212 @@ public partial class Dashboard_UC : UserControl
         {
             saleChart.DataPoints.Clear();
         }
+    }
+
+    private void incomeDateRange_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var selectedComboIndex = incomeDataRange.SelectedIndex;
+
+        switch (selectedComboIndex)
+        {
+            case 0:
+                AllProfitLoss();
+                fromProfit.Visible = false;
+                toProfit.Visible = false;
+                dash.Visible = false;
+                break;
+            case 1:
+                WeekProfitLoss();
+                fromProfit.Visible = false;
+                toProfit.Visible = false;
+                dash.Visible = false;
+                break;
+            case 2:
+                MonthProfitLoss(1);
+                fromProfit.Visible = false;
+                toProfit.Visible = false;
+                dash.Visible = false;
+                break;
+            case 3:
+                MonthProfitLoss(3);
+                fromProfit.Visible = false;
+                toProfit.Visible = false;
+                dash.Visible = false;
+                break;
+            case 4:
+                MonthProfitLoss(6);
+                fromProfit.Visible = false;
+                toProfit.Visible = false;
+                dash.Visible = false;
+                break;
+            case 5:
+                MonthProfitLoss(12);
+                fromProfit.Visible = false;
+                toProfit.Visible = false;
+                dash.Visible = false;
+                break;
+            case 6:
+                CustomProfitLoss();
+                fromProfit.Visible = true;
+                toProfit.Visible = true;
+                dash.Visible = true;
+                break;
+        }
+    }
+
+
+
+    public void AllProfitLoss()
+    {
+        var income = _db.Sales.Where(s => s.IsDeleted == false).Select(s => s.Product.Price * s.Amount).ToList().Sum();
+        var expense = _db.Products.Where(p => p.IsDeleted == false).Select(s => s.NetCost * s.Storage.TotalAmount).ToList().Sum();
+        var profit = income - expense;
+
+        income_Txt.Text = income.ToString("F2") + " ₾";
+        exp_Text.Text = expense.ToString("F2") + " ₾";
+        profit_Txt.Text = profit.ToString("F2") + " ₾";
+
+        if (profit < 0)
+        {
+            profit_Txt.ForeColor = Color.FromArgb(167, 23, 26);
+        }
+        else
+        {
+            profit_Txt.ForeColor = Color.LawnGreen;
+        }
+    }
+
+    public void WeekProfitLoss()
+    {
+        DateTime startDate = DateTime.Now.Date.AddDays(-6);
+        DateTime endDate = DateTime.Now.Date;
+        var product = _db.Products.Select(p => p.Name).ToList();
+
+        var income = _db.Sales.Where(s => s.IsDeleted == false)
+                              .Where(s => s.Date.Value >= startDate && s.Date.Value <= endDate)
+                              .Select(s => s.Product.Price * s.Amount)
+                              .ToList()
+                              .Sum();
+
+        var expenseCreate = _db.Products.Where(p => p.IsDeleted == false)
+                                  .Where(p => p.CreateDate >= startDate && p.CreateDate <= endDate)
+                                  .Select(s => s.NetCost * s.Storage.TotalAmount)
+                                  .ToList()
+                                  .Sum();
+
+        var expenseAddAmount = _db.AddAmounts.Where(a => a.Product.IsDeleted == false)
+                                             .Where(a => a.AdditionCreateDate >= startDate
+                                                    && a.AdditionCreateDate <= endDate)
+                                             .Select(a => a.Amount * a.Product.NetCost)
+                                             .ToList()
+                                             .Sum();
+
+        var expense = expenseCreate + expenseAddAmount;
+        var profit = income - expense;
+
+        income_Txt.Text = income.ToString("F2") + " ₾";
+        exp_Text.Text = expense.ToString("F2") + " ₾";
+        profit_Txt.Text = profit.ToString("F2") + " ₾";
+
+        if (profit < 0)
+        {
+            profit_Txt.ForeColor = Color.FromArgb(167, 23, 26);
+        }
+        else
+        {
+            profit_Txt.ForeColor = Color.LawnGreen;
+        }
+    }
+
+    public void MonthProfitLoss(int monthRange)
+    {
+        DateTime startDate = DateTime.Now.Date.AddMonths(-monthRange);
+        DateTime endDate = DateTime.Now.Date;
+        var product = _db.Products.Select(p => p.Name).ToList();
+
+        var income = _db.Sales.Where(s => s.IsDeleted == false)
+                              .Where(s => s.Date.Value >= startDate && s.Date.Value <= endDate)
+                              .Select(s => s.Product.Price * s.Amount)
+                              .ToList()
+                              .Sum();
+
+        var expenseAddAmount = _db.AddAmounts.Where(a => a.Product.IsDeleted == false)
+                                             .Where(a => a.AdditionCreateDate >= startDate
+                                                    && a.AdditionCreateDate <= endDate)
+                                             .Select(a => a.Amount * a.Product.NetCost)
+                                             .ToList()
+                                             .Sum();
+
+        var expenseFirst = _db.Products.Where(p => p.IsDeleted == false)
+                                        .Select(p => p.Storage.TotalAmount * p.NetCost).ToList().Sum();
+
+        var expenseCreate = expenseFirst - expenseAddAmount;
+        var expense = expenseCreate + expenseAddAmount;
+        var profit = income - expense;
+
+        income_Txt.Text = income.ToString("F2") + " ₾";
+        exp_Text.Text = expense.ToString("F2") + " ₾";
+        profit_Txt.Text = profit.ToString("F2") + " ₾";
+
+        if (profit < 0)
+        {
+            profit_Txt.ForeColor = Color.FromArgb(167, 23, 26);
+        }
+        else
+        {
+            profit_Txt.ForeColor = Color.LawnGreen;
+        }
+    }
+
+    public void CustomProfitLoss()
+    {
+        DateTime startDate = fromProfit.Value.Date;
+        DateTime endDate = toProfit.Value.Date;
+        var product = _db.Products.Select(p => p.Name).ToList();
+
+        var income = _db.Sales.Where(s => s.IsDeleted == false)
+                              .Where(s => s.Date.Value >= startDate && s.Date.Value <= endDate)
+                              .Select(s => s.Product.Price * s.Amount)
+                              .ToList()
+                              .Sum();
+
+        var expenseCreate = _db.Products.Where(p => p.IsDeleted == false)
+                                  .Where(p => p.CreateDate >= startDate && p.CreateDate <= endDate)
+                                  .Select(s => s.NetCost * s.Storage.TotalAmount)
+                                  .ToList()
+                                  .Sum();
+
+        var expenseAddAmount = _db.AddAmounts.Where(a => a.Product.IsDeleted == false)
+                                             .Where(a => a.AdditionCreateDate >= startDate
+                                                    && a.AdditionCreateDate <= endDate)
+                                             .Select(a => a.Amount * a.Product.NetCost)
+                                             .ToList()
+                                             .Sum();
+
+        var expense = expenseCreate + expenseAddAmount;
+        var profit = income - expense;
+
+        income_Txt.Text = income.ToString("F2") + " ₾";
+        exp_Text.Text = expense.ToString("F2") + " ₾";
+        profit_Txt.Text = profit.ToString("F2") + " ₾";
+
+        if (profit < 0)
+        {
+            profit_Txt.ForeColor = Color.FromArgb(167, 23, 26);
+        }
+        else
+        {
+            profit_Txt.ForeColor = Color.LawnGreen;
+        }
+    }
+
+    private void fromProfit_ValueChanged(object sender, EventArgs e)
+    {
+        CustomProfitLoss();
+    }
+
+    private void toProfit_ValueChanged(object sender, EventArgs e)
+    {
+        CustomProfitLoss();
     }
 }

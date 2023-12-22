@@ -76,11 +76,15 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard_UC));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             packPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
             packIcon = new PictureBox();
             packLabel = new Label();
@@ -113,16 +117,19 @@
             soldIcon = new PictureBox();
             totalSold_Label = new Label();
             profitLossPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
+            dash = new Label();
+            toProfit = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            fromProfit = new Guna.UI2.WinForms.Guna2DateTimePicker();
             pictureBox3 = new PictureBox();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
-            label6 = new Label();
-            label5 = new Label();
-            label4 = new Label();
-            guna2ComboBox1 = new Guna.UI2.WinForms.Guna2ComboBox();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
+            profit_Txt = new Label();
+            exp_Text = new Label();
+            income_Txt = new Label();
+            incomeDataRange = new Guna.UI2.WinForms.Guna2ComboBox();
+            profit_Label = new Label();
+            expense_Label = new Label();
+            income_Label = new Label();
             packPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)packIcon).BeginInit();
             shippedPanel.SuspendLayout();
@@ -586,30 +593,87 @@
             // profitLossPanel
             // 
             profitLossPanel.BorderRadius = 15;
+            profitLossPanel.Controls.Add(dash);
+            profitLossPanel.Controls.Add(toProfit);
+            profitLossPanel.Controls.Add(fromProfit);
             profitLossPanel.Controls.Add(pictureBox3);
             profitLossPanel.Controls.Add(pictureBox2);
             profitLossPanel.Controls.Add(pictureBox1);
-            profitLossPanel.Controls.Add(label6);
-            profitLossPanel.Controls.Add(label5);
-            profitLossPanel.Controls.Add(label4);
-            profitLossPanel.Controls.Add(guna2ComboBox1);
-            profitLossPanel.Controls.Add(label3);
-            profitLossPanel.Controls.Add(label2);
-            profitLossPanel.Controls.Add(label1);
-            profitLossPanel.CustomizableEdges = customizableEdges21;
-            profitLossPanel.FillColor = Color.Salmon;
-            profitLossPanel.FillColor2 = Color.Salmon;
-            profitLossPanel.Location = new Point(874, 186);
+            profitLossPanel.Controls.Add(profit_Txt);
+            profitLossPanel.Controls.Add(exp_Text);
+            profitLossPanel.Controls.Add(income_Txt);
+            profitLossPanel.Controls.Add(incomeDataRange);
+            profitLossPanel.Controls.Add(profit_Label);
+            profitLossPanel.Controls.Add(expense_Label);
+            profitLossPanel.Controls.Add(income_Label);
+            profitLossPanel.CustomizableEdges = customizableEdges25;
+            profitLossPanel.FillColor = Color.MediumPurple;
+            profitLossPanel.FillColor2 = Color.MediumPurple;
+            profitLossPanel.Location = new Point(874, 175);
             profitLossPanel.Name = "profitLossPanel";
-            profitLossPanel.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            profitLossPanel.Size = new Size(495, 186);
+            profitLossPanel.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            profitLossPanel.Size = new Size(495, 197);
             profitLossPanel.TabIndex = 48;
+            // 
+            // dash
+            // 
+            dash.AutoSize = true;
+            dash.BackColor = Color.Transparent;
+            dash.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dash.ForeColor = Color.Black;
+            dash.Location = new Point(165, 3);
+            dash.Name = "dash";
+            dash.Size = new Size(22, 30);
+            dash.TabIndex = 49;
+            dash.Text = "-";
+            // 
+            // toProfit
+            // 
+            toProfit.BackColor = Color.Transparent;
+            toProfit.BorderColor = Color.White;
+            toProfit.BorderRadius = 5;
+            toProfit.BorderThickness = 2;
+            toProfit.Checked = true;
+            toProfit.CustomizableEdges = customizableEdges19;
+            toProfit.FillColor = Color.Plum;
+            toProfit.Font = new Font("Segoe UI", 9F);
+            toProfit.Format = DateTimePickerFormat.Short;
+            toProfit.Location = new Point(193, 5);
+            toProfit.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            toProfit.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            toProfit.Name = "toProfit";
+            toProfit.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            toProfit.Size = new Size(147, 30);
+            toProfit.TabIndex = 57;
+            toProfit.Value = new DateTime(2023, 12, 21, 13, 49, 2, 728);
+            toProfit.ValueChanged += toProfit_ValueChanged;
+            // 
+            // fromProfit
+            // 
+            fromProfit.BackColor = Color.Transparent;
+            fromProfit.BorderColor = Color.White;
+            fromProfit.BorderRadius = 5;
+            fromProfit.BorderThickness = 2;
+            fromProfit.Checked = true;
+            fromProfit.CustomizableEdges = customizableEdges21;
+            fromProfit.FillColor = Color.Plum;
+            fromProfit.Font = new Font("Segoe UI", 9F);
+            fromProfit.Format = DateTimePickerFormat.Short;
+            fromProfit.Location = new Point(12, 5);
+            fromProfit.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
+            fromProfit.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
+            fromProfit.Name = "fromProfit";
+            fromProfit.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            fromProfit.Size = new Size(147, 30);
+            fromProfit.TabIndex = 56;
+            fromProfit.Value = new DateTime(2023, 12, 21, 13, 49, 2, 728);
+            fromProfit.ValueChanged += fromProfit_ValueChanged;
             // 
             // pictureBox3
             // 
             pictureBox3.BackColor = Color.Transparent;
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(12, 138);
+            pictureBox3.Location = new Point(12, 146);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(40, 40);
             pictureBox3.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -620,7 +684,7 @@
             // 
             pictureBox2.BackColor = Color.Transparent;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(12, 85);
+            pictureBox2.Location = new Point(12, 90);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(40, 40);
             pictureBox2.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -631,104 +695,107 @@
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(12, 33);
+            pictureBox1.Location = new Point(12, 41);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(40, 40);
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             pictureBox1.TabIndex = 53;
             pictureBox1.TabStop = false;
             // 
-            // label6
+            // profit_Txt
             // 
-            label6.BackColor = Color.Transparent;
-            label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.White;
-            label6.Location = new Point(174, 143);
-            label6.Name = "label6";
-            label6.Size = new Size(185, 33);
-            label6.TabIndex = 52;
-            label6.Text = "0 ₾";
-            label6.TextAlign = ContentAlignment.MiddleLeft;
+            profit_Txt.BackColor = Color.Transparent;
+            profit_Txt.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            profit_Txt.ForeColor = Color.LawnGreen;
+            profit_Txt.Location = new Point(174, 153);
+            profit_Txt.Name = "profit_Txt";
+            profit_Txt.Size = new Size(314, 33);
+            profit_Txt.TabIndex = 52;
+            profit_Txt.Text = "0 ₾";
+            profit_Txt.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // label5
+            // exp_Text
             // 
-            label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.White;
-            label5.Location = new Point(193, 92);
-            label5.Name = "label5";
-            label5.Size = new Size(166, 33);
-            label5.TabIndex = 51;
-            label5.Text = "0 ₾";
-            label5.TextAlign = ContentAlignment.MiddleLeft;
+            exp_Text.BackColor = Color.Transparent;
+            exp_Text.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            exp_Text.ForeColor = Color.Orange;
+            exp_Text.Location = new Point(193, 98);
+            exp_Text.Name = "exp_Text";
+            exp_Text.Size = new Size(295, 33);
+            exp_Text.TabIndex = 51;
+            exp_Text.Text = "0 ₾";
+            exp_Text.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // label4
+            // income_Txt
             // 
-            label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(227, 33);
-            label4.Name = "label4";
-            label4.Size = new Size(132, 33);
-            label4.TabIndex = 50;
-            label4.Text = "0 ₾";
-            label4.TextAlign = ContentAlignment.MiddleLeft;
+            income_Txt.BackColor = Color.Transparent;
+            income_Txt.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            income_Txt.ForeColor = Color.DarkGreen;
+            income_Txt.Location = new Point(227, 40);
+            income_Txt.Name = "income_Txt";
+            income_Txt.Size = new Size(261, 33);
+            income_Txt.TabIndex = 50;
+            income_Txt.Text = "0 ₾";
+            income_Txt.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // guna2ComboBox1
+            // incomeDataRange
             // 
-            guna2ComboBox1.BackColor = Color.Transparent;
-            guna2ComboBox1.BorderRadius = 3;
-            guna2ComboBox1.CustomizableEdges = customizableEdges19;
-            guna2ComboBox1.DrawMode = DrawMode.OwnerDrawFixed;
-            guna2ComboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            guna2ComboBox1.FocusedColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            guna2ComboBox1.Font = new Font("Segoe UI", 10F);
-            guna2ComboBox1.ForeColor = Color.FromArgb(68, 88, 112);
-            guna2ComboBox1.ItemHeight = 30;
-            guna2ComboBox1.Items.AddRange(new object[] { "1 კვირა", "1 თვე", "3 თვე", "6 თვე", "1 წელი", "Custom" });
-            guna2ComboBox1.Location = new Point(360, 3);
-            guna2ComboBox1.Name = "guna2ComboBox1";
-            guna2ComboBox1.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            guna2ComboBox1.Size = new Size(130, 36);
-            guna2ComboBox1.StartIndex = 0;
-            guna2ComboBox1.TabIndex = 49;
+            incomeDataRange.BackColor = Color.Transparent;
+            incomeDataRange.BorderRadius = 3;
+            incomeDataRange.BorderThickness = 2;
+            incomeDataRange.CustomizableEdges = customizableEdges23;
+            incomeDataRange.DrawMode = DrawMode.OwnerDrawFixed;
+            incomeDataRange.DropDownStyle = ComboBoxStyle.DropDownList;
+            incomeDataRange.FillColor = Color.MediumPurple;
+            incomeDataRange.FocusedColor = Color.FromArgb(94, 148, 255);
+            incomeDataRange.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            incomeDataRange.Font = new Font("Segoe UI", 10F);
+            incomeDataRange.ForeColor = Color.White;
+            incomeDataRange.ItemHeight = 30;
+            incomeDataRange.Items.AddRange(new object[] { "სულ", "1 კვირა", "1 თვე", "3 თვე", "6 თვე", "1 წელი", "Custom" });
+            incomeDataRange.Location = new Point(358, 3);
+            incomeDataRange.Name = "incomeDataRange";
+            incomeDataRange.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            incomeDataRange.Size = new Size(130, 36);
+            incomeDataRange.StartIndex = 0;
+            incomeDataRange.TabIndex = 49;
+            incomeDataRange.SelectedIndexChanged += incomeDateRange_SelectedIndexChanged;
             // 
-            // label3
+            // profit_Label
             // 
-            label3.BackColor = Color.Transparent;
-            label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(72, 143);
-            label3.Name = "label3";
-            label3.Size = new Size(178, 32);
-            label3.TabIndex = 43;
-            label3.Text = "მოგება: ";
-            label3.TextAlign = ContentAlignment.MiddleLeft;
+            profit_Label.BackColor = Color.Transparent;
+            profit_Label.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            profit_Label.ForeColor = Color.White;
+            profit_Label.Location = new Point(72, 151);
+            profit_Label.Name = "profit_Label";
+            profit_Label.Size = new Size(178, 32);
+            profit_Label.TabIndex = 43;
+            profit_Label.Text = "მოგება: ";
+            profit_Label.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // label2
+            // expense_Label
             // 
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(72, 92);
-            label2.Name = "label2";
-            label2.Size = new Size(178, 33);
-            label2.TabIndex = 42;
-            label2.Text = "გასავალი: ";
-            label2.TextAlign = ContentAlignment.MiddleLeft;
+            expense_Label.BackColor = Color.Transparent;
+            expense_Label.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            expense_Label.ForeColor = Color.White;
+            expense_Label.Location = new Point(72, 96);
+            expense_Label.Name = "expense_Label";
+            expense_Label.Size = new Size(178, 33);
+            expense_Label.TabIndex = 42;
+            expense_Label.Text = "გასავალი: ";
+            expense_Label.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // label1
+            // income_Label
             // 
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(72, 33);
-            label1.Name = "label1";
-            label1.Size = new Size(178, 33);
-            label1.TabIndex = 41;
-            label1.Text = "შემოსავალი: ";
-            label1.TextAlign = ContentAlignment.MiddleLeft;
+            income_Label.BackColor = Color.Transparent;
+            income_Label.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            income_Label.ForeColor = Color.White;
+            income_Label.Location = new Point(72, 38);
+            income_Label.Name = "income_Label";
+            income_Label.Size = new Size(178, 33);
+            income_Label.TabIndex = 41;
+            income_Label.Text = "შემოსავალი: ";
+            income_Label.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // Dashboard_UC
             // 
@@ -806,15 +873,18 @@
         private Guna.Charts.WinForms.GunaPieDataset MiddePie;
         private Guna.Charts.WinForms.GunaPieDataset MinPie;
         private Guna.UI2.WinForms.Guna2GradientPanel profitLossPanel;
-        private Label label3;
-        private Label label2;
-        private Label label1;
-        private Guna.UI2.WinForms.Guna2ComboBox guna2ComboBox1;
-        private Label label6;
-        private Label label5;
-        private Label label4;
+        private Label profit_Label;
+        private Label expense_Label;
+        private Label income_Label;
+        private Guna.UI2.WinForms.Guna2ComboBox incomeDataRange;
+        private Label profit_Txt;
+        private Label exp_Text;
+        private Label income_Txt;
         private PictureBox pictureBox3;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
+        private Guna.UI2.WinForms.Guna2DateTimePicker toProfit;
+        private Guna.UI2.WinForms.Guna2DateTimePicker fromProfit;
+        private Label dash;
     }
 }
