@@ -1,7 +1,5 @@
 ﻿using InventoryManagementApp.Data;
 using System.Globalization;
-using System.Linq;
-using System.Windows.Forms.DataVisualization.Charting;
 
 namespace InventoryManagementApp.User_Controls;
 
@@ -613,7 +611,7 @@ public partial class Dashboard_UC : UserControl
     public void CustomDate()
     {
         var startDate = fromDate.Value.Date;
-        var endDate = toDate.Value.Date;
+        var endDate = toDate.Value.Date.AddDays(1);
         TimeSpan differenceInDays = endDate - startDate;
         int daysDifference = differenceInDays.Days;
         int monthsDifference = (endDate.Month - startDate.Month) + 12 * (endDate.Year - startDate.Year);
@@ -755,7 +753,7 @@ public partial class Dashboard_UC : UserControl
     public void CustomDateDetailed(string name)
     {
         var startDate = fromDate.Value.Date;
-        var endDate = toDate.Value.Date;
+        var endDate = toDate.Value.Date.AddDays(1);
         TimeSpan differenceInDays = endDate - startDate;
         int daysDifference = differenceInDays.Days;
         int monthsDifference = (endDate.Month - startDate.Month) + 12 * (endDate.Year - startDate.Year);
@@ -970,7 +968,7 @@ public partial class Dashboard_UC : UserControl
     public void WeekProfitLoss()
     {
         DateTime startDate = DateTime.Now.Date.AddDays(-6);
-        DateTime endDate = DateTime.Now.Date;
+        DateTime endDate = DateTime.Now.Date.AddDays(1);
         var product = _db.Products.Select(p => p.Name).ToList();
 
         var income = _db.Sales.Where(s => s.IsDeleted == false)
@@ -979,19 +977,17 @@ public partial class Dashboard_UC : UserControl
                               .ToList()
                               .Sum();
 
-        var expenseCreate = _db.Products.Where(p => p.IsDeleted == false)
-                                  .Where(p => p.CreateDate >= startDate && p.CreateDate <= endDate)
-                                  .Select(s => s.NetCost * s.Storage.TotalAmount)
-                                  .ToList()
-                                  .Sum();
-
         var expenseAddAmount = _db.AddAmounts.Where(a => a.Product.IsDeleted == false)
-                                             .Where(a => a.AdditionCreateDate >= startDate
-                                                    && a.AdditionCreateDate <= endDate)
-                                             .Select(a => a.Amount * a.Product.NetCost)
-                                             .ToList()
-                                             .Sum();
+                                              .Where(a => a.AdditionCreateDate >= startDate
+                                                     && a.AdditionCreateDate <= endDate)
+                                              .Select(a => a.Amount * a.Product.NetCost)
+                                              .ToList()
+                                              .Sum();
 
+        var expenseFirst = _db.Products.Where(p => p.IsDeleted == false)
+                                        .Select(p => p.Storage.TotalAmount * p.NetCost).ToList().Sum();
+
+        var expenseCreate = expenseFirst - expenseAddAmount;
         var expense = expenseCreate + expenseAddAmount;
         var profit = income - expense;
 
@@ -1012,7 +1008,7 @@ public partial class Dashboard_UC : UserControl
     public void MonthProfitLoss(int monthRange)
     {
         DateTime startDate = DateTime.Now.Date.AddMonths(-monthRange);
-        DateTime endDate = DateTime.Now.Date;
+        DateTime endDate = DateTime.Now.Date.AddDays(1);
         var product = _db.Products.Select(p => p.Name).ToList();
 
         var income = _db.Sales.Where(s => s.IsDeleted == false)
@@ -1052,7 +1048,7 @@ public partial class Dashboard_UC : UserControl
     public void CustomProfitLoss()
     {
         DateTime startDate = fromProfit.Value.Date;
-        DateTime endDate = toProfit.Value.Date;
+        DateTime endDate = toProfit.Value.Date.AddDays(1); ;
         var product = _db.Products.Select(p => p.Name).ToList();
 
         var income = _db.Sales.Where(s => s.IsDeleted == false)
