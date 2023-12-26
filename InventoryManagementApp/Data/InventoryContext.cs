@@ -24,6 +24,7 @@ public class InventoryContext : DbContext
     public DbSet<Storage> Storages { get; set; }
     public DbSet<TotalSold> TotalSolds { get; set; }
     public DbSet<Customer> Customers { get; set; }
+    public DbSet<InvoiceID> InvoiceIDs { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

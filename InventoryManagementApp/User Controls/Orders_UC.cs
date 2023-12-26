@@ -233,42 +233,7 @@ public partial class Orders_UC : UserControl
             toDate.Enabled = true;
             fromDate.Enabled = true;
             dateCheck.Enabled = true;
-            //var from_date = fromDate.Value.Date;
-            //var to_date = toDate.Value.Date.AddDays(1);
-            //if (dateCheck.Checked)
-            //{
-            //    var onlyDate = _db.Sales.Where(d => d.Date == from_date).Select(d => d.Product);
-            //    var onlySale = _db.Sales.Where(o => onlyDate.Contains(o.Product) && o.Date == from_date).Select(o => new
-            //    {
-            //        კოდი = o.Id,
-            //        პროდუქტი = o.Product.Name,
-            //        კატეგორია = o.Product.Category.Name,
-            //        ბრენდი = o.Product.Brand.Name,
-            //        რაოდენობა = o.Amount,
-            //        ლოკაცია = o.Location,
-            //        გადახდის_ტიპი = o.PaymentMethod,
-            //        შეკვეთის_ადგილი = o.PaymentArea,
-            //        თარიღი = o.Date
-            //    }).ToList();
-            //    ordersData.DataSource = onlySale;
-            //}
-            //else
-            //{
-            //    var dateSorting = _db.Sales.Where(d => d.Date >= from_date && d.Date <= to_date).Select(d => d.Product);
-            //    var sales = _db.Sales.Where(o => dateSorting.Contains(o.Product) && o.Date >= from_date && o.Date <= to_date).Select(o => new
-            //    {
-            //        კოდი = o.Id,
-            //        პროდუქტი = o.Product.Name,
-            //        კატეგორია = o.Product.Category.Name,
-            //        ბრენდი = o.Product.Brand.Name,
-            //        რაოდენობა = o.Amount,
-            //        ლოკაცია = o.Location,
-            //        გადახდის_ტიპი = o.PaymentMethod,
-            //        შეკვეთის_ადგილი = o.PaymentArea,
-            //        თარიღი = o.Date
-            //    }).ToList();
-            //    ordersData.DataSource = sales;
-            //}
+
         }
         else
         {

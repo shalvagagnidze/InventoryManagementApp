@@ -62,7 +62,7 @@ namespace InventoryManagementApp.UI
 
         private void settings_Btn_Click(object sender, EventArgs e)
         {
-            Settings_UC settingsUC = new Settings_UC();
+            Costumers_UC settingsUC = new Costumers_UC();
             addUserControl(settingsUC);
         }
     }

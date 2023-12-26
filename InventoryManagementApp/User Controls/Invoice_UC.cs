@@ -1,6 +1,8 @@
 ﻿using InventoryManagementApp.Data;
+using InventoryManagementApp.Models;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
+using System.Collections.Immutable;
 using System.ComponentModel;
 using Document = QuestPDF.Fluent.Document;
 
@@ -9,7 +11,6 @@ namespace InventoryManagementApp.User_Controls;
 public partial class Invoice_UC : UserControl
 {
     InventoryContext _db = new InventoryContext();
-
     BindingList<object> dataList = new BindingList<object>();
     List<(string Name, decimal Amount, decimal Price, decimal Total)> datas = new List<(string Name, decimal Amount, decimal Price, decimal Total)>();
     public Invoice_UC()
@@ -17,19 +18,11 @@ public partial class Invoice_UC : UserControl
         InitializeComponent();       
         dataList.Clear();
         invoiceData.Rows.Clear();
-        //costumerName_Txt.Text = String.Empty;
-        //costumerId_Txt.Text = String.Empty;
-        //email_Txt.Text = String.Empty;
-        //adress_Txt.Text = String.Empty;
-        //phoneNum_Txt.Text = String.Empty;
-        //prodName_Txt.Text = String.Empty;
-        //price_Txt.Text = String.Empty;
-        //amount_Txt.Text = String.Empty;
-
     }
 
     private void addProd_btn_Click(object sender, EventArgs e)
     {
+        
         if (!string.IsNullOrEmpty(prodName_Txt.Text) ||
            !string.IsNullOrEmpty(amount_Txt.Text) ||
            !string.IsNullOrEmpty(price_Txt.Text))
@@ -64,7 +57,29 @@ public partial class Invoice_UC : UserControl
     private void save_Btn_Click(object sender, EventArgs e)
     {
         QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
+        var invoice = _db.InvoiceIDs.FirstOrDefault(i => i.ID == 4);
+        InvoiceID invoices = new InvoiceID();
+        var invoiceList = _db.InvoiceIDs.Where(i => i.ID == 4).Select(i => i.Number).ToList();
+        var invoiceInt = invoiceList[0];
+        var invoiceString = "";
 
+        if (invoiceInt < 9)
+        {
+            invoiceString = $"№ 000{invoiceInt + 1}";
+        }
+        else if(invoiceInt >= 9 && invoiceInt < 99)
+        {
+            invoiceString = $"№ 00{invoiceInt + 1}";
+        }
+        else if(invoiceInt >= 99 && invoiceInt  < 999)
+        {
+            invoiceString = $"№ 0{invoiceInt + 1}";
+        }
+        else
+        {
+            invoiceString = $"№ {invoiceInt + 1}";
+        }
+        
         string costName = costumerName_Txt.Text;
         string costId = costumerId_Txt.Text;
         string adress = adress_Txt.Text;
@@ -75,7 +90,7 @@ public partial class Invoice_UC : UserControl
         decimal price = decimal.Parse(price_Txt.Text);
         decimal total = price * amount;
         decimal finalTotal = 0;
-        string fileName = "RealTest";
+        string fileName = (invoiceInt + 1).ToString();
 
         if (!string.IsNullOrEmpty(costumerName_Txt.Text) ||
            !string.IsNullOrEmpty(costumerId_Txt.Text) ||
@@ -244,7 +259,7 @@ public partial class Invoice_UC : UserControl
                                     //Invoice Number
                                     column.Item().TranslateX(70)
                                                  .TranslateY(10)
-                                                 .Text("No: 0010")
+                                                 .Text(invoiceString)
                                                  .FontFamily(Fonts.SegoeUI)
                                                  .FontSize(15)
                                                  .Bold()
@@ -465,13 +480,27 @@ public partial class Invoice_UC : UserControl
 
             }
 
-            MessageBox.Show("პროდუქტი წარმატებით დაემატა!",
-                        "წარმატებული შენახვა",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+            
 
             datas.Clear();
             invoiceData.Rows.Clear();
+            invoice.Number += 1;
+            _db.Update(invoice);
+            var response = _db.SaveChanges();
+            if(response > 0)
+            {
+                MessageBox.Show("პროდუქტი წარმატებით დაემატა!",
+                        "წარმატებული შენახვა",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("ინვოისის ჩამოტვირთვა ვერ მოხერხდა,სცადეთ თავიდან",
+                        "შეცდომა შენახვისას",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+            }
 
         }
         else
