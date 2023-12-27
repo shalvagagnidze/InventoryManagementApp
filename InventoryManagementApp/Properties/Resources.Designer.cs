@@ -93,6 +93,16 @@ namespace InventoryManagementApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Customer_40 {
+            get {
+                object obj = ResourceManager.GetObject("Customer_40", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Dashboard_40 {
             get {
                 object obj = ResourceManager.GetObject("Dashboard_40", resourceCulture);
@@ -126,6 +136,16 @@ namespace InventoryManagementApp.Properties {
         internal static System.Drawing.Bitmap Delivery_28 {
             get {
                 object obj = ResourceManager.GetObject("Delivery_28", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Download_48 {
+            get {
+                object obj = ResourceManager.GetObject("Download_48", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -196,6 +216,16 @@ namespace InventoryManagementApp.Properties {
         internal static System.Drawing.Bitmap Jani_Logo {
             get {
                 object obj = ResourceManager.GetObject("Jani_Logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Jani_newLogo {
+            get {
+                object obj = ResourceManager.GetObject("Jani_newLogo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -306,6 +336,16 @@ namespace InventoryManagementApp.Properties {
         internal static System.Drawing.Bitmap Shipping_28 {
             get {
                 object obj = ResourceManager.GetObject("Shipping_28", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Signature {
+            get {
+                object obj = ResourceManager.GetObject("Signature", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

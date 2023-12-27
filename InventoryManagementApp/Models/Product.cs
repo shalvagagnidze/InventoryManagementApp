@@ -17,8 +17,8 @@ public class Product
     public Category? Category { get; set; }
     public Brand? Brand { get; set; }
     public List<Sale>? Sales { get; set; }
-    public DateTime? CreateDate { get; set; }
-    public DateTime DeleteTime { get; set; }
+    public DateTime CreateDate { get; set; }
+    public DateTime? DeleteTime { get; set; }
     public bool IsDeleted { get; set; }
     public void DeleteProduct()
     {

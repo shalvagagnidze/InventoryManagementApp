@@ -130,7 +130,6 @@
             prodDesc_Txt.StateCommon.Content.Font = new Font("Georgia", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
             prodDesc_Txt.StateCommon.Content.Padding = new Padding(10, 0, 20, 20);
             prodDesc_Txt.TabIndex = 48;
-            prodDesc_Txt.Text = "შეიყვანეთ თქვენი გვარი";
             // 
             // chooseBra_Label
             // 
@@ -181,7 +180,6 @@
             netCost_Txt.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             netCost_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             netCost_Txt.TabIndex = 42;
-            netCost_Txt.Text = "შეიყვანეთ თქვენი სახელი";
             // 
             // prodAmount_Txt
             // 
@@ -199,7 +197,6 @@
             prodAmount_Txt.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             prodAmount_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             prodAmount_Txt.TabIndex = 41;
-            prodAmount_Txt.Text = "შეიყვანეთ თქვენი სახელი";
             // 
             // totAmount_Label
             // 
@@ -239,7 +236,6 @@
             price_Txt.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             price_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             price_Txt.TabIndex = 38;
-            price_Txt.Text = "შეიყვანეთ თქვენი სახელი";
             // 
             // productName_Label
             // 
@@ -290,7 +286,6 @@
             productName_Txt.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             productName_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             productName_Txt.TabIndex = 34;
-            productName_Txt.Text = "შეიყვანეთ თქვენი გვარი";
             // 
             // prodID_Txt
             // 
@@ -308,7 +303,6 @@
             prodID_Txt.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             prodID_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             prodID_Txt.TabIndex = 33;
-            prodID_Txt.Text = "შეიყვანეთ თქვენი სახელი";
             // 
             // prodSave_Btn
             // 

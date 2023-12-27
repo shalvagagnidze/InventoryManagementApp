@@ -35,7 +35,7 @@ public class InventoryContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<Product>().HasQueryFilter(o => !o.IsDeleted);
+       // modelBuilder.Entity<Product>().HasQueryFilter(o => !o.IsDeleted);
         modelBuilder.Entity<User>().HasQueryFilter(o => !o.IsDeleted);
         modelBuilder.Entity<Category>().HasQueryFilter(o => !o.IsDeleted);
         modelBuilder.Entity<Brand>().HasQueryFilter(o => !o.IsDeleted);

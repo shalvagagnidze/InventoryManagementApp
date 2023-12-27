@@ -17,6 +17,8 @@ public partial class Orders_UC : UserControl
     public Orders_UC()
     {
         InitializeComponent();
+        fromDate.Value = DateTime.Now.Date;
+        toDate.Value = DateTime.Now.Date;
         toDate.Enabled = false;
         fromDate.Enabled = false;
         dateCheck.Enabled = false;
@@ -250,7 +252,7 @@ public partial class Orders_UC : UserControl
         if (dateCheck.Checked)
         {
             var onlyDate = _db.Sales.Where(d => d.Date == from_date).Select(d => d.Product);
-            var onlySale = _db.Sales.Where(o => onlyDate.Contains(o.Product) && o.Date == from_date).Select(o => new
+            var onlySale = _db.Sales.Where(d => d.Product.IsDeleted == false).Where(o => onlyDate.Contains(o.Product) && o.Date == from_date).Select(o => new
             {
                 კოდი = o.Id,
                 პროდუქტი = o.Product.Name,

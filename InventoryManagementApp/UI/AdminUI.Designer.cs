@@ -154,9 +154,9 @@
             settings_Btn.StateTracking.Border.Width = 1;
             settings_Btn.StateTracking.Content.ShortText.Color1 = Color.White;
             settings_Btn.TabIndex = 16;
-            settings_Btn.Values.ExtraText = "   ";
-            settings_Btn.Values.Image = Properties.Resources.Settings_35;
-            settings_Btn.Values.Text = "   პარამეტრები";
+            settings_Btn.Values.ExtraText = "      ";
+            settings_Btn.Values.Image = Properties.Resources.Customer_40;
+            settings_Btn.Values.Text = "მომხმარებლები";
             settings_Btn.Click += settings_Btn_Click;
             // 
             // invoice_Btn

@@ -82,40 +82,54 @@ namespace InventoryManagementApp.UI
                 sale.PaymentMethod = (PaymentMethod)Enum.Parse(typeof(PaymentMethod), payType);
             }
 
-            if (toBePacked.Checked)
+            if (!toBePacked.Checked &&
+                !shipped.Checked &&
+                !delivered.Checked)
             {
-                sale.Activity = Activity.მზადდება;
-            }
-
-            if (shipped.Checked)
-            {
-                sale.Activity = Activity.გზაშია;
-            }
-
-            if (delivered.Checked)
-            {
-                sale.Activity = Activity.მიწოდებულია;
-            }
-
-
-            _db.Update(sale);
-            var response = _db.SaveChanges();
-
-            if (response > 0)
-            {
-                MessageBox.Show("შეკვეთა წარმატებით განახლდა!",
-                                "წარმატებული შენახვა",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Information);               
-                this.Hide();
+                MessageBox.Show("გთხოვთ, მონიშნოთ შეკვეთის მდგომარეობა",
+                               "მდგომარეობა ცარიელია",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Warning);
             }
             else
             {
-                MessageBox.Show("შეკვეთის განახლება ვერ მოხერხდა, თავიდან სცადეთ!",
-                                "დამატების წარუმატებელი მცდელობა",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Warning);
+               
+                if (toBePacked.Checked)
+                {
+                    sale.Activity = Activity.მზადდება;
+                }
+
+                if (shipped.Checked)
+                {
+                    sale.Activity = Activity.გზაშია;
+                }
+
+                if (delivered.Checked)
+                {
+                    sale.Activity = Activity.მიწოდებულია;
+                }
+
+                _db.Update(sale);
+                var response = _db.SaveChanges();
+
+                if (response > 0)
+                {
+                    MessageBox.Show("შეკვეთა წარმატებით განახლდა!",
+                                    "წარმატებული შენახვა",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information);
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("შეკვეთის განახლება ვერ მოხერხდა, თავიდან სცადეთ!",
+                                    "დამატების წარუმატებელი მცდელობა",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                }
             }
+
+           
         }
 
         private void amountNumeric_ValueChanged(object sender, EventArgs e)

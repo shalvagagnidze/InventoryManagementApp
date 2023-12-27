@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Invoice_UC));
             costumerInfo_Label = new Label();
             costumerName_Label = new Label();
@@ -47,7 +47,6 @@
             prodName_Label = new Label();
             prodName_Txt = new Krypton.Toolkit.KryptonTextBox();
             amount_Label = new Label();
-            amount_Txt = new Krypton.Toolkit.KryptonTextBox();
             date_Label = new Label();
             date_Txt = new Guna.UI2.WinForms.Guna2DateTimePicker();
             dateCheckBox = new CheckBox();
@@ -55,6 +54,7 @@
             addProd_btn = new Krypton.Toolkit.KryptonButton();
             save_Btn = new Krypton.Toolkit.KryptonButton();
             addProd_Label = new Label();
+            amountNumeric = new Krypton.Toolkit.KryptonNumericUpDown();
             ((System.ComponentModel.ISupportInitialize)invoiceData).BeginInit();
             SuspendLayout();
             // 
@@ -96,7 +96,6 @@
             costumerName_Txt.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             costumerName_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             costumerName_Txt.TabIndex = 38;
-            costumerName_Txt.Text = "შეიყვანეთ თქვენი გვარი";
             // 
             // costumerID_Label
             // 
@@ -125,7 +124,6 @@
             costumerId_Txt.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             costumerId_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             costumerId_Txt.TabIndex = 40;
-            costumerId_Txt.Text = "შეიყვანეთ თქვენი გვარი";
             // 
             // adress_Label
             // 
@@ -154,7 +152,6 @@
             adress_Txt.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             adress_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             adress_Txt.TabIndex = 42;
-            adress_Txt.Text = "შეიყვანეთ თქვენი გვარი";
             // 
             // email_Label
             // 
@@ -183,7 +180,6 @@
             email_Txt.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             email_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             email_Txt.TabIndex = 44;
-            email_Txt.Text = "შეიყვანეთ თქვენი გვარი";
             // 
             // phoneNum_Label
             // 
@@ -212,7 +208,6 @@
             phoneNum_Txt.StateCommon.Content.Font = new Font("Georgia", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
             phoneNum_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             phoneNum_Txt.TabIndex = 46;
-            phoneNum_Txt.Text = "შეიყვანეთ თქვენი გვარი";
             // 
             // price_Label
             // 
@@ -229,7 +224,7 @@
             // 
             price_Txt.Location = new Point(114, 424);
             price_Txt.Name = "price_Txt";
-            price_Txt.Size = new Size(221, 38);
+            price_Txt.Size = new Size(221, 37);
             price_Txt.StateCommon.Back.Color1 = Color.White;
             price_Txt.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
             price_Txt.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
@@ -241,7 +236,6 @@
             price_Txt.StateCommon.Content.Font = new Font("Georgia", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
             price_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             price_Txt.TabIndex = 51;
-            price_Txt.Text = "შეიყვანეთ თქვენი გვარი";
             // 
             // prodName_Label
             // 
@@ -258,7 +252,7 @@
             // 
             prodName_Txt.Location = new Point(341, 342);
             prodName_Txt.Name = "prodName_Txt";
-            prodName_Txt.Size = new Size(327, 38);
+            prodName_Txt.Size = new Size(327, 37);
             prodName_Txt.StateCommon.Back.Color1 = Color.White;
             prodName_Txt.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
             prodName_Txt.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
@@ -270,7 +264,6 @@
             prodName_Txt.StateCommon.Content.Font = new Font("Georgia", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
             prodName_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             prodName_Txt.TabIndex = 49;
-            prodName_Txt.Text = "შეიყვანეთ თქვენი გვარი";
             // 
             // amount_Label
             // 
@@ -282,24 +275,6 @@
             amount_Label.Size = new Size(148, 28);
             amount_Label.TabIndex = 54;
             amount_Label.Text = "რაოდენობა:";
-            // 
-            // amount_Txt
-            // 
-            amount_Txt.Location = new Point(518, 421);
-            amount_Txt.Name = "amount_Txt";
-            amount_Txt.Size = new Size(279, 38);
-            amount_Txt.StateCommon.Back.Color1 = Color.White;
-            amount_Txt.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
-            amount_Txt.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
-            amount_Txt.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            amount_Txt.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            amount_Txt.StateCommon.Border.Rounding = 20F;
-            amount_Txt.StateCommon.Border.Width = 1;
-            amount_Txt.StateCommon.Content.Color1 = Color.Gray;
-            amount_Txt.StateCommon.Content.Font = new Font("Georgia", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            amount_Txt.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
-            amount_Txt.TabIndex = 53;
-            amount_Txt.Text = "შეიყვანეთ თქვენი გვარი";
             // 
             // date_Label
             // 
@@ -317,7 +292,7 @@
             date_Txt.BackColor = SystemColors.Control;
             date_Txt.BorderRadius = 10;
             date_Txt.Checked = true;
-            date_Txt.CustomizableEdges = customizableEdges3;
+            date_Txt.CustomizableEdges = customizableEdges1;
             date_Txt.FillColor = Color.FromArgb(250, 250, 252);
             date_Txt.Font = new Font("Segoe UI", 9F);
             date_Txt.Format = DateTimePickerFormat.Long;
@@ -325,7 +300,7 @@
             date_Txt.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             date_Txt.MinDate = new DateTime(1753, 1, 1, 0, 0, 0, 0);
             date_Txt.Name = "date_Txt";
-            date_Txt.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            date_Txt.ShadowDecoration.CustomizableEdges = customizableEdges2;
             date_Txt.Size = new Size(289, 44);
             date_Txt.TabIndex = 56;
             date_Txt.Value = new DateTime(2023, 12, 25, 21, 31, 54, 904);
@@ -481,10 +456,25 @@
             addProd_Label.Text = "პროდუქტის დამატება";
             addProd_Label.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // amountNumeric
+            // 
+            amountNumeric.Increment = new decimal(new int[] { 1, 0, 0, 0 });
+            amountNumeric.Location = new Point(514, 424);
+            amountNumeric.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
+            amountNumeric.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
+            amountNumeric.Name = "amountNumeric";
+            amountNumeric.Size = new Size(262, 34);
+            amountNumeric.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            amountNumeric.StateCommon.Border.Rounding = 5F;
+            amountNumeric.TabIndex = 75;
+            amountNumeric.Value = new decimal(new int[] { 0, 0, 0, 0 });
+            amountNumeric.ValueChanged += amountNumeric_ValueChanged;
+            // 
             // Invoice_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(amountNumeric);
             Controls.Add(addProd_Label);
             Controls.Add(save_Btn);
             Controls.Add(addProd_btn);
@@ -493,7 +483,6 @@
             Controls.Add(date_Txt);
             Controls.Add(date_Label);
             Controls.Add(amount_Label);
-            Controls.Add(amount_Txt);
             Controls.Add(price_Label);
             Controls.Add(price_Txt);
             Controls.Add(prodName_Label);
@@ -533,7 +522,6 @@
         private Label prodName_Label;
         private Krypton.Toolkit.KryptonTextBox prodName_Txt;
         private Label amount_Label;
-        private Krypton.Toolkit.KryptonTextBox amount_Txt;
         private Label date_Label;
         private Guna.UI2.WinForms.Guna2DateTimePicker date_Txt;
         private CheckBox dateCheckBox;
@@ -541,5 +529,6 @@
         private Krypton.Toolkit.KryptonButton addProd_btn;
         private Krypton.Toolkit.KryptonButton save_Btn;
         private Label addProd_Label;
+        private Krypton.Toolkit.KryptonNumericUpDown amountNumeric;
     }
 }

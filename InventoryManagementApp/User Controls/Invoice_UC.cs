@@ -2,7 +2,6 @@
 using InventoryManagementApp.Models;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
-using System.Collections.Immutable;
 using System.ComponentModel;
 using Document = QuestPDF.Fluent.Document;
 
@@ -12,25 +11,26 @@ public partial class Invoice_UC : UserControl
 {
     InventoryContext _db = new InventoryContext();
     BindingList<object> dataList = new BindingList<object>();
+    bool isModified = false;
     List<(string Name, decimal Amount, decimal Price, decimal Total)> datas = new List<(string Name, decimal Amount, decimal Price, decimal Total)>();
     public Invoice_UC()
     {
-        InitializeComponent();       
+        InitializeComponent();
         dataList.Clear();
         invoiceData.Rows.Clear();
     }
 
     private void addProd_btn_Click(object sender, EventArgs e)
     {
-        
+
         if (!string.IsNullOrEmpty(prodName_Txt.Text) ||
-           !string.IsNullOrEmpty(amount_Txt.Text) ||
-           !string.IsNullOrEmpty(price_Txt.Text))
+           !string.IsNullOrEmpty(price_Txt.Text) ||
+            isModified)
         {
 
 
             string prodName = prodName_Txt.Text;
-            decimal amount = decimal.Parse(amount_Txt.Text);
+            decimal amount = (decimal)amountNumeric.Value;
             decimal price = decimal.Parse(price_Txt.Text);
             decimal total = price * amount;
 
@@ -43,7 +43,7 @@ public partial class Invoice_UC : UserControl
             };
             dataList.Add(data);
             datas.Add((prodName, amount, price, total));
-            invoiceData.DataSource = dataList;           
+            invoiceData.DataSource = dataList;
         }
         else
         {
@@ -67,11 +67,11 @@ public partial class Invoice_UC : UserControl
         {
             invoiceString = $"№ 000{invoiceInt + 1}";
         }
-        else if(invoiceInt >= 9 && invoiceInt < 99)
+        else if (invoiceInt >= 9 && invoiceInt < 99)
         {
             invoiceString = $"№ 00{invoiceInt + 1}";
         }
-        else if(invoiceInt >= 99 && invoiceInt  < 999)
+        else if (invoiceInt >= 99 && invoiceInt < 999)
         {
             invoiceString = $"№ 0{invoiceInt + 1}";
         }
@@ -79,14 +79,14 @@ public partial class Invoice_UC : UserControl
         {
             invoiceString = $"№ {invoiceInt + 1}";
         }
-        
+
         string costName = costumerName_Txt.Text;
         string costId = costumerId_Txt.Text;
         string adress = adress_Txt.Text;
         string phoneNum = phoneNum_Txt.Text;
         string email = email_Txt.Text;
         string prodName = prodName_Txt.Text;
-        decimal amount = decimal.Parse(amount_Txt.Text);
+        decimal amount = (decimal)amountNumeric.Value;
         decimal price = decimal.Parse(price_Txt.Text);
         decimal total = price * amount;
         decimal finalTotal = 0;
@@ -98,7 +98,7 @@ public partial class Invoice_UC : UserControl
            !string.IsNullOrEmpty(phoneNum_Txt.Text) ||
            !string.IsNullOrEmpty(email_Txt.Text) ||
            !string.IsNullOrEmpty(prodName_Txt.Text) ||
-           !string.IsNullOrEmpty(amount_Txt.Text) ||
+           isModified ||
            !string.IsNullOrEmpty(price_Txt.Text))
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
@@ -124,7 +124,9 @@ public partial class Invoice_UC : UserControl
 
                         page.Header().Inlined(inline =>
                         {
-                            byte[] imageData = File.ReadAllBytes("C:\\Users\\salva\\Desktop\\Jani\\Icons\\Jani_newLogo.png");
+                            
+                            byte[] imageData = (byte[])new ImageConverter().ConvertTo(Properties.Resources.Jani_newLogo, typeof(byte[]));
+
 
                             inline.Item().Element(Block);
 
@@ -385,7 +387,7 @@ public partial class Invoice_UC : UserControl
                                 row.RelativeItem().Column(column =>
                                 {
                                     column.Item().TranslateX(5)
-                                                 .TranslateY(-40)
+                                                 .TranslateY(240)
                                                  .Text("საბანკო რეკვიზიტები: ")
                                                  .FontFamily(Fonts.SegoeUI)
                                                  .FontSize(13)
@@ -393,28 +395,28 @@ public partial class Invoice_UC : UserControl
                                                  .FontColor("#4674A5");
 
                                     column.Item().TranslateX(5)
-                                                 .TranslateY(-40)
+                                                 .TranslateY(240)
                                                  .Text("მიმღები: შ.პ.ს ჯანი 2022")
                                                  .FontFamily(Fonts.SegoeUI)
                                                  .FontSize(12)
                                                  .FontColor("#4674A5");
 
                                     column.Item().TranslateX(5)
-                                                 .TranslateY(-40)
+                                                 .TranslateY(240)
                                                  .Text("ბანკი: საქართველოს ბანკი")
                                                  .FontFamily(Fonts.SegoeUI)
                                                  .FontSize(12)
                                                  .FontColor("#4674A5");
 
                                     column.Item().TranslateX(5)
-                                                 .TranslateY(-40)
+                                                 .TranslateY(240)
                                                  .Text("ანგარიში: GE48BG0000000549618803")
                                                  .FontFamily(Fonts.SegoeUI)
                                                  .FontSize(12)
                                                  .FontColor("#4674A5");
 
                                     column.Item().TranslateX(5)
-                                                 .TranslateY(-40)
+                                                 .TranslateY(240)
                                                  .Text("ბანკის კოდი: BAGAGE22")
                                                  .FontFamily(Fonts.SegoeUI)
                                                  .FontSize(12)
@@ -423,18 +425,28 @@ public partial class Invoice_UC : UserControl
 
                                 row.RelativeItem().Column(column =>
                                 {
-                                    column.Item().TranslateX(150)
-                                                 .TranslateY(-40)
-                                                 .Text($"{finalTotal} ₾")
+                                   
+
+                                    byte[] signDatas = File.ReadAllBytes("C:\\Users\\salva\\Desktop\\Jani\\Icons\\Signature.png");
+                                    byte[] signData = (byte[])new ImageConverter().ConvertTo(Properties.Resources.Signature, typeof(byte[]));
+                                    column.Item().Width(165)
+                                         .TranslateX(150)
+                                         .TranslateY(155)
+                                         // .PaddingVertical(25)
+                                         .Image(signData);
+
+                                    column.Item().TranslateX(75)
+                                                 .TranslateY(-45)
+                                                 .Text($"ჯამი: {finalTotal} ₾")
                                                  .FontFamily(Fonts.SegoeUI)
                                                  .FontSize(20)
                                                  .Bold()
                                                  .FontColor("#4674A5");
 
-                                    column.Item().PaddingVertical(10).LineHorizontal(3).LineColor(Colors.Grey.Medium);
+                                    column.Item().TranslateY(-10).LineHorizontal(3).LineColor(Colors.Grey.Medium);
 
                                     column.Item().TranslateX(10)
-                                                 .TranslateY(-37)
+                                                 .TranslateY(-36)
                                                  .Text("რატი გაგნიძე - ")
                                                  .FontFamily(Fonts.SegoeUI)
                                                  .FontSize(13)
@@ -465,13 +477,12 @@ public partial class Invoice_UC : UserControl
                         void FooterRect(QuestPDF.Infrastructure.IContainer container)
                         {
                             container
-                                .Width(575)
-                                .Height(5)
-                                .TranslateX(0)
-                                .TranslateY(100)
-                                .Border(31)
-                                .BorderColor("#4674A5");
-
+                                    .Width(575)
+                                    .Height(5)
+                                    .TranslateX(0)
+                                    .TranslateY(370)
+                                    .Border(31)
+                                    .BorderColor("#4674A5");
                         }
 
                     });
@@ -480,16 +491,16 @@ public partial class Invoice_UC : UserControl
 
             }
 
-            
+
 
             datas.Clear();
             invoiceData.Rows.Clear();
             invoice.Number += 1;
             _db.Update(invoice);
             var response = _db.SaveChanges();
-            if(response > 0)
+            if (response > 0)
             {
-                MessageBox.Show("პროდუქტი წარმატებით დაემატა!",
+                MessageBox.Show("ინვოისი წარმატებით შეინახა!",
                         "წარმატებული შენახვა",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
@@ -513,4 +524,8 @@ public partial class Invoice_UC : UserControl
 
     }
 
+    private void amountNumeric_ValueChanged(object sender, EventArgs e)
+    {
+        isModified = true;
+    }
 }

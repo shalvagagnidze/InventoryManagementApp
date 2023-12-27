@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Costumers_UC));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             search_Icon = new PictureBox();
             Search_Txt = new Krypton.Toolkit.KryptonTextBox();
             costumersData = new Krypton.Toolkit.KryptonDataGridView();
@@ -143,7 +142,7 @@
             downloadExel.StateTracking.Content.ShortText.Color1 = Color.White;
             downloadExel.TabIndex = 20;
             downloadExel.Values.ExtraText = "  ";
-            downloadExel.Values.Image = (Image)resources.GetObject("downloadExel.Values.Image");
+            downloadExel.Values.Image = Properties.Resources.Download_48;
             downloadExel.Values.Text = "  გადმოწერა";
             downloadExel.Click += downloadExel_Click;
             // 
@@ -151,7 +150,7 @@
             // 
             location.BackColor = Color.Transparent;
             location.BorderRadius = 5;
-            location.CustomizableEdges = customizableEdges1;
+            location.CustomizableEdges = customizableEdges3;
             location.DrawMode = DrawMode.OwnerDrawFixed;
             location.DropDownStyle = ComboBoxStyle.DropDownList;
             location.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -161,7 +160,7 @@
             location.ItemHeight = 30;
             location.Location = new Point(730, 34);
             location.Name = "location";
-            location.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            location.ShadowDecoration.CustomizableEdges = customizableEdges4;
             location.Size = new Size(255, 36);
             location.TabIndex = 21;
             location.SelectedIndexChanged += location_SelectedIndexChanged;

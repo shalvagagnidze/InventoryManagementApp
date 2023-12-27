@@ -1,5 +1,6 @@
 ﻿using InventoryManagementApp.Data;
 using InventoryManagementApp.Models;
+using InventoryManagementApp.Properties;
 using Krypton.Toolkit;
 
 namespace InventoryManagementApp.UI
@@ -11,7 +12,7 @@ namespace InventoryManagementApp.UI
         string brandName, brandOrigin, brandDescription;
         public Add_Brand()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
 
         private void brandSave_Btn_Click(object sender, EventArgs e)

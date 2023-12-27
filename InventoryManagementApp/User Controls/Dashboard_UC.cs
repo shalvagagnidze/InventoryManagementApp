@@ -16,6 +16,8 @@ public partial class Dashboard_UC : UserControl
         packText.Text = packedCount.ToString();
         shippingText.Text = shippedCount.ToString();
         deliveryText.Text = deliveredCount.ToString();
+        fromDate.Value = DateTime.Now.Date;
+        toDate.Value = DateTime.Now.Date;
         fromDate.Enabled = false;
         toDate.Enabled = false;
         fromProfit.Visible = false;
@@ -30,7 +32,7 @@ public partial class Dashboard_UC : UserControl
 
         storage_Text.Text = storage.ToString();
         totalSold_Text.Text = totalSold.ToString();
-        var productNames = _db.Products.Select(s => s.Name).ToList();
+        var productNames = _db.Products.Where(s => !s.IsDeleted).Select(s => s.Name).ToList();
         productNames.Insert(0, "ყველა პროდუქტი");
         productCombo.DataSource = productNames;
 
@@ -43,6 +45,7 @@ public partial class Dashboard_UC : UserControl
     {
         topChart.Title.Text = "Top 3 გაყიდვადი პროდუქტი";
         var topProducts = _db.Products
+                                      .Where(s => !s.IsDeleted)
                                       .Where(p => !p.IsDeleted && p.Sales
                                       .Any(s => !s.IsDeleted))
                                       .GroupBy(p => p, (key, group) => new
@@ -667,7 +670,8 @@ public partial class Dashboard_UC : UserControl
 
             if (daysDifference > 31 && daysDifference <= 93)
             {
-                var weeksAndMonthsData = sales
+               var weeksAndMonthsData = sales
+                                            .Where(s => s.Date.HasValue && s.Date.Value >= startDate && s.Date.Value <= endDate)
                                             .GroupBy(s => new { Year = s.Date.Value.Year, Month = s.Date.Value.Month })
                                             .OrderBy(group => group.Key.Year)
                                             .ThenBy(group => group.Key.Month)
@@ -675,7 +679,7 @@ public partial class Dashboard_UC : UserControl
                                             {
                                                 Year = group.Key.Year,
                                                 Month = group.Key.Month,
-                                                WeekData = GetWeeksInMonth(group.Key.Year, group.Key.Month, DayOfWeek.Sunday)
+                                                WeekData = GetWeeksInDateRange(startDate, endDate, DayOfWeek.Sunday)
                                                     .GroupJoin(
                                                         group,
                                                         week => week,
@@ -687,19 +691,21 @@ public partial class Dashboard_UC : UserControl
                                                         })
                                                     .ToList()
                                             })
-                                                    .ToList();
+                                            .ToList();
 
-                List<int> GetWeeksInMonth(int year, int month, DayOfWeek startOfWeek)
+                List<int> GetWeeksInDateRange(DateTime startDate, DateTime endDate, DayOfWeek startOfWeek)
                 {
-                    var firstDayOfMonth = new DateTime(year, month, 1);
-                    var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                    var weeks = new List<int>();
 
-                    return Enumerable.Range(0, (lastDayOfMonth - firstDayOfMonth).Days + 1)
-                        .Select(offset => firstDayOfMonth.AddDays(offset))
-                        .Where(day => day.DayOfWeek == startOfWeek)
-                        .Select(day => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(day, CalendarWeekRule.FirstDay, DayOfWeek.Sunday))
-                        .Distinct()
-                        .ToList();
+                    for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                    {
+                        if (date.DayOfWeek == startOfWeek)
+                        {
+                            weeks.Add(CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Sunday));
+                        }
+                    }
+
+                    return weeks.Distinct().ToList();
                 }
 
                 saleChart.DataPoints.Clear();
@@ -713,6 +719,7 @@ public partial class Dashboard_UC : UserControl
                     }
                 }
                 saleChart.Invalidate();
+
             }
 
             if (daysDifference > 93 && daysDifference <= 365)
@@ -811,7 +818,8 @@ public partial class Dashboard_UC : UserControl
 
             if (daysDifference > 31 && daysDifference <= 93)
             {
-                var weeksAndMonthsData = sales
+               var weeksAndMonthsData = sales
+                                            .Where(s => s.Date.HasValue && s.Date.Value >= startDate && s.Date.Value <= endDate)
                                             .GroupBy(s => new { Year = s.Date.Value.Year, Month = s.Date.Value.Month })
                                             .OrderBy(group => group.Key.Year)
                                             .ThenBy(group => group.Key.Month)
@@ -819,7 +827,7 @@ public partial class Dashboard_UC : UserControl
                                             {
                                                 Year = group.Key.Year,
                                                 Month = group.Key.Month,
-                                                WeekData = GetWeeksInMonth(group.Key.Year, group.Key.Month, DayOfWeek.Sunday)
+                                                WeekData = GetWeeksInDateRange(startDate, endDate, DayOfWeek.Sunday)
                                                     .GroupJoin(
                                                         group,
                                                         week => week,
@@ -831,19 +839,21 @@ public partial class Dashboard_UC : UserControl
                                                         })
                                                     .ToList()
                                             })
-                                                    .ToList();
+                                            .ToList();
 
-                List<int> GetWeeksInMonth(int year, int month, DayOfWeek startOfWeek)
+                List<int> GetWeeksInDateRange(DateTime startDate, DateTime endDate, DayOfWeek startOfWeek)
                 {
-                    var firstDayOfMonth = new DateTime(year, month, 1);
-                    var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
+                    var weeks = new List<int>();
 
-                    return Enumerable.Range(0, (lastDayOfMonth - firstDayOfMonth).Days + 1)
-                        .Select(offset => firstDayOfMonth.AddDays(offset))
-                        .Where(day => day.DayOfWeek == startOfWeek)
-                        .Select(day => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(day, CalendarWeekRule.FirstDay, DayOfWeek.Sunday))
-                        .Distinct()
-                        .ToList();
+                    for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                    {
+                        if (date.DayOfWeek == startOfWeek)
+                        {
+                            weeks.Add(CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(date, CalendarWeekRule.FirstDay, DayOfWeek.Sunday));
+                        }
+                    }
+
+                    return weeks.Distinct().ToList();
                 }
 
                 saleChart.DataPoints.Clear();
@@ -857,6 +867,7 @@ public partial class Dashboard_UC : UserControl
                     }
                 }
                 saleChart.Invalidate();
+
             }
 
             if (daysDifference > 93 && daysDifference <= 365)
@@ -948,7 +959,7 @@ public partial class Dashboard_UC : UserControl
     public void AllProfitLoss()
     {
         var income = _db.Sales.Where(s => s.IsDeleted == false).Select(s => s.Product.Price * s.Amount).ToList().Sum();
-        var expense = _db.Products.Where(p => p.IsDeleted == false).Select(s => s.NetCost * s.Storage.TotalAmount).ToList().Sum();
+        var expense = _db.Products.Where(p => !p.IsDeleted).Select(s => s.NetCost * s.Storage.TotalAmount).ToList().Sum();
         var profit = income - expense;
 
         income_Txt.Text = income.ToString("F2") + " ₾";
@@ -969,7 +980,7 @@ public partial class Dashboard_UC : UserControl
     {
         DateTime startDate = DateTime.Now.Date.AddDays(-6);
         DateTime endDate = DateTime.Now.Date.AddDays(1);
-        var product = _db.Products.Select(p => p.Name).ToList();
+        var product = _db.Products.Where(p => !p.IsDeleted).Select(p => p.Name).ToList();
 
         var income = _db.Sales.Where(s => s.IsDeleted == false)
                               .Where(s => s.Date.Value >= startDate && s.Date.Value <= endDate)
@@ -1009,7 +1020,7 @@ public partial class Dashboard_UC : UserControl
     {
         DateTime startDate = DateTime.Now.Date.AddMonths(-monthRange);
         DateTime endDate = DateTime.Now.Date.AddDays(1);
-        var product = _db.Products.Select(p => p.Name).ToList();
+        var product = _db.Products.Where(p => !p.IsDeleted).Select(p => p.Name).ToList();
 
         var income = _db.Sales.Where(s => s.IsDeleted == false)
                               .Where(s => s.Date.Value >= startDate && s.Date.Value <= endDate)
@@ -1049,7 +1060,7 @@ public partial class Dashboard_UC : UserControl
     {
         DateTime startDate = fromProfit.Value.Date;
         DateTime endDate = toProfit.Value.Date.AddDays(1); ;
-        var product = _db.Products.Select(p => p.Name).ToList();
+        var product = _db.Products.Where(p => !p.IsDeleted).Select(p => p.Name).ToList();
 
         var income = _db.Sales.Where(s => s.IsDeleted == false)
                               .Where(s => s.Date.Value >= startDate && s.Date.Value <= endDate)

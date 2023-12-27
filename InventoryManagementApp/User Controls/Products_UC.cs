@@ -31,7 +31,7 @@ public partial class Products_UC : UserControl
         var sell = createSellButton();
         productData.CellContentClick += new DataGridViewCellEventHandler(ProductData_CellContentClick);
 
-        productData.DataSource = _db.Products.Select(s => new
+        productData.DataSource = _db.Products.Where(s => !s.IsDeleted).Select(s => new
         {
             კოდი = s.Code,
             დასახელება = s.Name,
@@ -83,7 +83,7 @@ public partial class Products_UC : UserControl
             else
             {
                 var sell = createSellButton();
-                productData.DataSource = _db.Products.Select(s => new
+                productData.DataSource = _db.Products.Where(p => !p.IsDeleted).Select(s => new
                 {
                     კოდი = s.Code,
                     დასახელება = s.Name,
@@ -141,10 +141,10 @@ public partial class Products_UC : UserControl
         var sell = createSellButton();
 
 
-        var search = _db.Products.Where(s => s.Name.Contains(searchText) ||
+        var search = _db.Products.Where(s => !s.IsDeleted && (s.Name.Contains(searchText) ||
                                         s.Code.ToString().Contains(searchText) ||
                                         s.Category.Name.Contains(searchText) ||
-                                        s.Brand.Name.Contains(searchText))
+                                        s.Brand.Name.Contains(searchText)))
                                  .Select(s => new
                                  {
                                      კოდი = s.Code,
@@ -250,7 +250,7 @@ public partial class Products_UC : UserControl
 
 
         panel2.SendToBack();
-        productData.DataSource = _db.Products.Select(s => new
+        productData.DataSource = _db.Products.Where(s => !s.IsDeleted).Select(s => new
         {
             კოდი = s.Id,
             დასახელება = s.Name,
@@ -303,7 +303,7 @@ public partial class Products_UC : UserControl
                                    MessageBoxIcon.Information);
 
                     var sell = createSellButton();
-                    productData.DataSource = _db.Products.Select(s => new
+                    productData.DataSource = _db.Products.Where(s => !s.IsDeleted).Select(s => new
                     {
                         კოდი = s.Id,
                         დასახელება = s.Name,
