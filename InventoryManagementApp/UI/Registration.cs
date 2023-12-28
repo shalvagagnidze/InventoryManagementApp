@@ -32,7 +32,7 @@ public partial class Registration : KryptonForm
         PassConf_Txt.Text = "";
         checkAdmin.Checked = false;
         checkModerator.Checked = false;
-        BDate_Txt.Value = DateTime.Now;
+        BDate_Txt.Value = DateTime.Now.Date;
         Login login = new Login();
         login.Show();
     }
@@ -106,7 +106,7 @@ public partial class Registration : KryptonForm
                     UserName = userName,
                     UserPassword = passHash,
                     Role = role,
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.Now.Date,
                     IsDeleted = false
                 };
 
@@ -117,9 +117,7 @@ public partial class Registration : KryptonForm
                                 "წარმატებული რეგისტრაცია",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.Hide();
-                Login login = new Login();
-                login.Show();
+                this.Hide();               
             }
             else
             {

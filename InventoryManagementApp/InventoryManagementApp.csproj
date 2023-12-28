@@ -19,6 +19,7 @@
     <PackageReference Include="Krypton.Toolkit" Version="80.23.11.321" />
     <PackageReference Include="Krypton.Toolkit.Suite.Extended.DataGridView" Version="80.23.11.318" />
     <PackageReference Include="Krypton.Workspace" Version="80.23.11.321" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
@@ -27,6 +28,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="QuestPDF" Version="2023.12.1" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="System.Windows.Forms.DataVisualization" Version="1.0.0-prerelease.20110.1" />
   </ItemGroup>
 

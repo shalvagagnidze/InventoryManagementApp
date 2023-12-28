@@ -16,7 +16,7 @@ public partial class Login : KryptonForm
         instance = this;
     }
 
-   
+
 
     private void showPass_CheckedChanged(object sender, EventArgs e)
     {
@@ -39,35 +39,24 @@ public partial class Login : KryptonForm
         password = UPass_Text.Text;
 
         User user = _db.Users.FirstOrDefault(u => u.UserName == userName);
-        
-           // bool isValidPassword = BCrypt.Net.BCrypt.EnhancedVerify(password, user.UserPassword);
 
-            if (user != null && BCrypt.Net.BCrypt.EnhancedVerify(password, user.UserPassword))
-            {
-                userId = user.Id;
-                this.Hide();
-                AdminUI adminUI = new AdminUI();
-                adminUI.Show();
-            //switch (user.Role.ToString())
-            //{
-            //    case "Admin":
-            //        AdminUI adminUI = new AdminUI();
-            //        adminUI.Show();
-            //        break;
-            //    case "Moderator":
-            //        ModeratorUI moderatorUI = new ModeratorUI();
-            //        moderatorUI.Show();
-            //        break;
-            //}
-            }
-            else
-            {
-                MessageBox.Show("მომხმარებლის სახელი ან პაროლი არასწორია, თავიდან სცადეთ",
-                                "შესვლა ვერ მოხერხდა",
-                                MessageBoxButtons.OK, MessageBoxIcon.Error);
-                userName = "";
-                password = "";
-            }
-        
+        //bool isValidPassword = BCrypt.Net.BCrypt.EnhancedVerify(password, user.UserPassword);
+
+        if (user != null && BCrypt.Net.BCrypt.EnhancedVerify(password, user.UserPassword))
+        {
+            userId = user.Id;
+            this.Hide();
+            AdminUI adminUI = new AdminUI();
+            adminUI.Show();
+        }
+        else
+        {
+            MessageBox.Show("მომხმარებლის სახელი ან პაროლი არასწორია, თავიდან სცადეთ",
+                            "შესვლა ვერ მოხერხდა",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+            userName = "";
+            password = "";
+        }
+
     }
 }
