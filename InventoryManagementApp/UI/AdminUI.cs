@@ -1,4 +1,5 @@
 ﻿using InventoryManagementApp.User_Controls;
+using Krypton.Navigator;
 using Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace InventoryManagementApp.UI
             InitializeComponent();
             Dashboard_UC dashboard = new Dashboard_UC();
             addUserControl(dashboard);
+            this.FormClosing += AdminUI_FormClosing;
+
         }
 
         private void addUserControl(UserControl userControl)
@@ -29,7 +32,14 @@ namespace InventoryManagementApp.UI
             userControl.BringToFront();
             
         }
-
+        private void AdminUI_FormClosing(Object sender, FormClosingEventArgs e)
+        {
+            //In case windows is trying to shut down, don't hold the process up
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+               Application.Exit();
+            }
+        }
 
         private void AdminUI_Load(object sender, EventArgs e)
         {

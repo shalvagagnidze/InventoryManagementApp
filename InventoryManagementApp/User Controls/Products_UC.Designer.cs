@@ -31,6 +31,7 @@ namespace InventoryManagementApp.User_Controls
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Products_UC));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             productData = new Krypton.Toolkit.KryptonDataGridView();
             addProduct_Btn = new Krypton.Toolkit.KryptonButton();
             addCategory_Btn = new Krypton.Toolkit.KryptonButton();
@@ -45,6 +46,7 @@ namespace InventoryManagementApp.User_Controls
             sortBrand_Btn = new Krypton.Toolkit.KryptonButton();
             sortCat_Btn = new Krypton.Toolkit.KryptonButton();
             sort_Btn = new Krypton.Toolkit.KryptonButton();
+            download_Btn = new Guna.UI2.WinForms.Guna2ImageButton();
             ((System.ComponentModel.ISupportInitialize)productData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)search_Icon).BeginInit();
             panel1.SuspendLayout();
@@ -54,6 +56,8 @@ namespace InventoryManagementApp.User_Controls
             // productData
             // 
             productData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            productData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            productData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             productData.BorderStyle = BorderStyle.None;
             productData.ColumnHeadersHeight = 51;
             productData.ImeMode = ImeMode.On;
@@ -62,6 +66,7 @@ namespace InventoryManagementApp.User_Controls
             productData.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             productData.ReadOnly = true;
             productData.RowHeadersWidth = 62;
+            productData.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             productData.RowTemplate.DividerHeight = 3;
             productData.RowTemplate.Resizable = DataGridViewTriState.False;
             productData.Size = new Size(1369, 552);
@@ -611,11 +616,28 @@ namespace InventoryManagementApp.User_Controls
             sort_Btn.Values.Text = "";
             sort_Btn.Click += sort_Btn_Click;
             // 
+            // download_Btn
+            // 
+            download_Btn.CheckedState.ImageSize = new Size(64, 64);
+            download_Btn.HoverState.ImageSize = new Size(64, 64);
+            download_Btn.Image = Properties.Resources.Download_48;
+            download_Btn.ImageOffset = new Point(0, 0);
+            download_Btn.ImageRotate = 0F;
+            download_Btn.ImageSize = new Size(48, 48);
+            download_Btn.Location = new Point(722, 121);
+            download_Btn.Name = "download_Btn";
+            download_Btn.PressedState.ImageSize = new Size(64, 64);
+            download_Btn.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            download_Btn.Size = new Size(50, 56);
+            download_Btn.TabIndex = 25;
+            download_Btn.Click += download_Btn_Click;
+            // 
             // Products_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 252, 252);
+            Controls.Add(download_Btn);
             Controls.Add(sort_Btn);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -653,5 +675,6 @@ namespace InventoryManagementApp.User_Controls
         private Krypton.Toolkit.KryptonButton sortBrand_Btn;
         private Krypton.Toolkit.KryptonButton sortCat_Btn;
         private Krypton.Toolkit.KryptonButton sort_Btn;
+        private Guna.UI2.WinForms.Guna2ImageButton download_Btn;
     }
 }

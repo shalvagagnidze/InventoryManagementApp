@@ -1,5 +1,6 @@
 ﻿using InventoryManagementApp.Common.Enums;
 using InventoryManagementApp.Data;
+using InventoryManagementApp.UI;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using OfficeOpenXml.Table;
@@ -11,10 +12,12 @@ namespace InventoryManagementApp.User_Controls;
 public partial class Costumers_UC : UserControl
 {
     InventoryContext _db = new InventoryContext();
+    public static Costumers_UC Instance;
+    int userID;
     public Costumers_UC()
     {
         InitializeComponent();
-
+        userID = Login.userId;
         costumersData.DataSource = _db.Sales.Select(c => new
         {
             კოდი = c.Customer.Id,
@@ -209,6 +212,16 @@ public partial class Costumers_UC : UserControl
                         ლოკაცია = c.Location
 
                     }).ToList();
+
+                    foreach (var article in custData)
+                    {
+                        workSheet.Cells[recordIndex, 1].Value = article.კოდი;
+                        workSheet.Cells[recordIndex, 2].Value = article.სახელი;
+                        workSheet.Cells[recordIndex, 3].Value = article.გვარი;
+                        workSheet.Cells[recordIndex, 4].Value = article.ტელეფონი;
+                        workSheet.Cells[recordIndex, 5].Value = article.ლოკაცია;
+                        recordIndex++;
+                    }
                     break;
                 case 1:
                     tableLoad(workSheet, "თბილისი", ref recordIndex);
@@ -316,4 +329,22 @@ public partial class Costumers_UC : UserControl
         }
     }
 
+    private void register_Btn_Click(object sender, EventArgs e)
+    {
+        var user = _db.Users.FirstOrDefault(o => o.Id == userID);
+
+        if(user.Role.ToString() == "Admin")
+        {
+            Registration registration = new Registration();
+            registration.Show();
+        }
+        else
+        {
+            MessageBox.Show("თქვენ არ გაქვთ User-ების დამატების უფლება",
+                                   "შეზღუდული უფლებები",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Warning);
+        }
+        
+    }
 }

@@ -42,46 +42,61 @@ public partial class Add_Product : KryptonForm
 
         var brand = _db.Brands.FirstOrDefault(x => x.Name == brandName).Id;
 
-        if (category != null)
+        var product = _db.Products.FirstOrDefault(o => o.Code == code);
+
+        if(product != null)
         {
-            categoryId = category;
+            MessageBox.Show("მოცემული კოდით პროდუქტი უკვე არსებობს, თავიდან სცადეთ",
+                          "პროდუქტი უკვე არსებობს",
+                          MessageBoxButtons.OK,
+                          MessageBoxIcon.Warning);
         }
         else
         {
-            MessageBox.Show("თქვენ მიერ მონიშნული კატეგორია არ იძებნება, ხელახლა სცადეთ",
-                            "კატეგორია ვერ მოიძებნა",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning);
-        }
+            if (category != null)
+            {
+                categoryId = category;
+            }
+            else
+            {
+                MessageBox.Show("თქვენ მიერ მონიშნული კატეგორია არ იძებნება, ხელახლა სცადეთ",
+                                "კატეგორია ვერ მოიძებნა",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
 
-        if (brand != null)
-        {
-            brandId = brand;
-        }
-        else
-        {
-            MessageBox.Show("თქვენ მიერ მონიშნული ბრენდი არ იძებნება, ხელახლა სცადეთ",
-                            "ბრენდი ვერ მოიძებნა",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning);
-        }
+            if (brand != null)
+            {
+                brandId = brand;
+            }
+            else
+            {
+                MessageBox.Show("თქვენ მიერ მონიშნული ბრენდი არ იძებნება, ხელახლა სცადეთ",
+                                "ბრენდი ვერ მოიძებნა",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
 
-        if (string.IsNullOrWhiteSpace(productName_Txt.Text) ||
-           string.IsNullOrWhiteSpace(productName_Txt.Text) ||
-           string.IsNullOrWhiteSpace(price_Txt.Text) ||
-           string.IsNullOrWhiteSpace(netCost_Txt.Text) ||
-           string.IsNullOrWhiteSpace(prodDesc_Txt.Text))
 
-        {
-            MessageBox.Show("გთხოვთ, შეავსოთ მოცემული ყველა ველი",
-                            "შესავსები ველი ცარიელია",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning);
+
+            if (string.IsNullOrWhiteSpace(productName_Txt.Text) ||
+               string.IsNullOrWhiteSpace(productName_Txt.Text) ||
+               string.IsNullOrWhiteSpace(price_Txt.Text) ||
+               string.IsNullOrWhiteSpace(netCost_Txt.Text) ||
+               string.IsNullOrWhiteSpace(prodDesc_Txt.Text))
+
+            {
+                MessageBox.Show("გთხოვთ, შეავსოთ მოცემული ყველა ველი",
+                                "შესავსები ველი ცარიელია",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
+            else
+            {
+                AddProduct();
+            }
         }
-        else
-        {
-            AddProduct();
-        }
+        
 
 
     }
@@ -97,7 +112,7 @@ public partial class Add_Product : KryptonForm
         TotalSold totalSold = new TotalSold();
         totalSold.TotalSoldAmount = 0;
         StockStatus status = StockStatus.მარაგშია;
-        DateTime createDate = DateTime.Now;
+        DateTime createDate = DateTime.Now.Date;
         int a = 0;
         Product product = new Product()
         {
@@ -138,14 +153,4 @@ public partial class Add_Product : KryptonForm
 
     }
 
-    private void categoryListBox_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        //categoryName = categoryListBox.Text;
-
-    }
-
-    private void brandList_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        //brandName = brandList.Text;
-    }
 }

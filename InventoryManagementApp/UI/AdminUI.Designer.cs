@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminUI));
             kryptonCustomPaletteBase1 = new Krypton.Toolkit.KryptonCustomPaletteBase(components);
             kryptonPanel1 = new Krypton.Toolkit.KryptonPanel();
             settings_Btn = new Krypton.Toolkit.KryptonButton();
@@ -391,6 +392,7 @@
             ClientSize = new Size(1378, 844);
             Controls.Add(panelContainer);
             Controls.Add(kryptonPanel1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "AdminUI";
             Palette = kryptonCustomPaletteBase1;
             PaletteMode = Krypton.Toolkit.PaletteMode.Custom;

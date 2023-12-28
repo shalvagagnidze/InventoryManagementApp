@@ -10,13 +10,14 @@ public partial class Orders_UC : UserControl
 {
     public static Orders_UC instance;
     public static Sale transferSale;
-
+    int userID;
     InventoryContext _db = new InventoryContext();
     Sale orders = new Sale();
 
     public Orders_UC()
     {
         InitializeComponent();
+        userID = Login.userId;
         fromDate.Value = DateTime.Now.Date;
         toDate.Value = DateTime.Now.Date;
         toDate.Enabled = false;
@@ -66,60 +67,86 @@ public partial class Orders_UC : UserControl
 
     private void edit_Btn_Click(object sender, EventArgs e)
     {
-        var row = ordersData.CurrentRow;
-        var orderIndex = ordersData.CurrentRow.Cells["კოდი"].Value.ToString();
-        var order = _db.Sales.FirstOrDefault(p => p.Id.ToString() == orderIndex);
-        transferSale = order;
-        Edit_Order edit_order = new Edit_Order();
-        edit_order.Show();
+        var user = _db.Users.FirstOrDefault(o => o.Id == userID);
+
+        if (user.Role.ToString() == "Admin")
+        {
+            var row = ordersData.CurrentRow;
+            var orderIndex = ordersData.CurrentRow.Cells["კოდი"].Value.ToString();
+            var order = _db.Sales.FirstOrDefault(p => p.Id.ToString() == orderIndex);
+            transferSale = order;
+            Edit_Order edit_order = new Edit_Order();
+            edit_order.Show();
+        }
+        else
+        {
+            MessageBox.Show("თქვენ არ გაქვთ რედაქტირების უფლება",
+                                   "შეზღუდული უფლებები",
+                                   MessageBoxButtons.OK,
+                                   MessageBoxIcon.Warning);
+        }
+        
     }
 
     private void delete_Btn_Click(object sender, EventArgs e)
     {
-        if (MessageBox.Show("დარწმუნებული ხართ, რომ გსურთ წაშლა?", "ფრთხილად წაშლამდე!"
-                           , MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+        var user = _db.Users.FirstOrDefault(o => o.Id == userID);
+
+        if (user.Role.ToString() == "Admin")
         {
-            var row = ordersData.CurrentRow;
-            var orderIndex = ordersData.CurrentRow.Cells["კოდი"].Value.ToString();
-            var orderId = orderIndex;
-            var order = _db.Sales.FirstOrDefault(p => p.Id.ToString() == orderId);
-
-            order.DeleteOrder();
-            order.DeleteTime = DateTime.Now;
-
-            var response = _db.SaveChanges();
-
-            if (response > 0)
+            if (MessageBox.Show("დარწმუნებული ხართ, რომ გსურთ წაშლა?", "ფრთხილად წაშლამდე!"
+                           , MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                MessageBox.Show("შეკვეთა წარმატებით წაიშალა!",
-                                  "შეკვეთის წაშლა",
-                                  MessageBoxButtons.OK,
-                                  MessageBoxIcon.Information);
+                var row = ordersData.CurrentRow;
+                var orderIndex = ordersData.CurrentRow.Cells["კოდი"].Value.ToString();
+                var orderId = orderIndex;
+                var order = _db.Sales.FirstOrDefault(p => p.Id.ToString() == orderId);
 
-                ordersData.DataSource = _db.Sales.Select(o => new
+                order.DeleteOrder();
+                order.DeleteTime = DateTime.Now;
+
+                var response = _db.SaveChanges();
+
+                if (response > 0)
                 {
-                    კოდი = o.Id,
-                    პროდუქტი = o.Product.Name,
-                    კატეგორია = o.Product.Category.Name,
-                    ბრენდი = o.Product.Brand.Name,
-                    რაოდენობა = o.Amount,
-                    ლოკაცია = o.Location,
-                    გადახდის_ტიპი = o.PaymentMethod,
-                    შეკვეთის_ადგილი = o.PaymentArea,
-                    მდგომარეობა = o.Activity,
-                    თარიღი = o.Date
-                }).ToList();
+                    MessageBox.Show("შეკვეთა წარმატებით წაიშალა!",
+                                      "შეკვეთის წაშლა",
+                                      MessageBoxButtons.OK,
+                                      MessageBoxIcon.Information);
+
+                    ordersData.DataSource = _db.Sales.Select(o => new
+                    {
+                        კოდი = o.Id,
+                        პროდუქტი = o.Product.Name,
+                        კატეგორია = o.Product.Category.Name,
+                        ბრენდი = o.Product.Brand.Name,
+                        რაოდენობა = o.Amount,
+                        ლოკაცია = o.Location,
+                        გადახდის_ტიპი = o.PaymentMethod,
+                        შეკვეთის_ადგილი = o.PaymentArea,
+                        მდგომარეობა = o.Activity,
+                        თარიღი = o.Date
+                    }).ToList();
+
+                }
+                else
+                {
+                    MessageBox.Show("შეკვეთის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
+                                       "შეცდომა წაშლისას",
+                                       MessageBoxButtons.OK,
+                                       MessageBoxIcon.Warning);
+                }
 
             }
-            else
-            {
-                MessageBox.Show("შეკვეთის წაშლა ვერ მოხერხდა, თავიდან სცადეთ!",
-                                   "შეცდომა წაშლისას",
+        }
+        else
+        {
+            MessageBox.Show("თქვენ არ გაქვთ წაშლის უფლება",
+                                   "შეზღუდული უფლებები",
                                    MessageBoxButtons.OK,
                                    MessageBoxIcon.Warning);
-            }
-
         }
+        
     }
 
     private void searchButton_Click(object sender, EventArgs e)

@@ -7,18 +7,16 @@ namespace InventoryManagementApp;
 public partial class Login : KryptonForm
 {
     private InventoryContext _db = new InventoryContext();
+    public static Login instance;
+    public static int userId;
 
     public Login()
     {
         InitializeComponent();
+        instance = this;
     }
 
-    private void Regist_Button_Click(object sender, EventArgs e)
-    {
-        this.Hide();
-        Registration registration = new Registration();
-        registration.Show();
-    }
+   
 
     private void showPass_CheckedChanged(object sender, EventArgs e)
     {
@@ -46,18 +44,21 @@ public partial class Login : KryptonForm
 
             if (user != null && BCrypt.Net.BCrypt.EnhancedVerify(password, user.UserPassword))
             {
+                userId = user.Id;
                 this.Hide();
-                switch (user.Role.ToString())
-                {
-                    case "Admin":
-                        AdminUI adminUI = new AdminUI();
-                        adminUI.Show();
-                        break;
-                    case "Moderator":
-                        ModeratorUI moderatorUI = new ModeratorUI();
-                        moderatorUI.Show();
-                        break;
-                }
+                AdminUI adminUI = new AdminUI();
+                adminUI.Show();
+            //switch (user.Role.ToString())
+            //{
+            //    case "Admin":
+            //        AdminUI adminUI = new AdminUI();
+            //        adminUI.Show();
+            //        break;
+            //    case "Moderator":
+            //        ModeratorUI moderatorUI = new ModeratorUI();
+            //        moderatorUI.Show();
+            //        break;
+            //}
             }
             else
             {

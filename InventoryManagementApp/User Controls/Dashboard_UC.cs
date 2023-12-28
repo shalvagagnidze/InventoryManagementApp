@@ -12,7 +12,7 @@ public partial class Dashboard_UC : UserControl
         int packedCount = _db.Sales.Count(sale => sale.Activity == Common.Enums.Activity.მზადდება);
         int shippedCount = _db.Sales.Count(sale => sale.Activity == Common.Enums.Activity.გზაშია);
         int deliveredCount = _db.Sales.Count(sale => sale.Activity == Common.Enums.Activity.მიწოდებულია);
-
+        
         packText.Text = packedCount.ToString();
         shippingText.Text = shippedCount.ToString();
         deliveryText.Text = deliveredCount.ToString();

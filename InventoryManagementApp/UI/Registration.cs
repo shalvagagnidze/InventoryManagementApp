@@ -105,7 +105,7 @@ public partial class Registration : KryptonForm
                     BirthDate = birthDate,
                     UserName = userName,
                     UserPassword = passHash,
-                    Role = Role.Admin,
+                    Role = role,
                     CreatedDate = DateTime.Now,
                     IsDeleted = false
                 };

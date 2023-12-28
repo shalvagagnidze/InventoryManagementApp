@@ -371,7 +371,6 @@
             brandList.Name = "brandList";
             brandList.Size = new Size(180, 204);
             brandList.TabIndex = 54;
-            brandList.SelectedIndexChanged += brandList_SelectedIndexChanged;
             // 
             // Add_Product
             // 

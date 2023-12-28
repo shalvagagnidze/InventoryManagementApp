@@ -45,6 +45,8 @@
             // ordersData
             // 
             ordersData.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            ordersData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            ordersData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             ordersData.BorderStyle = BorderStyle.None;
             ordersData.ColumnHeadersHeight = 51;
             ordersData.ImeMode = ImeMode.On;
@@ -53,6 +55,7 @@
             ordersData.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             ordersData.ReadOnly = true;
             ordersData.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            ordersData.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             ordersData.RowTemplate.DividerHeight = 3;
             ordersData.RowTemplate.Resizable = DataGridViewTriState.False;
             ordersData.Size = new Size(1372, 642);

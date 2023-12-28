@@ -34,7 +34,6 @@
             UName_Text = new Krypton.Toolkit.KryptonTextBox();
             UPass_Text = new Krypton.Toolkit.KryptonTextBox();
             Sign_Button = new Krypton.Toolkit.KryptonButton();
-            Regist_Button = new Krypton.Toolkit.KryptonButton();
             pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
             showPass = new Krypton.Toolkit.KryptonCheckBox();
@@ -96,11 +95,11 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.Jani_Logo;
-            pictureBox1.Location = new Point(71, 64);
+            pictureBox1.Image = Properties.Resources.Jani_newLogo;
+            pictureBox1.Location = new Point(22, 58);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(437, 240);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Size = new Size(544, 219);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
@@ -142,7 +141,7 @@
             // 
             // Sign_Button
             // 
-            Sign_Button.Location = new Point(69, 538);
+            Sign_Button.Location = new Point(168, 533);
             Sign_Button.Name = "Sign_Button";
             Sign_Button.OverrideDefault.Back.Color1 = Color.FromArgb(6, 174, 244);
             Sign_Button.OverrideDefault.Back.Color2 = Color.FromArgb(8, 142, 254);
@@ -155,7 +154,7 @@
             Sign_Button.OverrideDefault.Border.Rounding = 20F;
             Sign_Button.OverrideDefault.Border.Width = 1;
             Sign_Button.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
-            Sign_Button.Size = new Size(164, 38);
+            Sign_Button.Size = new Size(244, 52);
             Sign_Button.StateCommon.Back.Color1 = Color.FromArgb(6, 174, 244);
             Sign_Button.StateCommon.Back.Color2 = Color.FromArgb(8, 142, 254);
             Sign_Button.StateCommon.Back.ColorAngle = 45F;
@@ -168,7 +167,7 @@
             Sign_Button.StateCommon.Border.Width = 1;
             Sign_Button.StateCommon.Content.ShortText.Color1 = Color.White;
             Sign_Button.StateCommon.Content.ShortText.Color2 = Color.White;
-            Sign_Button.StateCommon.Content.ShortText.Font = new Font("Georgia", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Sign_Button.StateCommon.Content.ShortText.Font = new Font("Georgia", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Sign_Button.StatePressed.Back.Color1 = Color.FromArgb(20, 145, 198);
             Sign_Button.StatePressed.Back.Color2 = Color.FromArgb(22, 121, 206);
             Sign_Button.StatePressed.Back.ColorAngle = 135F;
@@ -191,58 +190,6 @@
             Sign_Button.TabIndex = 6;
             Sign_Button.Values.Text = "შესვლა";
             Sign_Button.Click += Sign_Button_Click;
-            // 
-            // Regist_Button
-            // 
-            Regist_Button.Location = new Point(284, 538);
-            Regist_Button.Name = "Regist_Button";
-            Regist_Button.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
-            Regist_Button.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
-            Regist_Button.OverrideDefault.Back.ColorAngle = 45F;
-            Regist_Button.OverrideDefault.Border.Color1 = Color.FromArgb(8, 142, 254);
-            Regist_Button.OverrideDefault.Border.Color2 = Color.FromArgb(8, 142, 254);
-            Regist_Button.OverrideDefault.Border.ColorAngle = 45F;
-            Regist_Button.OverrideDefault.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            Regist_Button.OverrideDefault.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            Regist_Button.OverrideDefault.Border.Rounding = 20F;
-            Regist_Button.OverrideDefault.Border.Width = 2;
-            Regist_Button.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
-            Regist_Button.Size = new Size(234, 38);
-            Regist_Button.StateCommon.Back.Color1 = Color.FromArgb(250, 252, 252);
-            Regist_Button.StateCommon.Back.Color2 = Color.FromArgb(250, 252, 252);
-            Regist_Button.StateCommon.Back.ColorAngle = 45F;
-            Regist_Button.StateCommon.Border.Color1 = Color.FromArgb(6, 174, 244);
-            Regist_Button.StateCommon.Border.Color2 = Color.FromArgb(8, 142, 254);
-            Regist_Button.StateCommon.Border.ColorAngle = 45F;
-            Regist_Button.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            Regist_Button.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            Regist_Button.StateCommon.Border.Rounding = 20F;
-            Regist_Button.StateCommon.Border.Width = 2;
-            Regist_Button.StateCommon.Content.ShortText.Color1 = Color.FromArgb(8, 142, 254);
-            Regist_Button.StateCommon.Content.ShortText.Font = new Font("Georgia", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Regist_Button.StatePressed.Back.Color1 = Color.FromArgb(20, 145, 198);
-            Regist_Button.StatePressed.Back.Color2 = Color.FromArgb(22, 121, 206);
-            Regist_Button.StatePressed.Back.ColorAngle = 135F;
-            Regist_Button.StatePressed.Border.Color1 = Color.FromArgb(20, 145, 198);
-            Regist_Button.StatePressed.Border.Color2 = Color.FromArgb(22, 121, 206);
-            Regist_Button.StatePressed.Border.ColorAngle = 135F;
-            Regist_Button.StatePressed.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            Regist_Button.StatePressed.Border.Rounding = 20F;
-            Regist_Button.StatePressed.Border.Width = 1;
-            Regist_Button.StateTracking.Back.Color1 = Color.FromArgb(8, 142, 254);
-            Regist_Button.StateTracking.Back.Color2 = Color.FromArgb(6, 174, 244);
-            Regist_Button.StateTracking.Back.ColorAngle = 45F;
-            Regist_Button.StateTracking.Border.Color1 = Color.FromArgb(6, 174, 244);
-            Regist_Button.StateTracking.Border.Color2 = Color.FromArgb(8, 142, 254);
-            Regist_Button.StateTracking.Border.ColorAngle = 45F;
-            Regist_Button.StateTracking.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            Regist_Button.StateTracking.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            Regist_Button.StateTracking.Border.Rounding = 20F;
-            Regist_Button.StateTracking.Border.Width = 1;
-            Regist_Button.StateTracking.Content.ShortText.Color1 = Color.White;
-            Regist_Button.TabIndex = 7;
-            Regist_Button.Values.Text = "რეგისტრაცია";
-            Regist_Button.Click += Regist_Button_Click;
             // 
             // pictureBox2
             // 
@@ -287,7 +234,6 @@
             Controls.Add(showPass);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
-            Controls.Add(Regist_Button);
             Controls.Add(Sign_Button);
             Controls.Add(UPass_Text);
             Controls.Add(UName_Text);
@@ -312,7 +258,6 @@
         private Krypton.Toolkit.KryptonTextBox UName_Text;
         private Krypton.Toolkit.KryptonTextBox UPass_Text;
         private Krypton.Toolkit.KryptonButton Sign_Button;
-        private Krypton.Toolkit.KryptonButton Regist_Button;
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
         private Krypton.Toolkit.KryptonCheckBox showPass;

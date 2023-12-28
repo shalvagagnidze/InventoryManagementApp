@@ -28,13 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Costumers_UC));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             search_Icon = new PictureBox();
             Search_Txt = new Krypton.Toolkit.KryptonTextBox();
             costumersData = new Krypton.Toolkit.KryptonDataGridView();
             downloadExel = new Krypton.Toolkit.KryptonButton();
             location = new Guna.UI2.WinForms.Guna2ComboBox();
+            register_Btn = new Guna.UI2.WinForms.Guna2ImageButton();
             ((System.ComponentModel.ISupportInitialize)search_Icon).BeginInit();
             ((System.ComponentModel.ISupportInitialize)costumersData).BeginInit();
             SuspendLayout();
@@ -72,6 +75,7 @@
             // 
             costumersData.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             costumersData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            costumersData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             costumersData.BorderStyle = BorderStyle.None;
             costumersData.ColumnHeadersHeight = 51;
             costumersData.ImeMode = ImeMode.On;
@@ -80,6 +84,7 @@
             costumersData.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
             costumersData.ReadOnly = true;
             costumersData.RowHeadersWidth = 62;
+            costumersData.RowTemplate.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             costumersData.RowTemplate.DividerHeight = 3;
             costumersData.RowTemplate.Resizable = DataGridViewTriState.False;
             costumersData.Size = new Size(1369, 632);
@@ -94,7 +99,7 @@
             // downloadExel
             // 
             downloadExel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            downloadExel.Location = new Point(1108, 14);
+            downloadExel.Location = new Point(985, 13);
             downloadExel.Name = "downloadExel";
             downloadExel.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
             downloadExel.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
@@ -150,7 +155,7 @@
             // 
             location.BackColor = Color.Transparent;
             location.BorderRadius = 5;
-            location.CustomizableEdges = customizableEdges3;
+            location.CustomizableEdges = customizableEdges1;
             location.DrawMode = DrawMode.OwnerDrawFixed;
             location.DropDownStyle = ComboBoxStyle.DropDownList;
             location.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -158,17 +163,34 @@
             location.Font = new Font("Segoe UI", 10F);
             location.ForeColor = Color.FromArgb(68, 88, 112);
             location.ItemHeight = 30;
-            location.Location = new Point(730, 34);
+            location.Location = new Point(668, 34);
             location.Name = "location";
-            location.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            location.ShadowDecoration.CustomizableEdges = customizableEdges2;
             location.Size = new Size(255, 36);
             location.TabIndex = 21;
             location.SelectedIndexChanged += location_SelectedIndexChanged;
+            // 
+            // register_Btn
+            // 
+            register_Btn.CheckedState.ImageSize = new Size(64, 64);
+            register_Btn.HoverState.ImageSize = new Size(64, 64);
+            register_Btn.Image = (Image)resources.GetObject("register_Btn.Image");
+            register_Btn.ImageOffset = new Point(0, 0);
+            register_Btn.ImageRotate = 0F;
+            register_Btn.ImageSize = new Size(80, 80);
+            register_Btn.Location = new Point(1256, 13);
+            register_Btn.Name = "register_Btn";
+            register_Btn.PressedState.ImageSize = new Size(64, 64);
+            register_Btn.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            register_Btn.Size = new Size(79, 72);
+            register_Btn.TabIndex = 22;
+            register_Btn.Click += register_Btn_Click;
             // 
             // Costumers_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(register_Btn);
             Controls.Add(location);
             Controls.Add(downloadExel);
             Controls.Add(costumersData);
@@ -189,5 +211,6 @@
         private Krypton.Toolkit.KryptonDataGridView costumersData;
         private Krypton.Toolkit.KryptonButton downloadExel;
         private Guna.UI2.WinForms.Guna2ComboBox location;
+        private Guna.UI2.WinForms.Guna2ImageButton register_Btn;
     }
 }
