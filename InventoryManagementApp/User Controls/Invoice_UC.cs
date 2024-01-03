@@ -57,9 +57,9 @@ public partial class Invoice_UC : UserControl
     private void save_Btn_Click(object sender, EventArgs e)
     {
         QuestPDF.Settings.License = QuestPDF.Infrastructure.LicenseType.Community;
-        var invoice = _db.InvoiceIDs.FirstOrDefault(i => i.ID == 4);
+        var invoice = _db.InvoiceIDs.FirstOrDefault(i => i.ID == 1);
         InvoiceID invoices = new InvoiceID();
-        var invoiceList = _db.InvoiceIDs.Where(i => i.ID == 4).Select(i => i.Number).ToList();
+        var invoiceList = _db.InvoiceIDs.Where(i => i.ID == 1).Select(i => i.Number).ToList();
         var invoiceInt = invoiceList[0];
         var invoiceString = "";
 

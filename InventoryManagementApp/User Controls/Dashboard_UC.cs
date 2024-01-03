@@ -960,6 +960,7 @@ public partial class Dashboard_UC : UserControl
     {
         var income = _db.Sales.Where(s => s.IsDeleted == false).Select(s => s.Product.Price * s.Amount).ToList().Sum();
         var expense = _db.Products.Where(p => !p.IsDeleted).Select(s => s.NetCost * s.Storage.TotalAmount).ToList().Sum();
+       // var expense = 10;
         var profit = income - expense;
 
         income_Txt.Text = income.ToString("F2") + " ₾";

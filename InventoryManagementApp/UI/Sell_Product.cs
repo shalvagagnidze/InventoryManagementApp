@@ -34,7 +34,7 @@ public partial class Sell_Product : KryptonForm
         var products = Products_UC.transferProduct;
         var storage = _db.Storages.FirstOrDefault(s => s.Product == products);
 
-        if (!isModified || !isChanged || locationListBox.SelectedIndex == -1 ||
+        if (!isModified || locationListBox.SelectedIndex == -1 ||
             payAreaListBox.SelectedIndex == -1 || payTypeListBox.SelectedIndex == -1)
         {
             MessageBox.Show("გთხოვთ,შეავსოთ მოცემული ყველა ველი!",
@@ -101,7 +101,10 @@ public partial class Sell_Product : KryptonForm
         {
             products.Status = StockStatus.ამოიწურა;
         }
-        _db.Update(products);
+
+       products.Storage = storage;
+       products.TotalSold = totalSold;
+       _db.Update(products);
         
         var response = _db.SaveChanges();
 

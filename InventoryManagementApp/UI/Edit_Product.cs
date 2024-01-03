@@ -100,7 +100,7 @@ namespace InventoryManagementApp.UI
                 storage.TotalAmount += addAmount;
             }
 
-
+            
             _db.Update(products);
             var response = _db.SaveChanges();
 
