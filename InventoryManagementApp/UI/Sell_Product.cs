@@ -12,13 +12,15 @@ public partial class Sell_Product : KryptonForm
 
     bool isChanged = false, isModified = false;
     DateTime date;
-    int soldAmount;
+    int soldAmount, dynamicPriceInt;
+    decimal dynamicPrice;
     string location, payArea, payType, custFirstName, custLastName, custNumber;
     public Sell_Product()
     {
         InitializeComponent();
         var products = Products_UC.transferProduct;
         prodName.Text = products.Name;
+        dynamicPrice_Numeric.Value = products.Price;
         locationListBox.DataSource = Enum.GetValues(typeof(Location));
         payAreaListBox.DataSource = Enum.GetValues(typeof(PaymentArea));
         payTypeListBox.DataSource = Enum.GetValues(typeof(PaymentMethod));
@@ -28,6 +30,8 @@ public partial class Sell_Product : KryptonForm
     {
         date = soldDate.Value.Date;
         soldAmount = (int)amountNumeric.Value;
+        dynamicPriceInt = (int)dynamicPrice_Numeric.Value;
+        dynamicPrice = Convert.ToDecimal(dynamicPriceInt);
         location = locationListBox.SelectedItem.ToString();
         payArea = payAreaListBox.SelectedItem.ToString();
         payType = payTypeListBox.SelectedItem.ToString();
@@ -80,6 +84,7 @@ public partial class Sell_Product : KryptonForm
         {
             Amount = soldAmount,
             Date = date,
+            DynamicPrice = dynamicPrice,
             Location = (Location)Enum.Parse(typeof(Location), location),
             PaymentArea = (PaymentArea)Enum.Parse(typeof(PaymentArea), payArea),
             PaymentMethod = (PaymentMethod)Enum.Parse(typeof(PaymentMethod), payType),
@@ -124,8 +129,6 @@ public partial class Sell_Product : KryptonForm
                        MessageBoxIcon.Information);
         }
     }
-
-
 
     private void soldDate_ValueChanged(object sender, EventArgs e)
     {

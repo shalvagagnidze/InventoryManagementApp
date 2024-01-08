@@ -9,10 +9,11 @@ namespace InventoryManagementApp.UI
     {
         public static Edit_Order instance;
         InventoryContext _db = new InventoryContext();
-        int amount, firstAmount;
+        int amount, firstAmount, dynamicPriceInt;
+        decimal dynamicPrice;
         string location, payArea, payType, firstLoc, firstArea, firstType;
         DateTime date, firstDate;
-        bool isNumericModified;
+        bool isNumericModified,isDynamicPriceModified;
         DataGridView ordersData = new DataGridView();
         public Edit_Order()
         {
@@ -29,6 +30,7 @@ namespace InventoryManagementApp.UI
             firstDate = (DateTime)sale.Date;
             amountNumeric.Value = (int)sale.Amount;
             firstAmount = (int)sale.Amount;
+            dynamicPrice_Numeric.Value = (int)sale.DynamicPrice;
             firstLoc = sale.Location.ToString();
             firstArea = sale.PaymentArea.ToString();
             firstType = sale.PaymentMethod.ToString();
@@ -39,6 +41,8 @@ namespace InventoryManagementApp.UI
             var sale = Orders_UC.transferSale;
             var product = _db.Products.FirstOrDefault(p => p.Sales.Contains(sale));
             amount = (int)amountNumeric.Value;
+            dynamicPriceInt = (int)dynamicPrice_Numeric.Value;
+            dynamicPrice = Convert.ToDecimal(dynamicPriceInt);
             date = soldDate.Value;
             location = locationListBox.SelectedIndex.ToString();
             payArea = payAreaListBox.SelectedIndex.ToString();
@@ -60,6 +64,11 @@ namespace InventoryManagementApp.UI
                     totalSold.TotalSoldAmount -= (firstAmount - amount);
                     storage.TotalAmount += (firstAmount - amount);
                 }
+            }
+            
+            if(isDynamicPriceModified)
+            {
+                sale.DynamicPrice = dynamicPrice;
             }
 
             if (soldDate.Value != firstDate)
@@ -93,7 +102,7 @@ namespace InventoryManagementApp.UI
             }
             else
             {
-               
+
                 if (toBePacked.Checked)
                 {
                     sale.Activity = Activity.მზადდება;
@@ -129,7 +138,7 @@ namespace InventoryManagementApp.UI
                 }
             }
 
-           
+
         }
 
         private void amountNumeric_ValueChanged(object sender, EventArgs e)
@@ -153,6 +162,11 @@ namespace InventoryManagementApp.UI
         {
             toBePacked.Checked = false;
             shipped.Checked = false;
+        }
+
+        private void dynamicPrice_Numeric_ValueChanged(object sender, EventArgs e)
+        {
+            isDynamicPriceModified = true;
         }
     }
 }

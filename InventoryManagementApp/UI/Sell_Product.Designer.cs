@@ -52,6 +52,8 @@
             numberLabel = new Label();
             customerLastName = new Krypton.Toolkit.KryptonTextBox();
             phoneNumber = new Krypton.Toolkit.KryptonTextBox();
+            dynamicPrice_Label = new Label();
+            dynamicPrice_Numeric = new Krypton.Toolkit.KryptonNumericUpDown();
             SuspendLayout();
             // 
             // kryptonCustomPaletteBase1
@@ -242,7 +244,7 @@
             // amountNumeric
             // 
             amountNumeric.Increment = new decimal(new int[] { 1, 0, 0, 0 });
-            amountNumeric.Location = new Point(1069, 120);
+            amountNumeric.Location = new Point(1069, 87);
             amountNumeric.Maximum = new decimal(new int[] { 1215752191, 23, 0, 0 });
             amountNumeric.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
             amountNumeric.Name = "amountNumeric";
@@ -258,7 +260,7 @@
             amount_Label.AutoSize = true;
             amount_Label.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             amount_Label.ForeColor = Color.FromArgb(64, 64, 64);
-            amount_Label.Location = new Point(909, 126);
+            amount_Label.Location = new Point(909, 87);
             amount_Label.Name = "amount_Label";
             amount_Label.Size = new Size(154, 28);
             amount_Label.TabIndex = 95;
@@ -315,7 +317,7 @@
             // 
             customerFirstName.Location = new Point(130, 499);
             customerFirstName.Name = "customerFirstName";
-            customerFirstName.Size = new Size(229, 38);
+            customerFirstName.Size = new Size(229, 37);
             customerFirstName.StateCommon.Back.Color1 = Color.White;
             customerFirstName.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
             customerFirstName.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
@@ -365,7 +367,7 @@
             // 
             customerLastName.Location = new Point(490, 499);
             customerLastName.Name = "customerLastName";
-            customerLastName.Size = new Size(229, 38);
+            customerLastName.Size = new Size(229, 37);
             customerLastName.StateCommon.Back.Color1 = Color.White;
             customerLastName.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
             customerLastName.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
@@ -382,7 +384,7 @@
             // 
             phoneNumber.Location = new Point(1033, 499);
             phoneNumber.Name = "phoneNumber";
-            phoneNumber.Size = new Size(264, 38);
+            phoneNumber.Size = new Size(264, 37);
             phoneNumber.StateCommon.Back.Color1 = Color.White;
             phoneNumber.StateCommon.Border.Color1 = Color.FromArgb(224, 224, 224);
             phoneNumber.StateCommon.Border.Color2 = Color.FromArgb(224, 224, 224);
@@ -395,12 +397,38 @@
             phoneNumber.StateCommon.Content.Padding = new Padding(10, 0, 10, 0);
             phoneNumber.TabIndex = 106;
             // 
+            // dynamicPrice_Label
+            // 
+            dynamicPrice_Label.AutoSize = true;
+            dynamicPrice_Label.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dynamicPrice_Label.ForeColor = Color.FromArgb(64, 64, 64);
+            dynamicPrice_Label.Location = new Point(979, 162);
+            dynamicPrice_Label.Name = "dynamicPrice_Label";
+            dynamicPrice_Label.Size = new Size(73, 28);
+            dynamicPrice_Label.TabIndex = 108;
+            dynamicPrice_Label.Text = "ფასი:";
+            // 
+            // dynamicPrice_Numeric
+            // 
+            dynamicPrice_Numeric.Increment = new decimal(new int[] { 1, 0, 0, 0 });
+            dynamicPrice_Numeric.Location = new Point(1069, 162);
+            dynamicPrice_Numeric.Maximum = new decimal(new int[] { 1215752191, 23, 0, 0 });
+            dynamicPrice_Numeric.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
+            dynamicPrice_Numeric.Name = "dynamicPrice_Numeric";
+            dynamicPrice_Numeric.Size = new Size(228, 34);
+            dynamicPrice_Numeric.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            dynamicPrice_Numeric.StateCommon.Border.Rounding = 5F;
+            dynamicPrice_Numeric.TabIndex = 107;
+            dynamicPrice_Numeric.Value = new decimal(new int[] { 0, 0, 0, 0 });
+            // 
             // Sell_Product
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 252, 252);
             ClientSize = new Size(1307, 644);
+            Controls.Add(dynamicPrice_Label);
+            Controls.Add(dynamicPrice_Numeric);
             Controls.Add(phoneNumber);
             Controls.Add(customerLastName);
             Controls.Add(numberLabel);
@@ -456,5 +484,7 @@
         private Label numberLabel;
         private Krypton.Toolkit.KryptonTextBox customerLastName;
         private Krypton.Toolkit.KryptonTextBox phoneNumber;
+        private Label dynamicPrice_Label;
+        private Krypton.Toolkit.KryptonNumericUpDown dynamicPrice_Numeric;
     }
 }

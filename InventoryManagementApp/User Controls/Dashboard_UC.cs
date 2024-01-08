@@ -958,9 +958,8 @@ public partial class Dashboard_UC : UserControl
 
     public void AllProfitLoss()
     {
-        var income = _db.Sales.Where(s => s.IsDeleted == false).Select(s => s.Product.Price * s.Amount).ToList().Sum();
+        var income = _db.Sales.Where(s => s.IsDeleted == false).Select(s => s.DynamicPrice * s.Amount).ToList().Sum();
         var expense = _db.Products.Where(p => !p.IsDeleted).Select(s => s.NetCost * s.Storage.TotalAmount).ToList().Sum();
-       // var expense = 10;
         var profit = income - expense;
 
         income_Txt.Text = income.ToString("F2") + " ₾";
@@ -985,7 +984,7 @@ public partial class Dashboard_UC : UserControl
 
         var income = _db.Sales.Where(s => s.IsDeleted == false)
                               .Where(s => s.Date.Value >= startDate && s.Date.Value <= endDate)
-                              .Select(s => s.Product.Price * s.Amount)
+                              .Select(s => s.DynamicPrice * s.Amount)
                               .ToList()
                               .Sum();
 
@@ -1025,7 +1024,7 @@ public partial class Dashboard_UC : UserControl
 
         var income = _db.Sales.Where(s => s.IsDeleted == false)
                               .Where(s => s.Date.Value >= startDate && s.Date.Value <= endDate)
-                              .Select(s => s.Product.Price * s.Amount)
+                              .Select(s => s.DynamicPrice * s.Amount)
                               .ToList()
                               .Sum();
 
@@ -1065,7 +1064,7 @@ public partial class Dashboard_UC : UserControl
 
         var income = _db.Sales.Where(s => s.IsDeleted == false)
                               .Where(s => s.Date.Value >= startDate && s.Date.Value <= endDate)
-                              .Select(s => s.Product.Price * s.Amount)
+                              .Select(s => s.DynamicPrice * s.Amount)
                               .ToList()
                               .Sum();
 

@@ -49,6 +49,8 @@
             toBePacked = new CheckBox();
             shipped = new CheckBox();
             delivered = new CheckBox();
+            dynamicPrice_Label = new Label();
+            dynamicPrice_Numeric = new Krypton.Toolkit.KryptonNumericUpDown();
             SuspendLayout();
             // 
             // kryptonCustomPaletteBase1
@@ -142,7 +144,7 @@
             amount_Label.AutoSize = true;
             amount_Label.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
             amount_Label.ForeColor = Color.FromArgb(64, 64, 64);
-            amount_Label.Location = new Point(912, 121);
+            amount_Label.Location = new Point(909, 87);
             amount_Label.Name = "amount_Label";
             amount_Label.Size = new Size(154, 28);
             amount_Label.TabIndex = 109;
@@ -151,7 +153,7 @@
             // amountNumeric
             // 
             amountNumeric.Increment = new decimal(new int[] { 1, 0, 0, 0 });
-            amountNumeric.Location = new Point(1072, 115);
+            amountNumeric.Location = new Point(1069, 87);
             amountNumeric.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
             amountNumeric.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
             amountNumeric.Name = "amountNumeric";
@@ -346,12 +348,39 @@
             delivered.UseVisualStyleBackColor = true;
             delivered.CheckedChanged += delivered_CheckedChanged;
             // 
+            // dynamicPrice_Label
+            // 
+            dynamicPrice_Label.AutoSize = true;
+            dynamicPrice_Label.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dynamicPrice_Label.ForeColor = Color.FromArgb(64, 64, 64);
+            dynamicPrice_Label.Location = new Point(979, 162);
+            dynamicPrice_Label.Name = "dynamicPrice_Label";
+            dynamicPrice_Label.Size = new Size(73, 28);
+            dynamicPrice_Label.TabIndex = 121;
+            dynamicPrice_Label.Text = "ფასი:";
+            // 
+            // dynamicPrice_Numeric
+            // 
+            dynamicPrice_Numeric.Increment = new decimal(new int[] { 1, 0, 0, 0 });
+            dynamicPrice_Numeric.Location = new Point(1069, 162);
+            dynamicPrice_Numeric.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
+            dynamicPrice_Numeric.Minimum = new decimal(new int[] { 0, 0, 0, 0 });
+            dynamicPrice_Numeric.Name = "dynamicPrice_Numeric";
+            dynamicPrice_Numeric.Size = new Size(228, 34);
+            dynamicPrice_Numeric.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
+            dynamicPrice_Numeric.StateCommon.Border.Rounding = 5F;
+            dynamicPrice_Numeric.TabIndex = 120;
+            dynamicPrice_Numeric.Value = new decimal(new int[] { 0, 0, 0, 0 });
+            dynamicPrice_Numeric.ValueChanged += dynamicPrice_Numeric_ValueChanged;
+            // 
             // Edit_Order
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 252, 252);
             ClientSize = new Size(1307, 511);
+            Controls.Add(dynamicPrice_Label);
+            Controls.Add(dynamicPrice_Numeric);
             Controls.Add(delivered);
             Controls.Add(shipped);
             Controls.Add(toBePacked);
@@ -401,5 +430,7 @@
         private CheckBox toBePacked;
         private CheckBox shipped;
         private CheckBox delivered;
+        private Label dynamicPrice_Label;
+        private Krypton.Toolkit.KryptonNumericUpDown dynamicPrice_Numeric;
     }
 }

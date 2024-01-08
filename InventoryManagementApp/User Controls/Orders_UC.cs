@@ -27,6 +27,7 @@ public partial class Orders_UC : UserControl
         ordersData.DataSource = _db.Sales.Select(o => new
         {
             კოდი = o.Id,
+            პროდუქტის_კოდი = o.Product.Code,
             პროდუქტი = o.Product.Name,
             კატეგორია = o.Product.Category.Name,
             ბრენდი = o.Product.Brand.Name,
@@ -117,6 +118,7 @@ public partial class Orders_UC : UserControl
                     ordersData.DataSource = _db.Sales.Select(o => new
                     {
                         კოდი = o.Id,
+                        პროდუქტის_კოდი = o.Product.Code,
                         პროდუქტი = o.Product.Name,
                         კატეგორია = o.Product.Category.Name,
                         ბრენდი = o.Product.Brand.Name,
@@ -159,6 +161,7 @@ public partial class Orders_UC : UserControl
             var onlySale = _db.Sales.Where(o => onlyDate.Contains(o.Product) && o.Date == from_date).Select(o => new
             {
                 კოდი = o.Id,
+                პროდუქტის_კოდი = o.Product.Code,
                 პროდუქტი = o.Product.Name,
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
@@ -177,6 +180,7 @@ public partial class Orders_UC : UserControl
             var sales = _db.Sales.Where(o => dateSorting.Contains(o.Product) && o.Date >= from_date && o.Date <= to_date).Select(o => new
             {
                 კოდი = o.Id,
+                პროდუქტის_კოდი = o.Product.Code,
                 პროდუქტი = o.Product.Name,
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
@@ -217,6 +221,7 @@ public partial class Orders_UC : UserControl
             ordersData.DataSource = _db.Sales.Select(o => new
             {
                 კოდი = o.Id,
+                პროდუქტის_კოდი = o.Product.Code,
                 პროდუქტი = o.Product.Name,
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
@@ -236,10 +241,12 @@ public partial class Orders_UC : UserControl
         var search = _db.Sales.Where(s => s.Product.Name.Contains(searchText) ||
                                           s.Product.Category.Name.Contains(searchText) ||
                                           s.Id.ToString().Contains(searchText) ||
-                                          s.Product.Brand.Name.Contains(searchText))
+                                          s.Product.Brand.Name.Contains(searchText) ||
+                                          s.Product.Code.Contains(searchText))
                                   .Select(s => new
                                   {
                                       კოდი = s.Id,
+                                      პროდუქტის_კოდი = s.Product.Code,
                                       პროდუქტი = s.Product.Name,
                                       კატეგორია = s.Product.Category.Name,
                                       ბრენდი = s.Product.Brand.Name,
@@ -282,6 +289,7 @@ public partial class Orders_UC : UserControl
             var onlySale = _db.Sales.Where(d => d.Product.IsDeleted == false).Where(o => onlyDate.Contains(o.Product) && o.Date == from_date).Select(o => new
             {
                 კოდი = o.Id,
+                პროდუქტის_კოდი = o.Product.Code,
                 პროდუქტი = o.Product.Name,
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
@@ -300,6 +308,7 @@ public partial class Orders_UC : UserControl
             var sales = _db.Sales.Where(o => dateSorting.Contains(o.Product) && o.Date >= from_date && o.Date <= to_date).Select(o => new
             {
                 კოდი = o.Id,
+                პროდუქტის_კოდი = o.Product.Code,
                 პროდუქტი = o.Product.Name,
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
@@ -324,6 +333,7 @@ public partial class Orders_UC : UserControl
         var sales = _db.Sales.Where(o => dateSorting.Contains(o.Product) && o.Date >= from_date && o.Date <= to_date).Select(o => new
         {
             კოდი = o.Id,
+            პროდუქტის_კოდი = o.Product.Code,
             პროდუქტი = o.Product.Name,
             კატეგორია = o.Product.Category.Name,
             ბრენდი = o.Product.Brand.Name,

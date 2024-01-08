@@ -50,6 +50,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.7.2"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.7.2 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.7.2"
+                    }
+                }
             }
         }
         "Release"
@@ -250,15 +258,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Jani"
-        "ProductCode" = "8:{C1B0019F-1EC2-4100-880F-AA83EA891862}"
-        "PackageCode" = "8:{EA5BC516-C7B8-4F21-89F2-9682470A5BCA}"
+        "ProductCode" = "8:{65461C34-D5E0-4163-9600-E4580B75DB04}"
+        "PackageCode" = "8:{DA93546A-8195-4776-89E1-7BCAC71D063C}"
         "UpgradeCode" = "8:{7B328B40-6564-4B6D-9195-4CB83A90168A}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.4"
         "Manufacturer" = "8:Shalva Gagnidze"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

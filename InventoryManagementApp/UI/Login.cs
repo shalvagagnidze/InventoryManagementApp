@@ -16,8 +16,6 @@ public partial class Login : KryptonForm
         instance = this;
     }
 
-
-
     private void showPass_CheckedChanged(object sender, EventArgs e)
     {
         if (showPass.Checked)

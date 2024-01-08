@@ -8,6 +8,7 @@ public class Sale
     public DateTime? Date { get; set; }
     public DateTime? DeleteTime { get; set; }
     public int Amount { get; set; }
+    public decimal DynamicPrice { get; set; }
     public PaymentMethod? PaymentMethod { get; set; }
     public PaymentArea? PaymentArea { get; set; }
     public Location? Location { get; set; }
