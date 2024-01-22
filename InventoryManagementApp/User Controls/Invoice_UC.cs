@@ -18,6 +18,7 @@ public partial class Invoice_UC : UserControl
         InitializeComponent();
         dataList.Clear();
         invoiceData.Rows.Clear();
+        date_Txt.Value = DateTime.Now.Date;
     }
 
     private void addProd_btn_Click(object sender, EventArgs e)
@@ -426,13 +427,10 @@ public partial class Invoice_UC : UserControl
                                 row.RelativeItem().Column(column =>
                                 {
                                    
-
-                                    byte[] signDatas = File.ReadAllBytes("C:\\Users\\salva\\Desktop\\Jani\\Icons\\Signature.png");
                                     byte[] signData = (byte[])new ImageConverter().ConvertTo(Properties.Resources.Signature, typeof(byte[]));
                                     column.Item().Width(165)
                                          .TranslateX(150)
                                          .TranslateY(155)
-                                         // .PaddingVertical(25)
                                          .Image(signData);
 
                                     column.Item().TranslateX(75)
