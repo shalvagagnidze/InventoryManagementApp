@@ -42,7 +42,7 @@ public partial class Add_Product : KryptonForm
 
         var brand = _db.Brands.FirstOrDefault(x => x.Name == brandName).Id;
 
-        var product = _db.Products.FirstOrDefault(o => o.Code == code);
+        var product = _db.Products.FirstOrDefault(o => o.Code == code && o.IsDeleted == false);
 
         if(product != null)
         {
