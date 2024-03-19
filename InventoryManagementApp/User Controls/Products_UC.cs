@@ -407,7 +407,7 @@ public partial class Products_UC : UserControl
                     var row = productData.CurrentRow;
                     var prodIndex = productData.CurrentRow.Cells["კოდი"].Value.ToString();
                     var prodId = prodIndex;
-                    var product = _db.Products.FirstOrDefault(p => p.Code == prodId);
+                    var product = _db.Products.FirstOrDefault(p => p.Code == prodId && !p.IsDeleted);
 
                     product.DeleteProduct();
                     product.DeleteTime = DateTime.Now;
@@ -540,7 +540,7 @@ public partial class Products_UC : UserControl
             {
                 var row = productData.CurrentRow;
                 var prodIndex = productData.CurrentRow.Cells["კოდი"].Value.ToString();
-                var product = _db.Products.FirstOrDefault(p => p.Code == prodIndex);
+                var product = _db.Products.FirstOrDefault(p => p.Code == prodIndex && p.IsDeleted == false);
                 transferProduct = product;
                 Edit_Product edit_Product = new Edit_Product();
                 edit_Product.Show();
@@ -582,7 +582,7 @@ public partial class Products_UC : UserControl
         {
             var row = productData.CurrentRow;
             var prodIndex = productData.CurrentRow.Cells["კოდი"].Value.ToString();
-            var product = _db.Products.FirstOrDefault(p => p.Code == prodIndex);
+            var product = _db.Products.FirstOrDefault(p => p.Code == prodIndex && !p.IsDeleted);
             transferProduct = product;
             Sell_Product sellProduct = new Sell_Product();
             sellProduct.Show();

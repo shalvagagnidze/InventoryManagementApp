@@ -454,7 +454,7 @@ public partial class Dashboard_UC : UserControl
         var selectedBoxIndex = productCombo.SelectedIndex;
         if (selectedBoxIndex != 0)
         {
-            var product = _db.Products.FirstOrDefault(p => p.Name == selectedBox);
+            var product = _db.Products.FirstOrDefault(p => p.Name == selectedBox && !p.IsDeleted);
 
             if (selectedBox == product.Name)
             {
@@ -505,7 +505,7 @@ public partial class Dashboard_UC : UserControl
     {
         var selectedDateRange = dateCombo.SelectedIndex;
         var selectedBox = productCombo.Text;
-        var product = _db.Products.FirstOrDefault(p => p.Name == selectedBox);
+        var product = _db.Products.FirstOrDefault(p => p.Name == selectedBox && !p.IsDeleted);
         if (selectedBox != "ყველა პროდუქტი")
         {
             if (selectedBox == product.Name)
@@ -584,7 +584,7 @@ public partial class Dashboard_UC : UserControl
     private void fromDate_ValueChanged(object sender, EventArgs e)
     {
         var selectedBox = productCombo.Text;
-        var product = _db.Products.FirstOrDefault(p => p.Name == selectedBox);
+        var product = _db.Products.FirstOrDefault(p => p.Name == selectedBox && !p.IsDeleted);
 
         if (selectedBox == product?.Name)
         {
@@ -599,7 +599,7 @@ public partial class Dashboard_UC : UserControl
     private void toDate_ValueChanged(object sender, EventArgs e)
     {
         var selectedBox = productCombo.Text;
-        var product = _db.Products.FirstOrDefault(p => p.Name == selectedBox);
+        var product = _db.Products.FirstOrDefault(p => p.Name == selectedBox && !p.IsDeleted);
 
         if (selectedBox == product?.Name)
         {
