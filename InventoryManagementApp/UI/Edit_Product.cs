@@ -35,6 +35,18 @@ namespace InventoryManagementApp.UI
             brandList.DataSource = brandBox;
             firstCat = categoryName.Name;
             firstBrand = brandName.Name;
+
+            int selectedCategoryIndex = categoryBox.IndexOf(firstCat);
+            if (selectedCategoryIndex >= 0)
+            {
+                categoryListBox.SelectedIndex = selectedCategoryIndex;
+            }
+
+            int selectedBrandIndex = brandBox.IndexOf(firstBrand);
+            if (selectedBrandIndex >= 0)
+            {
+                brandList.SelectedIndex = selectedBrandIndex;
+            }
         }
 
 

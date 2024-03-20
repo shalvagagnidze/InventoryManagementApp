@@ -34,6 +34,48 @@ namespace InventoryManagementApp.UI
             firstLoc = sale.Location.ToString();
             firstArea = sale.PaymentArea.ToString();
             firstType = sale.PaymentMethod.ToString();
+
+            Location locationEnumValue;
+            if (Enum.TryParse(firstLoc, out locationEnumValue))
+            {
+                // Find the index of the first location in the locationsList
+                int selectedLocationIndex = locationsListBox
+                                                            .Cast<Location>()
+                                                            .ToList()
+                                                            .IndexOf(locationEnumValue);
+                if (selectedLocationIndex >= 0)
+                {
+                    locationListBox.SelectedIndex = selectedLocationIndex;
+                }
+            }
+
+            PaymentArea areaEnumValue;
+            if (Enum.TryParse(firstArea, out areaEnumValue))
+            {
+                // Find the index of the first payment area in the payAreasList
+                int selectedAreaIndex = payAreaList
+                                                   .Cast<PaymentArea>()
+                                                   .ToList()
+                                                   .IndexOf(areaEnumValue);
+                if (selectedAreaIndex >= 0)
+                {
+                    payAreaListBox.SelectedIndex = selectedAreaIndex;
+                }
+            }
+
+            PaymentMethod typeEnumValue;
+            if (Enum.TryParse(firstType, out typeEnumValue))
+            {
+                // Find the index of the first payment area in the payAreasList
+                int selectedTypeIndex = payTypeList
+                                                   .Cast<PaymentMethod>()
+                                                   .ToList()
+                                                   .IndexOf(typeEnumValue);
+                if (selectedTypeIndex >= 0)
+                {
+                    payTypeListBox.SelectedIndex = selectedTypeIndex;
+                }
+            }
         }
 
         private void save_Btn_Click(object sender, EventArgs e)
