@@ -9,7 +9,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyVersion>1.0.0.4</AssemblyVersion>
     <FileVersion>1.0.0.4</FileVersion>
+    <PackageIcon></PackageIcon>
+    <ApplicationIcon>Jani_Icon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Jani_Icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />

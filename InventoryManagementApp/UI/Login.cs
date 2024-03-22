@@ -2,6 +2,9 @@
 using InventoryManagementApp.Models;
 using InventoryManagementApp.UI;
 using Krypton.Toolkit;
+using System.Diagnostics;
+using System.IO.Compression;
+using System.Net;
 namespace InventoryManagementApp;
 
 public partial class Login : KryptonForm
@@ -14,7 +17,11 @@ public partial class Login : KryptonForm
     {
         InitializeComponent();
         instance = this;
+       
     }
+
+
+
 
     private void showPass_CheckedChanged(object sender, EventArgs e)
     {

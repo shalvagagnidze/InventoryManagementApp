@@ -32,9 +32,11 @@ public partial class Orders_UC : UserControl
             კატეგორია = o.Product.Category.Name,
             ბრენდი = o.Product.Brand.Name,
             რაოდენობა = o.Amount,
+            ფასი = o.DynamicPrice,
             ლოკაცია = o.Location,
             გადახდის_ტიპი = o.PaymentMethod,
             შეკვეთის_ადგილი = o.PaymentArea,
+            მომხმარებელი = o.Customer.FirstName + " " + o.Customer.LastName,
             მდგომარეობა = o.Activity,
             თარიღი = o.Date
         }).ToList();
@@ -123,9 +125,11 @@ public partial class Orders_UC : UserControl
                         კატეგორია = o.Product.Category.Name,
                         ბრენდი = o.Product.Brand.Name,
                         რაოდენობა = o.Amount,
+                        ფასი = o.DynamicPrice,
                         ლოკაცია = o.Location,
                         გადახდის_ტიპი = o.PaymentMethod,
                         შეკვეთის_ადგილი = o.PaymentArea,
+                        მომხმარებელი = o.Customer.FirstName + " " + o.Customer.LastName,
                         მდგომარეობა = o.Activity,
                         თარიღი = o.Date
                     }).ToList();
@@ -166,9 +170,11 @@ public partial class Orders_UC : UserControl
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
                 რაოდენობა = o.Amount,
+                ფასი = o.DynamicPrice,
                 ლოკაცია = o.Location,
                 გადახდის_ტიპი = o.PaymentMethod,
                 შეკვეთის_ადგილი = o.PaymentArea,
+                მომხმარებელი = o.Customer.FirstName + " " + o.Customer.LastName,
                 მდგომარეობა = o.Activity,
                 თარიღი = o.Date
             }).ToList();
@@ -185,9 +191,11 @@ public partial class Orders_UC : UserControl
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
                 რაოდენობა = o.Amount,
+                ფასი = o.DynamicPrice,
                 ლოკაცია = o.Location,
                 გადახდის_ტიპი = o.PaymentMethod,
                 შეკვეთის_ადგილი = o.PaymentArea,
+                მომხმარებელი = o.Customer.FirstName + " " + o.Customer.LastName,
                 მდგომარეობა = o.Activity,
                 თარიღი = o.Date
             }).ToList();
@@ -226,9 +234,11 @@ public partial class Orders_UC : UserControl
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
                 რაოდენობა = o.Amount,
+                ფასი = o.DynamicPrice,
                 ლოკაცია = o.Location,
                 გადახდის_ტიპი = o.PaymentMethod,
                 შეკვეთის_ადგილი = o.PaymentArea,
+                მომხმარებელი = o.Customer.FirstName + " " + o.Customer.LastName,
                 მდგომარეობა = o.Activity,
                 თარიღი = o.Date
             }).ToList();
@@ -250,10 +260,12 @@ public partial class Orders_UC : UserControl
                                       პროდუქტი = s.Product.Name,
                                       კატეგორია = s.Product.Category.Name,
                                       ბრენდი = s.Product.Brand.Name,
+                                      ფასი = s.DynamicPrice,
                                       რაოდენობა = s.Amount,
                                       ლოკაცია = s.Location,
                                       გადახდის_ტიპი = s.PaymentMethod,
                                       შეკვეთის_ადგილი = s.PaymentArea,
+                                      მომხმარებელი = s.Customer.FirstName + " " + s.Customer.LastName,
                                       მდგომარეობა = s.Activity,
                                       თარიღი = s.Date
                                   }).ToList();
@@ -294,9 +306,11 @@ public partial class Orders_UC : UserControl
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
                 რაოდენობა = o.Amount,
+                ფასი = o.DynamicPrice,
                 ლოკაცია = o.Location,
                 გადახდის_ტიპი = o.PaymentMethod,
                 შეკვეთის_ადგილი = o.PaymentArea,
+                მომხმარებელი = o.Customer.FirstName+" "+o.Customer.LastName,
                 მდგომარეობა = o.Activity,
                 თარიღი = o.Date
             }).ToList();
@@ -313,9 +327,11 @@ public partial class Orders_UC : UserControl
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
                 რაოდენობა = o.Amount,
+                ფასი = o.DynamicPrice,
                 ლოკაცია = o.Location,
                 გადახდის_ტიპი = o.PaymentMethod,
                 შეკვეთის_ადგილი = o.PaymentArea,
+                მომხმარებელი = o.Customer.FirstName + " " + o.Customer.LastName,
                 მდგომარეობა = o.Activity,
                 თარიღი = o.Date
             }).ToList();
@@ -338,9 +354,11 @@ public partial class Orders_UC : UserControl
             კატეგორია = o.Product.Category.Name,
             ბრენდი = o.Product.Brand.Name,
             რაოდენობა = o.Amount,
+            ფასი = o.DynamicPrice,
             ლოკაცია = o.Location,
             გადახდის_ტიპი = o.PaymentMethod,
             შეკვეთის_ადგილი = o.PaymentArea,
+            მომხმარებელი = o.Customer.FirstName + " " + o.Customer.LastName,
             მდგომარეობა = o.Activity,
             თარიღი = o.Date
         }).ToList();
