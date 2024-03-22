@@ -40,6 +40,7 @@ public partial class Orders_UC : UserControl
             მდგომარეობა = o.Activity,
             თარიღი = o.Date
         }).ToList();
+        
 
 
     }

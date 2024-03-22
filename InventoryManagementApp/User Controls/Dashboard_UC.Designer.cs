@@ -57,21 +57,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.Charts.WinForms.ChartFont chartFont9 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.ChartFont chartFont10 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.ChartFont chartFont11 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.ChartFont chartFont12 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Grid grid4 = new Guna.Charts.WinForms.Grid();
-            Guna.Charts.WinForms.Tick tick4 = new Guna.Charts.WinForms.Tick();
-            Guna.Charts.WinForms.ChartFont chartFont13 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Grid grid5 = new Guna.Charts.WinForms.Grid();
-            Guna.Charts.WinForms.Tick tick5 = new Guna.Charts.WinForms.Tick();
-            Guna.Charts.WinForms.ChartFont chartFont14 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Grid grid6 = new Guna.Charts.WinForms.Grid();
-            Guna.Charts.WinForms.PointLabel pointLabel2 = new Guna.Charts.WinForms.PointLabel();
-            Guna.Charts.WinForms.ChartFont chartFont15 = new Guna.Charts.WinForms.ChartFont();
-            Guna.Charts.WinForms.Tick tick6 = new Guna.Charts.WinForms.Tick();
-            Guna.Charts.WinForms.ChartFont chartFont16 = new Guna.Charts.WinForms.ChartFont();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -85,6 +70,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dashboard_UC));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             packPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
             packIcon = new PictureBox();
             packLabel = new Label();
@@ -104,10 +92,7 @@
             fromDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
             toDate = new Guna.UI2.WinForms.Guna2DateTimePicker();
             netCost_Label = new Label();
-            topChart = new Guna.Charts.WinForms.GunaChart();
             MaxPie = new Guna.Charts.WinForms.GunaPieDataset();
-            MinPie = new Guna.Charts.WinForms.GunaPieDataset();
-            MiddePie = new Guna.Charts.WinForms.GunaPieDataset();
             guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
             storage_Text = new Label();
             storageIcon = new PictureBox();
@@ -130,6 +115,7 @@
             profit_Label = new Label();
             expense_Label = new Label();
             income_Label = new Label();
+            chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             packPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)packIcon).BeginInit();
             shippedPanel.SuspendLayout();
@@ -144,6 +130,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chart1).BeginInit();
             SuspendLayout();
             // 
             // packPanel
@@ -429,64 +416,10 @@
             netCost_Label.TabIndex = 44;
             netCost_Label.Text = "-";
             // 
-            // topChart
-            // 
-            topChart.BackColor = Color.FromArgb(250, 252, 252);
-            topChart.Datasets.AddRange(new Guna.Charts.Interfaces.IGunaDataset[] { MaxPie, MinPie, MiddePie });
-            chartFont9.FontName = "Arial";
-            chartFont9.Size = 9;
-            chartFont9.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
-            topChart.Legend.LabelFont = chartFont9;
-            topChart.Location = new Point(874, 378);
-            topChart.Name = "topChart";
-            topChart.Size = new Size(492, 368);
-            topChart.TabIndex = 45;
-            chartFont10.FontName = "Segoe UI";
-            chartFont10.Size = 25;
-            chartFont10.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
-            topChart.Title.Font = chartFont10;
-            topChart.Title.ForeColor = Color.Goldenrod;
-            chartFont11.FontName = "Arial";
-            topChart.Tooltips.BodyFont = chartFont11;
-            chartFont12.FontName = "Arial";
-            chartFont12.Size = 9;
-            chartFont12.Style = Guna.Charts.WinForms.ChartFontStyle.Bold;
-            topChart.Tooltips.TitleFont = chartFont12;
-            topChart.XAxes.Display = false;
-            topChart.XAxes.GridLines = grid4;
-            chartFont13.FontName = "Arial";
-            tick4.Font = chartFont13;
-            topChart.XAxes.Ticks = tick4;
-            topChart.YAxes.Display = false;
-            topChart.YAxes.GridLines = grid5;
-            chartFont14.FontName = "Arial";
-            tick5.Font = chartFont14;
-            topChart.YAxes.Ticks = tick5;
-            topChart.ZAxes.GridLines = grid6;
-            chartFont15.FontName = "Arial";
-            pointLabel2.Font = chartFont15;
-            topChart.ZAxes.PointLabels = pointLabel2;
-            chartFont16.FontName = "Arial";
-            tick6.Font = chartFont16;
-            topChart.ZAxes.Ticks = tick6;
-            // 
             // MaxPie
             // 
             MaxPie.FillColors.AddRange(new Color[] { Color.Green });
             MaxPie.Label = "Pie1";
-            MaxPie.TargetChart = topChart;
-            // 
-            // MinPie
-            // 
-            MinPie.FillColors.AddRange(new Color[] { Color.OrangeRed });
-            MinPie.Label = "Pie1";
-            MinPie.TargetChart = topChart;
-            // 
-            // MiddePie
-            // 
-            MiddePie.FillColors.AddRange(new Color[] { Color.LightBlue });
-            MiddePie.Label = "Pie1";
-            MiddePie.TargetChart = topChart;
             // 
             // guna2GradientPanel1
             // 
@@ -797,14 +730,31 @@
             income_Label.Text = "შემოსავალი: ";
             income_Label.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // chart1
+            // 
+            chart1.BackColor = Color.Transparent;
+            chartArea1.Name = "ChartArea1";
+            chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chart1.Legends.Add(legend1);
+            chart1.Location = new Point(825, 378);
+            chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chart1.Series.Add(series1);
+            chart1.Size = new Size(544, 374);
+            chart1.TabIndex = 49;
+            chart1.Text = "chart1";
+            // 
             // Dashboard_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(chart1);
             Controls.Add(profitLossPanel);
             Controls.Add(guna2GradientPanel2);
             Controls.Add(guna2GradientPanel1);
-            Controls.Add(topChart);
             Controls.Add(netCost_Label);
             Controls.Add(toDate);
             Controls.Add(fromDate);
@@ -836,6 +786,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chart1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -860,7 +811,6 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker fromDate;
         private Guna.UI2.WinForms.Guna2DateTimePicker toDate;
         private Label netCost_Label;
-        private Guna.Charts.WinForms.GunaChart topChart;
         private Guna.Charts.WinForms.GunaPieDataset MaxPie;
         private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
         private Label storage_Label;
@@ -870,8 +820,6 @@
         private Label totalSold_Label;
         private Label storage_Text;
         private Label totalSold_Text;
-        private Guna.Charts.WinForms.GunaPieDataset MiddePie;
-        private Guna.Charts.WinForms.GunaPieDataset MinPie;
         private Guna.UI2.WinForms.Guna2GradientPanel profitLossPanel;
         private Label profit_Label;
         private Label expense_Label;
@@ -886,5 +834,6 @@
         private Guna.UI2.WinForms.Guna2DateTimePicker toProfit;
         private Guna.UI2.WinForms.Guna2DateTimePicker fromProfit;
         private Label dash;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

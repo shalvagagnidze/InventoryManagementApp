@@ -1,6 +1,10 @@
 ﻿using InventoryManagementApp.Data;
 using System.Globalization;
-
+using Guna.UI2.WinForms;
+using Guna.Charts.WinForms;
+using System.Linq;
+using System.Data;
+using System.Windows.Forms.DataVisualization.Charting;
 namespace InventoryManagementApp.User_Controls;
 
 public partial class Dashboard_UC : UserControl
@@ -43,47 +47,184 @@ public partial class Dashboard_UC : UserControl
 
     public void TopSales()
     {
-        topChart.Title.Text = "Top 3 გაყიდვადი პროდუქტი";
+        // Check if the chart control already exists on the form
+        Chart chart1 = (Chart)this.Controls.Find("chart1", true).FirstOrDefault();
+
+        if (chart1 == null)
+        {
+            // If chart1 doesn't exist, create a new one
+            chart1 = new Chart();
+            chart1.Name = "chart1";
+            chart1.Dock = DockStyle.Top;
+            // Assuming this method is part of a Form, add the chart to the form
+            this.Controls.Add(chart1);
+        }
+        else
+        {
+            // If chart1 already exists, clear it before adding new series
+            chart1.Series.Clear();
+        }
+
+        // Set chart title
+        chart1.Titles.Clear(); // Clear existing titles
+       // chart1.Titles.Add("Top 3 გაყიდვადი პროდუქტი");
+       // chart1.Titles[0].Font = new Font("Arial", 10, FontStyle.Bold); // Title font and size
+       // chart1.Titles[0].ForeColor = Color.FromArgb(255, 204, 0);
+
+        // Create a new series
+        var series = new Series();
+        series.ChartType = SeriesChartType.Pie;
+
+        // Define sector colors
+        Color[] sectorColors = { Color.FromArgb(255, 88, 181, 215), Color.FromArgb(255, 253, 180, 92), Color.FromArgb(255, 255, 94, 94) };
+
+        // Query top products
         var topProducts = _db.Products
-                                      .Where(s => !s.IsDeleted)
-                                      .Where(p => !p.IsDeleted && p.Sales
-                                      .Any(s => !s.IsDeleted))
-                                      .GroupBy(p => p, (key, group) => new
-                                      {
-                                          Product = group.First().Name.ToString(),
-                                          TotalAmount = group.SelectMany(s => s.Sales
-                                                             .Where(s => !s.IsDeleted)
-                                                             .Select(s => s.Amount)).Sum()
-                                      })
-                                      .OrderBy(result => result.TotalAmount)
-                                      .ToList();
-        int i = 0;
+                            .Where(s => !s.IsDeleted)
+                            .Where(p => !p.IsDeleted && p.Sales
+                                .Any(s => !s.IsDeleted))
+                            .GroupBy(p => p, (key, group) => new
+                            {
+                                Product = group.First().Name.ToString(),
+                                TotalAmount = group.SelectMany(s => s.Sales
+                                                      .Where(s => !s.IsDeleted)
+                                                      .Select(s => s.Amount)).Sum()
+                            })
+                            .OrderByDescending(result => result.TotalAmount)
+                            .Take(3) // Ensure only top 3 products are considered
+                            .ToList();
+
+        // Add data points to the series
+       
         foreach (var product in topProducts)
         {
-            if (i == 0)
-            {
-                MiddePie.DataPoints.Add(product.Product, product.TotalAmount);
-                MiddePie.Label = product.Product;
-
-            }
-            else if (i == 1)
-            {
-                MinPie.DataPoints.Add(product.Product, product.TotalAmount);
-                MinPie.Label = product.Product;
-            }
-            else if (i == 2)
-            {
-                MaxPie.DataPoints.Add(product.Product, product.TotalAmount);
-                MaxPie.Label = product.Product;
-            }
-
-            if (i > 2)
-            {
-                break;
-            }
-            i++;
+            series.Points.AddXY(product.Product, product.TotalAmount);
+            // Add label for each data point
+            DataPoint dataPoint = series.Points.Last();
+            dataPoint.Label = $"{product.TotalAmount}";
+            dataPoint.LabelForeColor = Color.Black; // Set label color
+            dataPoint.Font = new Font("Roboto", 15,FontStyle.Bold); // Set label font
+            dataPoint.LegendText = product.Product;
         }
+
+        // Assign sector colors
+        for (int j = 0; j < topProducts.Count; j++)
+        {
+            series.Points[j].Color = sectorColors[j];
+            // Add legend item for each product
+            chart1.Legends.Add(new System.Windows.Forms.DataVisualization.Charting.Legend(topProducts[j].Product));
+            chart1.Legends[j].Font = new Font("Arial", (float)5.5);
+            chart1.Legends[j].BackColor = Color.Transparent; // Set legend background color
+            chart1.Legends[j].ForeColor = Color.Black; // Set legend text color
+        }
+
+        // Add series to the chart
+        chart1.Series.Add(series);
+
+        // Configure appearance of data points
+        series["PieLabelStyle"] = "Inside"; // Disable data point labels
+
+        chart1.Legends[0].Docking = Docking.Bottom;
+        chart1.Legends[0].Alignment = StringAlignment.Center;
+        chart1.Legends[0].IsDockedInsideChartArea = false;
+        chart1.Legends[0].LegendStyle = LegendStyle.Row;
+        // Configure chart area
+        chart1.ChartAreas[0].Area3DStyle.Enable3D = true; // Enable 3D view
+        chart1.ChartAreas[0].BackColor = Color.Transparent; // Set background color
+        chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false; // Hide X-axis grid lines
+        chart1.ChartAreas[0].AxisY.MajorGrid.Enabled = false; // Hide Y-axis grid lines
+
+        // Center the pie chart within the chart area
+        chart1.ChartAreas[0].Position.X = 10; // Set X position
+        chart1.ChartAreas[0].Position.Y = 0; // Set Y position
+        chart1.ChartAreas[0].Position.Width = 90; // Set width
+        chart1.ChartAreas[0].Position.Height = 90; // Set height
+
+        
+       
     }
+    //public void TopSales()
+    //{
+    //    Color[] sectorColors = { Color.Red, Color.Blue, Color.Green };
+    //    topChart.Title.Text = "Top 3 გაყიდვადი პროდუქტი";
+
+    //    var topProducts = _db.Products
+    //                           .Where(s => !s.IsDeleted)
+    //                           .Where(p => !p.IsDeleted && p.Sales
+    //                               .Any(s => !s.IsDeleted))
+    //                           .GroupBy(p => p, (key, group) => new
+    //                           {
+    //                               Product = group.First().Name.ToString(),
+    //                               TotalAmount = group.SelectMany(s => s.Sales
+    //                                                     .Where(s => !s.IsDeleted)
+    //                                                     .Select(s => s.Amount)).Sum()
+    //                           })
+    //                           .OrderByDescending(result => result.TotalAmount)
+    //                           .Take(3) // Ensure only top 3 products are considered
+    //                           .ToList();
+
+    //    foreach (var product in topProducts)
+    //    {
+    //        // Add each product to the single pie chart
+
+    //        MaxPie.DataPoints.Add(product.Product, product.TotalAmount);
+    //        MaxPie.Label = product.Product;
+    //    }
+    //    for (int j = 0; j < topProducts.Count; j++)
+    //    {
+    //        MaxPie.FillColors.Add(sectorColors[j]);
+    //    }
+    //}
+
+
+
+
+
+
+    //public void TopSales()
+    //{
+    //    topChart.Title.Text = "Top 3 გაყიდვადი პროდუქტი";
+    //    var topProducts = _db.Products
+    //                                  .Where(s => !s.IsDeleted)
+    //                                  .Where(p => !p.IsDeleted && p.Sales
+    //                                  .Any(s => !s.IsDeleted))
+    //                                  .GroupBy(p => p, (key, group) => new
+    //                                  {
+    //                                      Product = group.First().Name.ToString(),
+    //                                      TotalAmount = group.SelectMany(s => s.Sales
+    //                                                         .Where(s => !s.IsDeleted)
+    //                                                         .Select(s => s.Amount)).Sum()
+    //                                  })
+    //                                  .OrderBy(result => result.TotalAmount)
+    //                                  .Reverse()
+    //                                  .ToList();
+    //    int i = 0;
+    //    foreach (var product in topProducts)
+    //    {
+    //        if (i == 2)
+    //        {
+    //            MiddePie.DataPoints.Add(product.Product, product.TotalAmount);
+    //            MiddePie.Label = product.Product;
+
+    //        }
+    //        else if (i == 1)
+    //        {
+    //            MinPie.DataPoints.Add(product.Product, product.TotalAmount);
+    //            MinPie.Label = product.Product;
+    //        }
+    //        else if (i == 0)
+    //        {
+    //            MaxPie.DataPoints.Add(product.Product, product.TotalAmount);
+    //            MaxPie.Label = product.Product;
+    //        }
+
+    //        if (i > 2)
+    //        {
+    //            break;
+    //        }
+    //        i++;
+    //    }
+    //}
     public void ThreeMonth()
     {
         DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
