@@ -176,55 +176,6 @@ public partial class Dashboard_UC : UserControl
     //    }
     //}
 
-
-
-
-
-
-    //public void TopSales()
-    //{
-    //    topChart.Title.Text = "Top 3 გაყიდვადი პროდუქტი";
-    //    var topProducts = _db.Products
-    //                                  .Where(s => !s.IsDeleted)
-    //                                  .Where(p => !p.IsDeleted && p.Sales
-    //                                  .Any(s => !s.IsDeleted))
-    //                                  .GroupBy(p => p, (key, group) => new
-    //                                  {
-    //                                      Product = group.First().Name.ToString(),
-    //                                      TotalAmount = group.SelectMany(s => s.Sales
-    //                                                         .Where(s => !s.IsDeleted)
-    //                                                         .Select(s => s.Amount)).Sum()
-    //                                  })
-    //                                  .OrderBy(result => result.TotalAmount)
-    //                                  .Reverse()
-    //                                  .ToList();
-    //    int i = 0;
-    //    foreach (var product in topProducts)
-    //    {
-    //        if (i == 2)
-    //        {
-    //            MiddePie.DataPoints.Add(product.Product, product.TotalAmount);
-    //            MiddePie.Label = product.Product;
-
-    //        }
-    //        else if (i == 1)
-    //        {
-    //            MinPie.DataPoints.Add(product.Product, product.TotalAmount);
-    //            MinPie.Label = product.Product;
-    //        }
-    //        else if (i == 0)
-    //        {
-    //            MaxPie.DataPoints.Add(product.Product, product.TotalAmount);
-    //            MaxPie.Label = product.Product;
-    //        }
-
-    //        if (i > 2)
-    //        {
-    //            break;
-    //        }
-    //        i++;
-    //    }
-    //}
     public void ThreeMonth()
     {
         DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -318,8 +269,9 @@ public partial class Dashboard_UC : UserControl
             .OrderBy(s => s.Date)
             .ToList();
 
+        var cultureInfo = new CultureInfo("ka-GE"); // Georgian culture
         var daysInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
-            .Select(offset => startDate.AddDays(offset).ToString("dddd"))
+            .Select(offset => startDate.AddDays(offset).ToString("dddd", cultureInfo))
             .Distinct()
             .ToList();
 
@@ -328,13 +280,14 @@ public partial class Dashboard_UC : UserControl
         foreach (var day in daysInRange)
         {
             var totalAmount = sales
-                .Where(s => s.Date?.ToString("dddd") == day)
+                .Where(s => s.Date?.ToString("dddd", cultureInfo) == day)
                 .Sum(s => s?.Amount ?? 0);
 
             saleChart.DataPoints.Add(day, totalAmount);
         }
         saleChart.Invalidate();
     }
+
 
     public void SevenDaysDetailed(string name)
     {
@@ -348,8 +301,9 @@ public partial class Dashboard_UC : UserControl
             .OrderBy(s => s.Date)
             .ToList();
 
+        var cultureInfo = new CultureInfo("ka-GE");
         var daysInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
-            .Select(offset => startDate.AddDays(offset).ToString("dddd"))
+            .Select(offset => startDate.AddDays(offset).ToString("dddd",cultureInfo))
             .Distinct()
             .ToList();
 
@@ -358,7 +312,7 @@ public partial class Dashboard_UC : UserControl
         foreach (var day in daysInRange)
         {
             var totalAmount = sales
-                .Where(s => s.Date?.ToString("dddd") == day)
+                .Where(s => s.Date?.ToString("dddd",cultureInfo) == day)
                 .Sum(s => s?.Amount ?? 0);
 
             saleChart.DataPoints.Add(day, totalAmount);
@@ -759,6 +713,7 @@ public partial class Dashboard_UC : UserControl
         TimeSpan differenceInDays = endDate - startDate;
         int daysDifference = differenceInDays.Days;
         int monthsDifference = (endDate.Month - startDate.Month) + 12 * (endDate.Year - startDate.Year);
+        var cultureInfo = new CultureInfo("ka-GE");
 
         var sales = _db.Sales
                             .Where(s => s.IsDeleted == false)
@@ -772,7 +727,7 @@ public partial class Dashboard_UC : UserControl
                 var daysInRange = Enumerable.Range(0, daysDifference + 1)
                                             .Select(offset => startDate.AddDays(offset))
                                             .Distinct()
-                                            .Select(day => day.ToString("dddd"))
+                                            .Select(day => day.ToString("dddd", cultureInfo))
                                             .ToList();
 
                 saleChart.DataPoints.Clear();
@@ -780,7 +735,7 @@ public partial class Dashboard_UC : UserControl
                 foreach (var day in daysInRange)
                 {
                     var totalAmount = sales
-                        .Where(s => s.Date?.ToString("dddd") == day)
+                        .Where(s => s.Date?.ToString("dddd", cultureInfo) == day)
                         .Sum(s => s?.Amount ?? 0);
 
                     saleChart.DataPoints.Add(day, totalAmount);
@@ -905,6 +860,7 @@ public partial class Dashboard_UC : UserControl
         TimeSpan differenceInDays = endDate - startDate;
         int daysDifference = differenceInDays.Days;
         int monthsDifference = (endDate.Month - startDate.Month) + 12 * (endDate.Year - startDate.Year);
+        var cultureInfo = new CultureInfo("ka-GE");
 
         var sales = _db.Sales
                             .Where(s => s.IsDeleted == false)
@@ -919,7 +875,7 @@ public partial class Dashboard_UC : UserControl
                 var daysInRange = Enumerable.Range(0, daysDifference + 1)
                                             .Select(offset => startDate.AddDays(offset))
                                             .Distinct()
-                                            .Select(day => day.ToString("dddd"))
+                                            .Select(day => day.ToString("dddd", cultureInfo))
                                             .ToList();
 
                 saleChart.DataPoints.Clear();
@@ -927,7 +883,7 @@ public partial class Dashboard_UC : UserControl
                 foreach (var day in daysInRange)
                 {
                     var totalAmount = sales
-                        .Where(s => s.Date?.ToString("dddd") == day)
+                        .Where(s => s.Date?.ToString("dddd", cultureInfo) == day)
                         .Sum(s => s?.Amount ?? 0);
 
                     saleChart.DataPoints.Add(day, totalAmount);
