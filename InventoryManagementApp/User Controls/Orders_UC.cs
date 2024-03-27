@@ -1,4 +1,5 @@
-﻿using InventoryManagementApp.Data;
+﻿using InventoryManagementApp.Common.Enums;
+using InventoryManagementApp.Data;
 using InventoryManagementApp.Models;
 using InventoryManagementApp.UI;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,7 @@ public partial class Orders_UC : UserControl
             კატეგორია = o.Product.Category.Name,
             ბრენდი = o.Product.Brand.Name,
             რაოდენობა = o.Amount,
-            ფასი = o.DynamicPrice,
+            ფასი = o.DynamicPrice*o.Amount,
             ლოკაცია = o.Location,
             გადახდის_ტიპი = o.PaymentMethod,
             შეკვეთის_ადგილი = o.PaymentArea,
@@ -104,10 +105,26 @@ public partial class Orders_UC : UserControl
                 var row = ordersData.CurrentRow;
                 var orderIndex = ordersData.CurrentRow.Cells["კოდი"].Value.ToString();
                 var orderId = orderIndex;
-                var order = _db.Sales.FirstOrDefault(p => p.Id.ToString() == orderId);
+                var order = _db.Sales.Include(c => c.Product).FirstOrDefault(p => p.Id.ToString() == orderId);
+                var product = _db.Products.Include(c => c.Sales).FirstOrDefault(p => p.Code == order.Product.Code);
+                order?.DeleteOrder();
+                order!.DeleteTime = DateTime.Now;
+                var totalSold = _db.TotalSolds.FirstOrDefault(x => x.Product == product);
+                totalSold.TotalSoldAmount -= order.Amount;
+                var storage = _db.Storages.FirstOrDefault(x => x.Product == product);
+                storage.TotalAmount += order.Amount;
 
-                order.DeleteOrder();
-                order.DeleteTime = DateTime.Now;
+                product.Storage = storage;
+                product.TotalSold = totalSold;
+
+                if (storage.TotalAmount != 0)
+                {
+                    product.Status = StockStatus.მარაგშია;
+                }
+                else
+                {
+                    product.Status = StockStatus.ამოიწურა;
+                }
 
                 var response = _db.SaveChanges();
 
@@ -126,7 +143,7 @@ public partial class Orders_UC : UserControl
                         კატეგორია = o.Product.Category.Name,
                         ბრენდი = o.Product.Brand.Name,
                         რაოდენობა = o.Amount,
-                        ფასი = o.DynamicPrice,
+                        ფასი = o.DynamicPrice * o.Amount,
                         ლოკაცია = o.Location,
                         გადახდის_ტიპი = o.PaymentMethod,
                         შეკვეთის_ადგილი = o.PaymentArea,
@@ -171,7 +188,7 @@ public partial class Orders_UC : UserControl
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
                 რაოდენობა = o.Amount,
-                ფასი = o.DynamicPrice,
+                ფასი = o.DynamicPrice * o.Amount,
                 ლოკაცია = o.Location,
                 გადახდის_ტიპი = o.PaymentMethod,
                 შეკვეთის_ადგილი = o.PaymentArea,
@@ -192,7 +209,7 @@ public partial class Orders_UC : UserControl
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
                 რაოდენობა = o.Amount,
-                ფასი = o.DynamicPrice,
+                ფასი = o.DynamicPrice * o.Amount,
                 ლოკაცია = o.Location,
                 გადახდის_ტიპი = o.PaymentMethod,
                 შეკვეთის_ადგილი = o.PaymentArea,
@@ -235,7 +252,7 @@ public partial class Orders_UC : UserControl
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
                 რაოდენობა = o.Amount,
-                ფასი = o.DynamicPrice,
+                ფასი = o.DynamicPrice * o.Amount,
                 ლოკაცია = o.Location,
                 გადახდის_ტიპი = o.PaymentMethod,
                 შეკვეთის_ადგილი = o.PaymentArea,
@@ -307,7 +324,7 @@ public partial class Orders_UC : UserControl
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
                 რაოდენობა = o.Amount,
-                ფასი = o.DynamicPrice,
+                ფასი = o.DynamicPrice * o.Amount,
                 ლოკაცია = o.Location,
                 გადახდის_ტიპი = o.PaymentMethod,
                 შეკვეთის_ადგილი = o.PaymentArea,
@@ -328,7 +345,7 @@ public partial class Orders_UC : UserControl
                 კატეგორია = o.Product.Category.Name,
                 ბრენდი = o.Product.Brand.Name,
                 რაოდენობა = o.Amount,
-                ფასი = o.DynamicPrice,
+                ფასი = o.DynamicPrice * o.Amount,
                 ლოკაცია = o.Location,
                 გადახდის_ტიპი = o.PaymentMethod,
                 შეკვეთის_ადგილი = o.PaymentArea,
@@ -355,7 +372,7 @@ public partial class Orders_UC : UserControl
             კატეგორია = o.Product.Category.Name,
             ბრენდი = o.Product.Brand.Name,
             რაოდენობა = o.Amount,
-            ფასი = o.DynamicPrice,
+            ფასი = o.DynamicPrice * o.Amount,
             ლოკაცია = o.Location,
             გადახდის_ტიპი = o.PaymentMethod,
             შეკვეთის_ადგილი = o.PaymentArea,

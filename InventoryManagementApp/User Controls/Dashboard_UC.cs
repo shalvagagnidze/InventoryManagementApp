@@ -16,7 +16,7 @@ public partial class Dashboard_UC : UserControl
         int packedCount = _db.Sales.Count(sale => sale.Activity == Common.Enums.Activity.მზადდება);
         int shippedCount = _db.Sales.Count(sale => sale.Activity == Common.Enums.Activity.გზაშია);
         int deliveredCount = _db.Sales.Count(sale => sale.Activity == Common.Enums.Activity.მიწოდებულია);
-        
+
         packText.Text = packedCount.ToString();
         shippingText.Text = shippedCount.ToString();
         deliveryText.Text = deliveredCount.ToString();
@@ -66,10 +66,7 @@ public partial class Dashboard_UC : UserControl
         }
 
         // Set chart title
-        chart1.Titles.Clear(); // Clear existing titles
-       // chart1.Titles.Add("Top 3 გაყიდვადი პროდუქტი");
-       // chart1.Titles[0].Font = new Font("Arial", 10, FontStyle.Bold); // Title font and size
-       // chart1.Titles[0].ForeColor = Color.FromArgb(255, 204, 0);
+        chart1.Titles.Clear(); 
 
         // Create a new series
         var series = new Series();
@@ -95,7 +92,7 @@ public partial class Dashboard_UC : UserControl
                             .ToList();
 
         // Add data points to the series
-       
+
         foreach (var product in topProducts)
         {
             series.Points.AddXY(product.Product, product.TotalAmount);
@@ -103,7 +100,7 @@ public partial class Dashboard_UC : UserControl
             DataPoint dataPoint = series.Points.Last();
             dataPoint.Label = $"{product.TotalAmount}";
             dataPoint.LabelForeColor = Color.Black; // Set label color
-            dataPoint.Font = new Font("Roboto", 15,FontStyle.Bold); // Set label font
+            dataPoint.Font = new Font("Roboto", 15, FontStyle.Bold); // Set label font
             dataPoint.LegendText = product.Product;
         }
 
@@ -140,42 +137,10 @@ public partial class Dashboard_UC : UserControl
         chart1.ChartAreas[0].Position.Width = 90; // Set width
         chart1.ChartAreas[0].Position.Height = 90; // Set height
 
-        
-       
+
+
     }
-    //public void TopSales()
-    //{
-    //    Color[] sectorColors = { Color.Red, Color.Blue, Color.Green };
-    //    topChart.Title.Text = "Top 3 გაყიდვადი პროდუქტი";
-
-    //    var topProducts = _db.Products
-    //                           .Where(s => !s.IsDeleted)
-    //                           .Where(p => !p.IsDeleted && p.Sales
-    //                               .Any(s => !s.IsDeleted))
-    //                           .GroupBy(p => p, (key, group) => new
-    //                           {
-    //                               Product = group.First().Name.ToString(),
-    //                               TotalAmount = group.SelectMany(s => s.Sales
-    //                                                     .Where(s => !s.IsDeleted)
-    //                                                     .Select(s => s.Amount)).Sum()
-    //                           })
-    //                           .OrderByDescending(result => result.TotalAmount)
-    //                           .Take(3) // Ensure only top 3 products are considered
-    //                           .ToList();
-
-    //    foreach (var product in topProducts)
-    //    {
-    //        // Add each product to the single pie chart
-
-    //        MaxPie.DataPoints.Add(product.Product, product.TotalAmount);
-    //        MaxPie.Label = product.Product;
-    //    }
-    //    for (int j = 0; j < topProducts.Count; j++)
-    //    {
-    //        MaxPie.FillColors.Add(sectorColors[j]);
-    //    }
-    //}
-
+  
     public void ThreeMonth()
     {
         DateTime startDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
@@ -183,40 +148,44 @@ public partial class Dashboard_UC : UserControl
         DateTime endDate = startDate.AddMonths(3).AddDays(-1);
 
         var sales = _db.Sales
-            .Where(s => s.IsDeleted == false)
+            .Where(s => !s.IsDeleted)
             .Where(s => s.Date >= startDate && s.Date <= endDate)
             .OrderBy(s => s.Date)
             .ToList();
 
-
         var monthsInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
-                                      .Select(offset => startDate.AddDays(offset).ToString("MMM"))
-                                      .Distinct()
-                                      .OrderBy(m => DateTime.ParseExact(m, "MMM", null))
-                                      .ToList();
+            .Select(offset => startDate.AddDays(offset).ToString("MMM"))
+            .Distinct()
+            .OrderBy(m => GetMonthIndex(m)) // Sort by month index
+            .ToList();
 
         var chartData = monthsInRange.GroupJoin(sales,
-                                        month => month,
-                                        sale => sale.Date?.ToString("MMM"),
-                                        (month, monthSales) => new
-                                        {
-                                            Month = month,
-                                            TotalAmount = monthSales.Sum(s => s?.Amount ?? 0)
-                                        })
-                                    .OrderBy(g => g.Month)
-                                    .Reverse()
-                                    .ToList();
+            month => month,
+            sale => sale.Date?.ToString("MMM"),
+            (month, monthSales) => new
+            {
+                Month = month,
+                TotalAmount = monthSales.Sum(s => s?.Amount ?? 0)
+            })
+            .OrderBy(g => GetMonthIndex(g.Month)) // Sort by month index
+            .ToList();
 
         saleChart.DataPoints.Clear();
         foreach (var dataPoint in chartData)
         {
-
             saleChart.DataPoints.Add(dataPoint.Month, dataPoint.TotalAmount);
-
         }
 
         saleChart.Invalidate();
     }
+
+    // Method to get the index of a month
+    private int GetMonthIndex(string month)
+    {
+        DateTimeFormatInfo dtfi = DateTimeFormatInfo.CurrentInfo;
+        return dtfi.MonthNames.ToList().FindIndex(m => m.Equals(month, StringComparison.CurrentCultureIgnoreCase));
+    }
+
 
     public void ThreeMonthDetailed(string name)
     {
@@ -234,7 +203,7 @@ public partial class Dashboard_UC : UserControl
         var monthsInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
                                       .Select(offset => startDate.AddDays(offset).ToString("MMM"))
                                       .Distinct()
-                                      .OrderBy(m => DateTime.ParseExact(m, "MMM", null))
+                                      .OrderBy(m => GetMonthIndex(m))
                                       .ToList();
 
         var chartData = monthsInRange.GroupJoin(sales,
@@ -303,7 +272,7 @@ public partial class Dashboard_UC : UserControl
 
         var cultureInfo = new CultureInfo("ka-GE");
         var daysInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
-            .Select(offset => startDate.AddDays(offset).ToString("dddd",cultureInfo))
+            .Select(offset => startDate.AddDays(offset).ToString("dddd", cultureInfo))
             .Distinct()
             .ToList();
 
@@ -312,7 +281,7 @@ public partial class Dashboard_UC : UserControl
         foreach (var day in daysInRange)
         {
             var totalAmount = sales
-                .Where(s => s.Date?.ToString("dddd",cultureInfo) == day)
+                .Where(s => s.Date?.ToString("dddd", cultureInfo) == day)
                 .Sum(s => s?.Amount ?? 0);
 
             saleChart.DataPoints.Add(day, totalAmount);
@@ -398,7 +367,7 @@ public partial class Dashboard_UC : UserControl
         var monthsInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
                                       .Select(offset => startDate.AddDays(offset).ToString("MMM"))
                                       .Distinct()
-                                      .OrderBy(m => DateTime.ParseExact(m, "MMM", null))
+                                      .OrderBy(m => GetMonthIndex(m))
                                       .ToList();
 
         var chartData = monthsInRange.GroupJoin(sales,
@@ -766,28 +735,28 @@ public partial class Dashboard_UC : UserControl
 
             if (daysDifference > 31 && daysDifference <= 93)
             {
-               var weeksAndMonthsData = sales
-                                            .Where(s => s.Date.HasValue && s.Date.Value >= startDate && s.Date.Value <= endDate)
-                                            .GroupBy(s => new { Year = s.Date.Value.Year, Month = s.Date.Value.Month })
-                                            .OrderBy(group => group.Key.Year)
-                                            .ThenBy(group => group.Key.Month)
-                                            .Select(group => new
-                                            {
-                                                Year = group.Key.Year,
-                                                Month = group.Key.Month,
-                                                WeekData = GetWeeksInDateRange(startDate, endDate, DayOfWeek.Sunday)
-                                                    .GroupJoin(
-                                                        group,
-                                                        week => week,
-                                                        sale => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(sale.Date.Value, CalendarWeekRule.FirstDay, DayOfWeek.Sunday),
-                                                        (week, sales) => new
-                                                        {
-                                                            WeekNumber = week,
-                                                            TotalAmount = sales.Sum(s => s.Amount)
-                                                        })
-                                                    .ToList()
-                                            })
-                                            .ToList();
+                var weeksAndMonthsData = sales
+                                             .Where(s => s.Date.HasValue && s.Date.Value >= startDate && s.Date.Value <= endDate)
+                                             .GroupBy(s => new { Year = s.Date.Value.Year, Month = s.Date.Value.Month })
+                                             .OrderBy(group => group.Key.Year)
+                                             .ThenBy(group => group.Key.Month)
+                                             .Select(group => new
+                                             {
+                                                 Year = group.Key.Year,
+                                                 Month = group.Key.Month,
+                                                 WeekData = GetWeeksInDateRange(startDate, endDate, DayOfWeek.Sunday)
+                                                     .GroupJoin(
+                                                         group,
+                                                         week => week,
+                                                         sale => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(sale.Date.Value, CalendarWeekRule.FirstDay, DayOfWeek.Sunday),
+                                                         (week, sales) => new
+                                                         {
+                                                             WeekNumber = week,
+                                                             TotalAmount = sales.Sum(s => s.Amount)
+                                                         })
+                                                     .ToList()
+                                             })
+                                             .ToList();
 
                 List<int> GetWeeksInDateRange(DateTime startDate, DateTime endDate, DayOfWeek startOfWeek)
                 {
@@ -823,19 +792,19 @@ public partial class Dashboard_UC : UserControl
                 var monthsInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
                                               .Select(offset => startDate.AddDays(offset).ToString("MMM"))
                                               .Distinct()
-                                              .OrderBy(m => DateTime.ParseExact(m, "MMM", null))
+                                              .OrderBy(m => GetMonthIndex(m))
                                               .ToList();
 
                 var chartData = monthsInRange.GroupJoin(sales,
-                                                month => month,
-                                                sale => sale.Date?.ToString("MMM"),
-                                                (month, monthSales) => new
-                                                {
-                                                    Month = month,
-                                                    TotalAmount = monthSales.Sum(s => s?.Amount ?? 0)
-                                                })
-                                            .OrderBy(g => DateTime.ParseExact(g.Month, "MMM", CultureInfo.InvariantCulture).Month)
-                                            .ToList();
+                                   month => month,
+                                   sale => sale.Date?.ToString("MMM"),
+                                   (month, monthSales) => new
+                                   {
+                                       Month = month,
+                                       TotalAmount = monthSales.Sum(s => s?.Amount ?? 0)
+                                   })
+                               .OrderBy(g => GetMonthYearIndex(g.Month)) // Sort by year and month
+                               .ToList();
 
                 saleChart.DataPoints.Clear();
                 foreach (var dataPoint in chartData)
@@ -915,28 +884,28 @@ public partial class Dashboard_UC : UserControl
 
             if (daysDifference > 31 && daysDifference <= 93)
             {
-               var weeksAndMonthsData = sales
-                                            .Where(s => s.Date.HasValue && s.Date.Value >= startDate && s.Date.Value <= endDate)
-                                            .GroupBy(s => new { Year = s.Date.Value.Year, Month = s.Date.Value.Month })
-                                            .OrderBy(group => group.Key.Year)
-                                            .ThenBy(group => group.Key.Month)
-                                            .Select(group => new
-                                            {
-                                                Year = group.Key.Year,
-                                                Month = group.Key.Month,
-                                                WeekData = GetWeeksInDateRange(startDate, endDate, DayOfWeek.Sunday)
-                                                    .GroupJoin(
-                                                        group,
-                                                        week => week,
-                                                        sale => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(sale.Date.Value, CalendarWeekRule.FirstDay, DayOfWeek.Sunday),
-                                                        (week, sales) => new
-                                                        {
-                                                            WeekNumber = week,
-                                                            TotalAmount = sales.Sum(s => s.Amount)
-                                                        })
-                                                    .ToList()
-                                            })
-                                            .ToList();
+                var weeksAndMonthsData = sales
+                                             .Where(s => s.Date.HasValue && s.Date.Value >= startDate && s.Date.Value <= endDate)
+                                             .GroupBy(s => new { Year = s.Date.Value.Year, Month = s.Date.Value.Month })
+                                             .OrderBy(group => group.Key.Year)
+                                             .ThenBy(group => group.Key.Month)
+                                             .Select(group => new
+                                             {
+                                                 Year = group.Key.Year,
+                                                 Month = group.Key.Month,
+                                                 WeekData = GetWeeksInDateRange(startDate, endDate, DayOfWeek.Sunday)
+                                                     .GroupJoin(
+                                                         group,
+                                                         week => week,
+                                                         sale => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(sale.Date.Value, CalendarWeekRule.FirstDay, DayOfWeek.Sunday),
+                                                         (week, sales) => new
+                                                         {
+                                                             WeekNumber = week,
+                                                             TotalAmount = sales.Sum(s => s.Amount)
+                                                         })
+                                                     .ToList()
+                                             })
+                                             .ToList();
 
                 List<int> GetWeeksInDateRange(DateTime startDate, DateTime endDate, DayOfWeek startOfWeek)
                 {
@@ -970,20 +939,20 @@ public partial class Dashboard_UC : UserControl
             if (daysDifference > 93 && daysDifference <= 365)
             {
                 var monthsInRange = Enumerable.Range(0, (endDate - startDate).Days + 1)
-                                              .Select(offset => startDate.AddDays(offset).ToString("MMM"))
+                                              .Select(offset => startDate.AddDays(offset).ToString("MMM yyyy")) // Include year
                                               .Distinct()
-                                              .OrderBy(m => DateTime.ParseExact(m, "MMM", null))
+                                              .OrderBy(m => GetMonthYearIndex(m)) // Sort by month and year index
                                               .ToList();
 
                 var chartData = monthsInRange.GroupJoin(sales,
                                                 month => month,
-                                                sale => sale.Date?.ToString("MMM"),
+                                                sale => sale.Date?.ToString("MMM yyyy"), // Include year
                                                 (month, monthSales) => new
                                                 {
                                                     Month = month,
                                                     TotalAmount = monthSales.Sum(s => s?.Amount ?? 0)
                                                 })
-                                            .OrderBy(g => DateTime.ParseExact(g.Month, "MMM", CultureInfo.InvariantCulture).Month)
+                                            .OrderBy(g => DateTime.ParseExact(g.Month, "MMM yyyy", CultureInfo.InvariantCulture)) // Sort by date
                                             .ToList();
 
                 saleChart.DataPoints.Clear();
@@ -993,12 +962,25 @@ public partial class Dashboard_UC : UserControl
                 }
                 saleChart.Invalidate();
             }
+
         }
         else
         {
             saleChart.DataPoints.Clear();
         }
     }
+
+    // Method to get the index of a month and year combination
+    private int GetMonthYearIndex(string monthYear)
+    {
+        DateTime parsedDate;
+        if (DateTime.TryParseExact(monthYear, "MMM yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDate))
+        {
+            return parsedDate.Year * 12 + parsedDate.Month; // Combine year and month index
+        }
+        return 0;
+    }
+
 
     private void incomeDateRange_SelectedIndexChanged(object sender, EventArgs e)
     {
