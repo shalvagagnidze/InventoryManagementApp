@@ -270,7 +270,9 @@ public partial class Orders_UC : UserControl
                                           s.Product.Category.Name.Contains(searchText) ||
                                           s.Id.ToString().Contains(searchText) ||
                                           s.Product.Brand.Name.Contains(searchText) ||
-                                          s.Product.Code.Contains(searchText))
+                                          s.Product.Code.Contains(searchText) ||
+                                          s.Customer.FirstName.Contains(searchText) ||
+                                          s.Customer.LastName.Contains(searchText))
                                   .Select(s => new
                                   {
                                       კოდი = s.Id,

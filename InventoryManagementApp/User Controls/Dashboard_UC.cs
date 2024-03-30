@@ -1037,8 +1037,14 @@ public partial class Dashboard_UC : UserControl
 
     public void AllProfitLoss()
     {
-        var income = _db.Sales.Where(s => s.IsDeleted == false).Select(s => s.DynamicPrice * s.Amount).ToList().Sum();
-        var expense = _db.Products.Where(p => !p.IsDeleted).Select(s => s.NetCost * s.Storage.TotalAmount).ToList().Sum();
+        var income = _db.Sales.Where(s => s.IsDeleted == false)
+                              .Select(s => s.DynamicPrice * s.Amount)
+                              .ToList()
+                              .Sum();
+        var expense = _db.Products.Where(p => !p.IsDeleted)
+                                  .Select(s => s.NetCost * (s.Storage.TotalAmount+s.TotalSold.TotalSoldAmount))
+                                  .ToList()
+                                  .Sum();
         var profit = income - expense;
 
         income_Txt.Text = income.ToString("F2") + " ₾";
@@ -1066,19 +1072,30 @@ public partial class Dashboard_UC : UserControl
                               .Select(s => s.DynamicPrice * s.Amount)
                               .ToList()
                               .Sum();
+        var notProduct = _db.Products.Where(p => p.CreateDate >= startDate && p.CreateDate <= endDate).ToList();
 
-        var expenseAddAmount = _db.AddAmounts.Where(a => a.Product.IsDeleted == false)
+        var expenseAddAmount = _db.AddAmounts.Where(a => a.Product.IsDeleted == false && !notProduct.Contains(a.Product))
                                               .Where(a => a.AdditionCreateDate >= startDate
                                                      && a.AdditionCreateDate <= endDate)
                                               .Select(a => a.Amount * a.Product.NetCost)
                                               .ToList()
                                               .Sum();
 
-        var expenseFirst = _db.Products.Where(p => p.IsDeleted == false)
-                                        .Select(p => p.Storage.TotalAmount * p.NetCost).ToList().Sum();
+        //var expenseFirst = _db.Products.Where(p => p.IsDeleted == false)
+        //                                .Select(p => (p.Storage.TotalAmount + p.TotalSold.TotalSoldAmount) * p.NetCost)
+        //                                .ToList()
+        //                                .Sum();
 
-        var expenseCreate = expenseFirst - expenseAddAmount;
-        var expense = expenseCreate + expenseAddAmount;
+        var expenseFirst = _db.Products.Where(p => p.IsDeleted == false)
+                                       .Where(d => d.CreateDate >= startDate &&
+                                              d.CreateDate <= endDate)
+                                       .Select(p => (p.Storage.TotalAmount + p.TotalSold.TotalSoldAmount) * p.NetCost)
+                                       .ToList()
+                                       .Sum();
+
+        //var expenseCreate = expenseFirst - expenseAddAmount;
+        //var expense = expenseCreate + expenseAddAmount;
+        var expense = expenseFirst+expenseAddAmount;
         var profit = income - expense;
 
         income_Txt.Text = income.ToString("F2") + " ₾";
@@ -1107,18 +1124,25 @@ public partial class Dashboard_UC : UserControl
                               .ToList()
                               .Sum();
 
-        var expenseAddAmount = _db.AddAmounts.Where(a => a.Product.IsDeleted == false)
+        var notProduct = _db.Products.Where(p => p.CreateDate >= startDate && p.CreateDate <= endDate).ToList();
+
+        var expenseAddAmount = _db.AddAmounts.Where(a => a.Product.IsDeleted == false && !notProduct.Contains(a.Product))
                                              .Where(a => a.AdditionCreateDate >= startDate
                                                     && a.AdditionCreateDate <= endDate)
                                              .Select(a => a.Amount * a.Product.NetCost)
                                              .ToList()
                                              .Sum();
+                                             
 
         var expenseFirst = _db.Products.Where(p => p.IsDeleted == false)
-                                        .Select(p => p.Storage.TotalAmount * p.NetCost).ToList().Sum();
+                                       .Where(p => p.CreateDate >= startDate &&
+                                              p.CreateDate <= endDate)
+                                       .Select(p => (p.Storage.TotalAmount + p.TotalSold.TotalSoldAmount) * p.NetCost)
+                                       .ToList()
+                                       .Sum();
 
-        var expenseCreate = expenseFirst - expenseAddAmount;
-        var expense = expenseCreate + expenseAddAmount;
+       // var expenseCreate = expenseFirst - expenseAddAmount;
+        var expense = expenseFirst + expenseAddAmount;
         var profit = income - expense;
 
         income_Txt.Text = income.ToString("F2") + " ₾";
@@ -1147,13 +1171,15 @@ public partial class Dashboard_UC : UserControl
                               .ToList()
                               .Sum();
 
+        var notProduct = _db.Products.Where(p => p.CreateDate >= startDate && p.CreateDate <= endDate).ToList();
+
         var expenseCreate = _db.Products.Where(p => p.IsDeleted == false)
                                   .Where(p => p.CreateDate >= startDate && p.CreateDate <= endDate)
-                                  .Select(s => s.NetCost * s.Storage.TotalAmount)
+                                  .Select(s => s.NetCost * (s.Storage.TotalAmount + s.TotalSold.TotalSoldAmount))
                                   .ToList()
                                   .Sum();
 
-        var expenseAddAmount = _db.AddAmounts.Where(a => a.Product.IsDeleted == false)
+        var expenseAddAmount = _db.AddAmounts.Where(a => a.Product.IsDeleted == false && !notProduct.Contains(a.Product))
                                              .Where(a => a.AdditionCreateDate >= startDate
                                                     && a.AdditionCreateDate <= endDate)
                                              .Select(a => a.Amount * a.Product.NetCost)
