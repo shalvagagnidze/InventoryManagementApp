@@ -653,7 +653,7 @@ public partial class Products_UC : UserControl
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ExcelPackage excel = new ExcelPackage();
 
-            var workSheet = excel.Workbook.Worksheets.Add("მომხმარებლები");
+            var workSheet = excel.Workbook.Worksheets.Add("პროდუქტები");
 
             workSheet.TabColor = System.Drawing.Color.Blue;
             workSheet.DefaultRowHeight = 12;
@@ -671,15 +671,19 @@ public partial class Products_UC : UserControl
 
             workSheet.Cells[1, 1].Value = "კოდი";
             workSheet.Cells[1, 2].Value = "პროდუქტი";
-            workSheet.Cells[1, 3].Value = "რაოდენობა";
+            workSheet.Cells[1, 3].Value = "ფასი";
+            workSheet.Cells[1, 4].Value = "თვითღირებულება";
+            workSheet.Cells[1, 5].Value = "რაოდენობა";
 
             int recordIndex = 2;
             int total = 0;
 
-            var custData = _db.Products.Select(c => new
+            var custData = _db.Products.Where(p => !p.IsDeleted).Select(c => new
             {
                 კოდი = c.Code,
                 პროდუქტი = c.Name,
+                ფასი = c.Price,
+                თვითღირებულება = c.NetCost,
                 რაოდენობა = c.Storage.TotalAmount
             }).ToList();
 
@@ -687,14 +691,16 @@ public partial class Products_UC : UserControl
             {
                 workSheet.Cells[recordIndex, 1].Value = article.კოდი;
                 workSheet.Cells[recordIndex, 2].Value = article.პროდუქტი;
-                workSheet.Cells[recordIndex, 3].Value = article.რაოდენობა;
+                workSheet.Cells[recordIndex, 3].Value = article.ფასი;
+                workSheet.Cells[recordIndex, 4].Value = article.თვითღირებულება;
+                workSheet.Cells[recordIndex, 5].Value = article.რაოდენობა;
                 total += article.რაოდენობა;
                 recordIndex++;
             }
-            workSheet.Cells[recordIndex, 3].Value = $"ჯამი: {total}";
-            workSheet.Cells[recordIndex, 3].Style.Font.Color.SetColor(Color.Blue);
-            workSheet.Cells[recordIndex, 3].Style.Font.Bold = true;
-            var range = workSheet.Cells[1, 1, recordIndex - 1, 3];
+            workSheet.Cells[recordIndex, 5].Value = $"ჯამი: {total}";
+            workSheet.Cells[recordIndex, 5].Style.Font.Color.SetColor(Color.Blue);
+            workSheet.Cells[recordIndex, 5].Style.Font.Bold = true;
+            var range = workSheet.Cells[1, 1, recordIndex - 1, 5];
             var table = workSheet.Tables.Add(range, "მარაგი");
 
             // Set the table style
@@ -704,6 +710,8 @@ public partial class Products_UC : UserControl
             workSheet.Column(1).AutoFit();
             workSheet.Column(2).AutoFit();
             workSheet.Column(3).AutoFit();
+            workSheet.Column(4).AutoFit();
+            workSheet.Column(5).AutoFit();
 
             try
             {
