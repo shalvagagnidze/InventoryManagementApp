@@ -106,7 +106,7 @@ public partial class Orders_UC : UserControl
                 var orderIndex = ordersData.CurrentRow.Cells["კოდი"].Value.ToString();
                 var orderId = orderIndex;
                 var order = _db.Sales.Include(c => c.Product).FirstOrDefault(p => p.Id.ToString() == orderId);
-                var product = _db.Products.Include(c => c.Sales).FirstOrDefault(p => p.Code == order.Product.Code);
+                var product = _db.Products.Include(c => c.Sales).FirstOrDefault(p => !p.IsDeleted && p.Code == order.Product.Code);
                 order?.DeleteOrder();
                 order!.DeleteTime = DateTime.Now;
                 var totalSold = _db.TotalSolds.FirstOrDefault(x => x.Product == product);
