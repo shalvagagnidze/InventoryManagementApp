@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Orders_UC));
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             ordersData = new Krypton.Toolkit.KryptonDataGridView();
             delete_Btn = new Krypton.Toolkit.KryptonButton();
             edit_Btn = new Krypton.Toolkit.KryptonButton();
@@ -39,6 +40,7 @@
             dateCheck = new CheckBox();
             Search_Txt = new Krypton.Toolkit.KryptonTextBox();
             dateButton = new Krypton.Toolkit.KryptonCheckBox();
+            Order_download_Btn = new Guna.UI2.WinForms.Guna2ImageButton();
             ((System.ComponentModel.ISupportInitialize)ordersData).BeginInit();
             SuspendLayout();
             // 
@@ -276,10 +278,27 @@
             dateButton.Values.Text = "";
             dateButton.CheckedChanged += dateButton_CheckedChanged;
             // 
+            // Order_download_Btn
+            // 
+            Order_download_Btn.CheckedState.ImageSize = new Size(64, 64);
+            Order_download_Btn.HoverState.ImageSize = new Size(64, 64);
+            Order_download_Btn.Image = Properties.Resources.Download_48;
+            Order_download_Btn.ImageOffset = new Point(0, 0);
+            Order_download_Btn.ImageRotate = 0F;
+            Order_download_Btn.ImageSize = new Size(48, 48);
+            Order_download_Btn.Location = new Point(1184, 77);
+            Order_download_Btn.Name = "Order_download_Btn";
+            Order_download_Btn.PressedState.ImageSize = new Size(64, 64);
+            Order_download_Btn.ShadowDecoration.CustomizableEdges = customizableEdges1;
+            Order_download_Btn.Size = new Size(37, 32);
+            Order_download_Btn.TabIndex = 43;
+            Order_download_Btn.Click += Order_download_Btn_Click;
+            // 
             // Orders_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(Order_download_Btn);
             Controls.Add(dateButton);
             Controls.Add(Search_Txt);
             Controls.Add(dateCheck);
@@ -310,5 +329,6 @@
         private CheckBox dateCheck;
         private Krypton.Toolkit.KryptonTextBox Search_Txt;
         private Krypton.Toolkit.KryptonCheckBox dateButton;
+        private Guna.UI2.WinForms.Guna2ImageButton Order_download_Btn;
     }
 }

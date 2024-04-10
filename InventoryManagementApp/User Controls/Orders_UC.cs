@@ -3,6 +3,9 @@ using InventoryManagementApp.Data;
 using InventoryManagementApp.Models;
 using InventoryManagementApp.UI;
 using Microsoft.EntityFrameworkCore;
+using OfficeOpenXml.Style;
+using OfficeOpenXml.Table;
+using OfficeOpenXml;
 
 
 namespace InventoryManagementApp.User_Controls;
@@ -33,7 +36,7 @@ public partial class Orders_UC : UserControl
             კატეგორია = o.Product.Category.Name,
             ბრენდი = o.Product.Brand.Name,
             რაოდენობა = o.Amount,
-            ფასი = o.DynamicPrice*o.Amount,
+            ფასი = o.DynamicPrice * o.Amount,
             ლოკაცია = o.Location,
             გადახდის_ტიპი = o.PaymentMethod,
             შეკვეთის_ადგილი = o.PaymentArea,
@@ -41,7 +44,7 @@ public partial class Orders_UC : UserControl
             მდგომარეობა = o.Activity,
             თარიღი = o.Date
         }).ToList();
-        
+
 
 
     }
@@ -90,7 +93,7 @@ public partial class Orders_UC : UserControl
                                    MessageBoxButtons.OK,
                                    MessageBoxIcon.Warning);
         }
-        
+
     }
 
     private void delete_Btn_Click(object sender, EventArgs e)
@@ -170,7 +173,7 @@ public partial class Orders_UC : UserControl
                                    MessageBoxButtons.OK,
                                    MessageBoxIcon.Warning);
         }
-        
+
     }
 
     private void searchButton_Click(object sender, EventArgs e)
@@ -330,7 +333,7 @@ public partial class Orders_UC : UserControl
                 ლოკაცია = o.Location,
                 გადახდის_ტიპი = o.PaymentMethod,
                 შეკვეთის_ადგილი = o.PaymentArea,
-                მომხმარებელი = o.Customer.FirstName+" "+o.Customer.LastName,
+                მომხმარებელი = o.Customer.FirstName + " " + o.Customer.LastName,
                 მდგომარეობა = o.Activity,
                 თარიღი = o.Date
             }).ToList();
@@ -385,4 +388,154 @@ public partial class Orders_UC : UserControl
         ordersData.DataSource = sales;
     }
 
+    private void Order_download_Btn_Click(object sender, EventArgs e)
+    {
+        FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+        var random = new Random();
+        var letters = "";
+        for (int i = 0; i < 15; i++)
+        {
+            int number = random.Next(65, 91);
+
+            char letter = Convert.ToChar(number);
+
+            letters += letter;
+        }
+
+        var fileName = letters.ToString();
+
+        folderBrowserDialog.Description = "აირჩიეთ ფოლდერი სადაც შეინახავთ ფაილს";
+        if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+        {
+            // get the folder path
+            string folderPath = folderBrowserDialog.SelectedPath;
+
+            string filePaths = Path.Combine(folderPath, fileName + ".xlsx");
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ExcelPackage excel = new ExcelPackage();
+
+            var workSheet = excel.Workbook.Worksheets.Add("გაყიდვები");
+
+            workSheet.TabColor = System.Drawing.Color.Blue;
+            workSheet.DefaultRowHeight = 12;
+
+            workSheet.Row(1).Height = 20;
+            workSheet.Row(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Row(1).Style.Font.Bold = true;
+
+
+            workSheet.Column(1).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Column(2).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Column(3).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Column(4).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Column(5).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Column(6).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Column(7).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Column(8).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Column(9).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Column(10).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Column(11).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            workSheet.Column(12).Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+
+            workSheet.Cells[1, 1].Value = "კოდი";
+            workSheet.Cells[1, 2].Value = "პროდუქტის კოდი";
+            workSheet.Cells[1, 3].Value = "პროდუქტი";
+            workSheet.Cells[1, 4].Value = "კატეგორია";
+            workSheet.Cells[1, 5].Value = "ბრენდი";
+            workSheet.Cells[1, 6].Value = "რაოდენობა";
+            workSheet.Cells[1, 7].Value = "მომხმარებელი";
+            workSheet.Cells[1, 8].Value = "ფასი";
+            workSheet.Cells[1, 9].Value = "ლოკაცია";
+            workSheet.Cells[1, 10].Value = "გადახდის ტიპი";
+            workSheet.Cells[1, 11].Value = "შეკვეთის ადგილი";
+            workSheet.Cells[1, 12].Value = "მდგომარეობა";
+
+            int recordIndex = 2;
+            int total = 0;
+
+            var custData = _db.Sales.Where(p => !p.IsDeleted && !p.Product.IsDeleted).Select(c => new
+            {
+                კოდი = c.Id,
+                პროდუქტის_კოდი = c.Product.Code,
+                პროდუქტი = c.Product.Name,
+                კატეგორია = c.Product.Category.Name,
+                ბრენდი = c.Product.Brand.Name,
+                რაოდენობა = c.Amount,
+                მომხმარებელი = c.Customer.FirstName+" "+c.Customer.LastName,
+                ფასი = c.DynamicPrice,
+                ლოკაცია = c.Location,
+                გადახდის_ტიპი = c.PaymentMethod,
+                შეკვეთის_ადგილი = c.PaymentArea,
+                მდგომარეობა = c.Activity
+            }).ToList();
+
+            foreach (var article in custData)
+            {
+                workSheet.Cells[recordIndex, 1].Value = article.კოდი;
+                workSheet.Cells[recordIndex, 2].Value = article.პროდუქტის_კოდი;
+                workSheet.Cells[recordIndex, 3].Value = article.პროდუქტი;
+                workSheet.Cells[recordIndex, 4].Value = article.კატეგორია;
+                workSheet.Cells[recordIndex, 5].Value = article.ბრენდი;
+                workSheet.Cells[recordIndex, 6].Value = article.რაოდენობა;
+                workSheet.Cells[recordIndex, 7].Value = article.მომხმარებელი;
+                workSheet.Cells[recordIndex, 8].Value = article.ფასი;
+                workSheet.Cells[recordIndex, 9].Value = article.ლოკაცია;
+                workSheet.Cells[recordIndex, 10].Value = article.გადახდის_ტიპი;
+                workSheet.Cells[recordIndex, 11].Value = article.შეკვეთის_ადგილი;
+                workSheet.Cells[recordIndex, 12].Value = article.მდგომარეობა;
+                
+                total += article.რაოდენობა;
+                recordIndex++;
+            }
+            workSheet.Cells[recordIndex, 12].Value = $"ჯამური გაყიდვები: {total}";
+            workSheet.Cells[recordIndex, 12].Style.Font.Color.SetColor(Color.Blue);
+            workSheet.Cells[recordIndex, 12].Style.Font.Bold = true;
+            var range = workSheet.Cells[1, 1, recordIndex - 1, 12];
+            var table = workSheet.Tables.Add(range, "მარაგი");
+
+            // Set the table style
+            table.TableStyle = TableStyles.Medium2;
+            table.ShowFilter = false;
+
+            workSheet.Column(1).AutoFit();
+            workSheet.Column(2).AutoFit();
+            workSheet.Column(3).AutoFit();
+            workSheet.Column(4).AutoFit();
+            workSheet.Column(5).AutoFit();
+            workSheet.Column(6).AutoFit();
+            workSheet.Column(7).AutoFit();
+            workSheet.Column(8).AutoFit();
+            workSheet.Column(9).AutoFit();
+            workSheet.Column(10).AutoFit();
+            workSheet.Column(11).AutoFit();
+            workSheet.Column(12).AutoFit();
+
+            try
+            {
+
+                FileStream objFileStrm = File.Create(filePaths);
+                objFileStrm.Close();
+
+                // Write content to excel file  
+                File.WriteAllBytes(filePaths, excel.GetAsByteArray());
+                //Close Excel package 
+                excel.Dispose();
+
+                MessageBox.Show("ფაილი წარმატებით შეინახა!",
+                               "ფაილი შენახულია",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Information);
+            }
+            catch
+            {
+                MessageBox.Show("ფაილის შენახვა ვერ მოხერხდა,სცადეთ თავიდან",
+                               "ხარვეზი შენახვისას",
+                               MessageBoxButtons.OK,
+                               MessageBoxIcon.Information);
+            }
+
+        }
+    }
 }
+
