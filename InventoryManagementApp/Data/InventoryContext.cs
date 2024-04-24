@@ -25,6 +25,7 @@ public class InventoryContext : DbContext
     public DbSet<TotalSold> TotalSolds { get; set; }
     public DbSet<Customer> Customers { get; set; }
     public DbSet<InvoiceID> InvoiceIDs { get; set; }
+    public DbSet<BrokenProduct> BrokenProducts { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -40,6 +41,7 @@ public class InventoryContext : DbContext
         modelBuilder.Entity<Category>().HasQueryFilter(o => !o.IsDeleted);
         modelBuilder.Entity<Brand>().HasQueryFilter(o => !o.IsDeleted);
         modelBuilder.Entity<Sale>().HasQueryFilter(o => !o.IsDeleted);
+        modelBuilder.Entity<BrokenProduct>().HasQueryFilter(o => !o.IsDeleted);
 
         modelBuilder.Entity<Product>()
                     .HasKey(p => p.Id);                 
@@ -84,6 +86,10 @@ public class InventoryContext : DbContext
                     .HasOne(p => p.Brand)
                     .WithMany(b => b.Products);
 
+        modelBuilder.Entity<Product>()
+                    .HasMany(p => p.BrokenProduct)
+                    .WithOne(t => t.Product);
+
         modelBuilder.Entity<Brand>()
                     .HasKey(b => b.Id);
 
@@ -120,5 +126,10 @@ public class InventoryContext : DbContext
         modelBuilder.Entity<Customer>()
                     .HasMany(c => c.Sales)
                     .WithOne(c => c.Customer);
+
+        modelBuilder.Entity<BrokenProduct>()
+                    .HasOne(t => t.Product)
+                    .WithMany(t => t.BrokenProduct);
+
     }
 }

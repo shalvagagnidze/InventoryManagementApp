@@ -12,7 +12,7 @@ namespace InventoryManagementApp.UI
 
         InventoryContext _db = new InventoryContext();
 
-        string code, price, netCost, name, description,firstCat,firstBrand;
+        string code, price, netCost, name, description, firstCat, firstBrand;
         int addAmount;
         bool isModified = false;
         public Edit_Product()
@@ -88,12 +88,12 @@ namespace InventoryManagementApp.UI
                 products.Description = description;
             }
 
-            if(category.ToString() != firstCat)
+            if (category.ToString() != firstCat)
             {
-                products.Category = _db.Categories.FirstOrDefault(c => c.Name == category.ToString()); 
+                products.Category = _db.Categories.FirstOrDefault(c => c.Name == category.ToString());
             }
 
-            if(brand.ToString() != firstBrand)
+            if (brand.ToString() != firstBrand)
             {
                 products.Brand = _db.Brands.FirstOrDefault(b => b.Name == brand.ToString());
             }
@@ -112,7 +112,7 @@ namespace InventoryManagementApp.UI
                 storage.TotalAmount += addAmount;
             }
 
-            
+
             _db.Update(products);
             var response = _db.SaveChanges();
 
@@ -138,5 +138,7 @@ namespace InventoryManagementApp.UI
         {
             isModified = true;
         }
+
+
     }
 }

@@ -4,6 +4,7 @@ using InventoryManagementApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InventoryManagementApp.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    partial class InventoryContextModelSnapshot : ModelSnapshot
+    [Migration("20240423165908_AddTotalBroken")]
+    partial class AddTotalBroken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,15 +88,17 @@ namespace InventoryManagementApp.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
                     b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TotalBrokenId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
+
+                    b.HasIndex("TotalBrokenId");
 
                     b.ToTable("BrokenProducts");
                 });
@@ -274,6 +279,19 @@ namespace InventoryManagementApp.Migrations
                     b.ToTable("Storages");
                 });
 
+            modelBuilder.Entity("InventoryManagementApp.Models.TotalBroken", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TotalAmount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TotalBroken");
+                });
+
             modelBuilder.Entity("InventoryManagementApp.Models.TotalSold", b =>
                 {
                     b.Property<int>("Id")
@@ -342,7 +360,13 @@ namespace InventoryManagementApp.Migrations
                         .WithMany("BrokenProduct")
                         .HasForeignKey("ProductId");
 
+                    b.HasOne("InventoryManagementApp.Models.TotalBroken", "TotalBroken")
+                        .WithMany()
+                        .HasForeignKey("TotalBrokenId");
+
                     b.Navigation("Product");
+
+                    b.Navigation("TotalBroken");
                 });
 
             modelBuilder.Entity("InventoryManagementApp.Models.Product", b =>
@@ -386,6 +410,17 @@ namespace InventoryManagementApp.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("InventoryManagementApp.Models.TotalBroken", b =>
+                {
+                    b.HasOne("InventoryManagementApp.Models.Product", "Product")
+                        .WithOne("TotalBroken")
+                        .HasForeignKey("InventoryManagementApp.Models.TotalBroken", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("InventoryManagementApp.Models.TotalSold", b =>
                 {
                     b.HasOne("InventoryManagementApp.Models.Product", "Product")
@@ -421,6 +456,8 @@ namespace InventoryManagementApp.Migrations
                     b.Navigation("Sales");
 
                     b.Navigation("Storage");
+
+                    b.Navigation("TotalBroken");
 
                     b.Navigation("TotalSold");
                 });

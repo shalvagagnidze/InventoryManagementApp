@@ -32,6 +32,9 @@ namespace InventoryManagementApp.User_Controls
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Products_UC));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             productData = new Krypton.Toolkit.KryptonDataGridView();
             addProduct_Btn = new Krypton.Toolkit.KryptonButton();
             addCategory_Btn = new Krypton.Toolkit.KryptonButton();
@@ -41,16 +44,12 @@ namespace InventoryManagementApp.User_Controls
             delete_Btn = new Krypton.Toolkit.KryptonButton();
             addBrand_Btn = new Krypton.Toolkit.KryptonButton();
             panel1 = new Panel();
-            sortProd_Btn = new Krypton.Toolkit.KryptonButton();
-            panel2 = new Panel();
-            sortBrand_Btn = new Krypton.Toolkit.KryptonButton();
-            sortCat_Btn = new Krypton.Toolkit.KryptonButton();
-            sort_Btn = new Krypton.Toolkit.KryptonButton();
             download_Btn = new Guna.UI2.WinForms.Guna2ImageButton();
+            comboBox = new Guna.UI2.WinForms.Guna2ComboBox();
+            brokenProduct = new Guna.UI2.WinForms.Guna2ImageButton();
             ((System.ComponentModel.ISupportInitialize)productData).BeginInit();
             ((System.ComponentModel.ISupportInitialize)search_Icon).BeginInit();
             panel1.SuspendLayout();
-            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // productData
@@ -390,232 +389,6 @@ namespace InventoryManagementApp.User_Controls
             panel1.Size = new Size(678, 102);
             panel1.TabIndex = 20;
             // 
-            // sortProd_Btn
-            // 
-            sortProd_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            sortProd_Btn.Location = new Point(350, 8);
-            sortProd_Btn.Name = "sortProd_Btn";
-            sortProd_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
-            sortProd_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
-            sortProd_Btn.OverrideDefault.Back.ColorAngle = 45F;
-            sortProd_Btn.OverrideDefault.Border.Color1 = Color.FromArgb(8, 142, 254);
-            sortProd_Btn.OverrideDefault.Border.Color2 = Color.FromArgb(8, 142, 254);
-            sortProd_Btn.OverrideDefault.Border.ColorAngle = 45F;
-            sortProd_Btn.OverrideDefault.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortProd_Btn.OverrideDefault.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sortProd_Btn.OverrideDefault.Border.Rounding = 20F;
-            sortProd_Btn.OverrideDefault.Border.Width = 2;
-            sortProd_Btn.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
-            sortProd_Btn.Size = new Size(165, 39);
-            sortProd_Btn.StateCommon.Back.Color1 = Color.FromArgb(250, 252, 252);
-            sortProd_Btn.StateCommon.Back.Color2 = Color.FromArgb(250, 252, 252);
-            sortProd_Btn.StateCommon.Back.ColorAngle = 45F;
-            sortProd_Btn.StateCommon.Border.Color1 = Color.FromArgb(249, 225, 10);
-            sortProd_Btn.StateCommon.Border.Color2 = Color.FromArgb(245, 204, 43);
-            sortProd_Btn.StateCommon.Border.ColorAngle = 45F;
-            sortProd_Btn.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortProd_Btn.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sortProd_Btn.StateCommon.Border.Rounding = 7F;
-            sortProd_Btn.StateCommon.Border.Width = 2;
-            sortProd_Btn.StateCommon.Content.ShortText.Color1 = Color.FromArgb(245, 204, 43);
-            sortProd_Btn.StateCommon.Content.ShortText.Font = new Font("Georgia", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            sortProd_Btn.StatePressed.Back.Color1 = Color.FromArgb(20, 145, 198);
-            sortProd_Btn.StatePressed.Back.Color2 = Color.FromArgb(22, 121, 206);
-            sortProd_Btn.StatePressed.Back.ColorAngle = 135F;
-            sortProd_Btn.StatePressed.Border.Color1 = Color.FromArgb(20, 145, 198);
-            sortProd_Btn.StatePressed.Border.Color2 = Color.FromArgb(22, 121, 206);
-            sortProd_Btn.StatePressed.Border.ColorAngle = 135F;
-            sortProd_Btn.StatePressed.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortProd_Btn.StatePressed.Border.Rounding = 20F;
-            sortProd_Btn.StatePressed.Border.Width = 1;
-            sortProd_Btn.StateTracking.Back.Color1 = Color.FromArgb(8, 142, 254);
-            sortProd_Btn.StateTracking.Back.Color2 = Color.FromArgb(6, 174, 244);
-            sortProd_Btn.StateTracking.Back.ColorAngle = 45F;
-            sortProd_Btn.StateTracking.Border.Color1 = Color.FromArgb(6, 174, 244);
-            sortProd_Btn.StateTracking.Border.Color2 = Color.FromArgb(8, 142, 254);
-            sortProd_Btn.StateTracking.Border.ColorAngle = 45F;
-            sortProd_Btn.StateTracking.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortProd_Btn.StateTracking.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sortProd_Btn.StateTracking.Border.Rounding = 20F;
-            sortProd_Btn.StateTracking.Border.Width = 1;
-            sortProd_Btn.StateTracking.Content.ShortText.Color1 = Color.White;
-            sortProd_Btn.TabIndex = 21;
-            sortProd_Btn.Values.ExtraText = "  ";
-            sortProd_Btn.Values.Text = "  პროდუქტი";
-            sortProd_Btn.Click += sortProd_Btn_Click_1;
-            // 
-            // panel2
-            // 
-            panel2.Controls.Add(sortBrand_Btn);
-            panel2.Controls.Add(sortProd_Btn);
-            panel2.Controls.Add(sortCat_Btn);
-            panel2.Location = new Point(795, 130);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(518, 58);
-            panel2.TabIndex = 22;
-            // 
-            // sortBrand_Btn
-            // 
-            sortBrand_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            sortBrand_Btn.Location = new Point(8, 8);
-            sortBrand_Btn.Name = "sortBrand_Btn";
-            sortBrand_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
-            sortBrand_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
-            sortBrand_Btn.OverrideDefault.Back.ColorAngle = 45F;
-            sortBrand_Btn.OverrideDefault.Border.Color1 = Color.FromArgb(8, 142, 254);
-            sortBrand_Btn.OverrideDefault.Border.Color2 = Color.FromArgb(8, 142, 254);
-            sortBrand_Btn.OverrideDefault.Border.ColorAngle = 45F;
-            sortBrand_Btn.OverrideDefault.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortBrand_Btn.OverrideDefault.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sortBrand_Btn.OverrideDefault.Border.Rounding = 20F;
-            sortBrand_Btn.OverrideDefault.Border.Width = 2;
-            sortBrand_Btn.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
-            sortBrand_Btn.Size = new Size(165, 39);
-            sortBrand_Btn.StateCommon.Back.Color1 = Color.FromArgb(250, 252, 252);
-            sortBrand_Btn.StateCommon.Back.Color2 = Color.FromArgb(250, 252, 252);
-            sortBrand_Btn.StateCommon.Back.ColorAngle = 45F;
-            sortBrand_Btn.StateCommon.Border.Color1 = Color.FromArgb(249, 225, 10);
-            sortBrand_Btn.StateCommon.Border.Color2 = Color.FromArgb(245, 204, 43);
-            sortBrand_Btn.StateCommon.Border.ColorAngle = 45F;
-            sortBrand_Btn.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortBrand_Btn.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sortBrand_Btn.StateCommon.Border.Rounding = 7F;
-            sortBrand_Btn.StateCommon.Border.Width = 2;
-            sortBrand_Btn.StateCommon.Content.ShortText.Color1 = Color.FromArgb(245, 204, 43);
-            sortBrand_Btn.StateCommon.Content.ShortText.Font = new Font("Georgia", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            sortBrand_Btn.StatePressed.Back.Color1 = Color.FromArgb(20, 145, 198);
-            sortBrand_Btn.StatePressed.Back.Color2 = Color.FromArgb(22, 121, 206);
-            sortBrand_Btn.StatePressed.Back.ColorAngle = 135F;
-            sortBrand_Btn.StatePressed.Border.Color1 = Color.FromArgb(20, 145, 198);
-            sortBrand_Btn.StatePressed.Border.Color2 = Color.FromArgb(22, 121, 206);
-            sortBrand_Btn.StatePressed.Border.ColorAngle = 135F;
-            sortBrand_Btn.StatePressed.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortBrand_Btn.StatePressed.Border.Rounding = 20F;
-            sortBrand_Btn.StatePressed.Border.Width = 1;
-            sortBrand_Btn.StateTracking.Back.Color1 = Color.FromArgb(8, 142, 254);
-            sortBrand_Btn.StateTracking.Back.Color2 = Color.FromArgb(6, 174, 244);
-            sortBrand_Btn.StateTracking.Back.ColorAngle = 45F;
-            sortBrand_Btn.StateTracking.Border.Color1 = Color.FromArgb(6, 174, 244);
-            sortBrand_Btn.StateTracking.Border.Color2 = Color.FromArgb(8, 142, 254);
-            sortBrand_Btn.StateTracking.Border.ColorAngle = 45F;
-            sortBrand_Btn.StateTracking.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortBrand_Btn.StateTracking.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sortBrand_Btn.StateTracking.Border.Rounding = 20F;
-            sortBrand_Btn.StateTracking.Border.Width = 1;
-            sortBrand_Btn.StateTracking.Content.ShortText.Color1 = Color.White;
-            sortBrand_Btn.TabIndex = 24;
-            sortBrand_Btn.Values.ExtraText = "          ";
-            sortBrand_Btn.Values.Text = "   ბრენდი";
-            sortBrand_Btn.Click += sortBrand_Btn_Click;
-            // 
-            // sortCat_Btn
-            // 
-            sortCat_Btn.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            sortCat_Btn.Location = new Point(179, 8);
-            sortCat_Btn.Name = "sortCat_Btn";
-            sortCat_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
-            sortCat_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
-            sortCat_Btn.OverrideDefault.Back.ColorAngle = 45F;
-            sortCat_Btn.OverrideDefault.Border.Color1 = Color.FromArgb(8, 142, 254);
-            sortCat_Btn.OverrideDefault.Border.Color2 = Color.FromArgb(8, 142, 254);
-            sortCat_Btn.OverrideDefault.Border.ColorAngle = 45F;
-            sortCat_Btn.OverrideDefault.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortCat_Btn.OverrideDefault.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sortCat_Btn.OverrideDefault.Border.Rounding = 20F;
-            sortCat_Btn.OverrideDefault.Border.Width = 2;
-            sortCat_Btn.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
-            sortCat_Btn.Size = new Size(165, 39);
-            sortCat_Btn.StateCommon.Back.Color1 = Color.FromArgb(250, 252, 252);
-            sortCat_Btn.StateCommon.Back.Color2 = Color.FromArgb(250, 252, 252);
-            sortCat_Btn.StateCommon.Back.ColorAngle = 45F;
-            sortCat_Btn.StateCommon.Border.Color1 = Color.FromArgb(249, 225, 10);
-            sortCat_Btn.StateCommon.Border.Color2 = Color.FromArgb(245, 204, 43);
-            sortCat_Btn.StateCommon.Border.ColorAngle = 45F;
-            sortCat_Btn.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortCat_Btn.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sortCat_Btn.StateCommon.Border.Rounding = 7F;
-            sortCat_Btn.StateCommon.Border.Width = 2;
-            sortCat_Btn.StateCommon.Content.ShortText.Color1 = Color.FromArgb(245, 204, 43);
-            sortCat_Btn.StateCommon.Content.ShortText.Font = new Font("Georgia", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            sortCat_Btn.StatePressed.Back.Color1 = Color.FromArgb(20, 145, 198);
-            sortCat_Btn.StatePressed.Back.Color2 = Color.FromArgb(22, 121, 206);
-            sortCat_Btn.StatePressed.Back.ColorAngle = 135F;
-            sortCat_Btn.StatePressed.Border.Color1 = Color.FromArgb(20, 145, 198);
-            sortCat_Btn.StatePressed.Border.Color2 = Color.FromArgb(22, 121, 206);
-            sortCat_Btn.StatePressed.Border.ColorAngle = 135F;
-            sortCat_Btn.StatePressed.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortCat_Btn.StatePressed.Border.Rounding = 20F;
-            sortCat_Btn.StatePressed.Border.Width = 1;
-            sortCat_Btn.StateTracking.Back.Color1 = Color.FromArgb(8, 142, 254);
-            sortCat_Btn.StateTracking.Back.Color2 = Color.FromArgb(6, 174, 244);
-            sortCat_Btn.StateTracking.Back.ColorAngle = 45F;
-            sortCat_Btn.StateTracking.Border.Color1 = Color.FromArgb(6, 174, 244);
-            sortCat_Btn.StateTracking.Border.Color2 = Color.FromArgb(8, 142, 254);
-            sortCat_Btn.StateTracking.Border.ColorAngle = 45F;
-            sortCat_Btn.StateTracking.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sortCat_Btn.StateTracking.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sortCat_Btn.StateTracking.Border.Rounding = 20F;
-            sortCat_Btn.StateTracking.Border.Width = 1;
-            sortCat_Btn.StateTracking.Content.ShortText.Color1 = Color.White;
-            sortCat_Btn.TabIndex = 23;
-            sortCat_Btn.Values.ExtraText = "  ";
-            sortCat_Btn.Values.Text = "  კატეგორია";
-            sortCat_Btn.Click += sortCat_Btn_Click;
-            // 
-            // sort_Btn
-            // 
-            sort_Btn.Location = new Point(1319, 132);
-            sort_Btn.Name = "sort_Btn";
-            sort_Btn.OverrideDefault.Back.Color1 = Color.FromArgb(250, 252, 252);
-            sort_Btn.OverrideDefault.Back.Color2 = Color.FromArgb(250, 252, 252);
-            sort_Btn.OverrideDefault.Back.ColorAngle = 45F;
-            sort_Btn.OverrideDefault.Border.Color1 = Color.FromArgb(8, 142, 254);
-            sort_Btn.OverrideDefault.Border.Color2 = Color.FromArgb(8, 142, 254);
-            sort_Btn.OverrideDefault.Border.ColorAngle = 45F;
-            sort_Btn.OverrideDefault.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sort_Btn.OverrideDefault.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sort_Btn.OverrideDefault.Border.Rounding = 20F;
-            sort_Btn.OverrideDefault.Border.Width = 2;
-            sort_Btn.PaletteMode = Krypton.Toolkit.PaletteMode.ProfessionalSystem;
-            sort_Btn.Size = new Size(53, 45);
-            sort_Btn.StateCommon.Back.Color1 = Color.FromArgb(250, 252, 252);
-            sort_Btn.StateCommon.Back.Color2 = Color.FromArgb(250, 252, 252);
-            sort_Btn.StateCommon.Back.ColorAngle = 45F;
-            sort_Btn.StateCommon.Border.Color1 = Color.FromArgb(233, 19, 69);
-            sort_Btn.StateCommon.Border.Color2 = Color.FromArgb(210, 13, 59);
-            sort_Btn.StateCommon.Border.ColorAngle = 45F;
-            sort_Btn.StateCommon.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sort_Btn.StateCommon.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sort_Btn.StateCommon.Border.Rounding = 22F;
-            sort_Btn.StateCommon.Border.Width = 2;
-            sort_Btn.StateCommon.Content.ShortText.Color1 = Color.FromArgb(228, 9, 60);
-            sort_Btn.StateCommon.Content.ShortText.Font = new Font("Georgia", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            sort_Btn.StatePressed.Back.Color1 = Color.FromArgb(20, 145, 198);
-            sort_Btn.StatePressed.Back.Color2 = Color.FromArgb(22, 121, 206);
-            sort_Btn.StatePressed.Back.ColorAngle = 135F;
-            sort_Btn.StatePressed.Border.Color1 = Color.FromArgb(20, 145, 198);
-            sort_Btn.StatePressed.Border.Color2 = Color.FromArgb(22, 121, 206);
-            sort_Btn.StatePressed.Border.ColorAngle = 135F;
-            sort_Btn.StatePressed.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sort_Btn.StatePressed.Border.Rounding = 20F;
-            sort_Btn.StatePressed.Border.Width = 1;
-            sort_Btn.StateTracking.Back.Color1 = Color.FromArgb(8, 142, 254);
-            sort_Btn.StateTracking.Back.Color2 = Color.FromArgb(6, 174, 244);
-            sort_Btn.StateTracking.Back.ColorAngle = 45F;
-            sort_Btn.StateTracking.Border.Color1 = Color.FromArgb(6, 174, 244);
-            sort_Btn.StateTracking.Border.Color2 = Color.FromArgb(8, 142, 254);
-            sort_Btn.StateTracking.Border.ColorAngle = 45F;
-            sort_Btn.StateTracking.Border.DrawBorders = Krypton.Toolkit.PaletteDrawBorders.Top | Krypton.Toolkit.PaletteDrawBorders.Bottom | Krypton.Toolkit.PaletteDrawBorders.Left | Krypton.Toolkit.PaletteDrawBorders.Right;
-            sort_Btn.StateTracking.Border.GraphicsHint = Krypton.Toolkit.PaletteGraphicsHint.AntiAlias;
-            sort_Btn.StateTracking.Border.Rounding = 20F;
-            sort_Btn.StateTracking.Border.Width = 1;
-            sort_Btn.StateTracking.Content.ShortText.Color1 = Color.White;
-            sort_Btn.TabIndex = 23;
-            sort_Btn.Values.ExtraText = "       ";
-            sort_Btn.Values.Image = (Image)resources.GetObject("sort_Btn.Values.Image");
-            sort_Btn.Values.Text = "";
-            sort_Btn.Click += sort_Btn_Click;
-            // 
             // download_Btn
             // 
             download_Btn.CheckedState.ImageSize = new Size(64, 64);
@@ -632,14 +405,57 @@ namespace InventoryManagementApp.User_Controls
             download_Btn.TabIndex = 25;
             download_Btn.Click += download_Btn_Click;
             // 
+            // comboBox
+            // 
+            comboBox.AutoRoundedCorners = true;
+            comboBox.BackColor = Color.Transparent;
+            comboBox.BorderColor = Color.FromArgb(2, 79, 196);
+            comboBox.BorderRadius = 19;
+            comboBox.BorderThickness = 2;
+            comboBox.CustomizableEdges = customizableEdges2;
+            comboBox.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox.FocusedColor = Color.FromArgb(94, 148, 255);
+            comboBox.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            comboBox.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox.ForeColor = Color.FromArgb(2, 79, 196);
+            comboBox.ItemHeight = 35;
+            comboBox.Items.AddRange(new object[] { "პროდუქტი", "კატეგორია", "ბრენდი" });
+            comboBox.ItemsAppearance.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            comboBox.ItemsAppearance.ForeColor = Color.FromArgb(245, 204, 43);
+            comboBox.Location = new Point(1130, 130);
+            comboBox.Name = "comboBox";
+            comboBox.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            comboBox.Size = new Size(242, 41);
+            comboBox.StartIndex = 0;
+            comboBox.TabIndex = 26;
+            comboBox.TextAlign = HorizontalAlignment.Center;
+            comboBox.SelectedIndexChanged += comboBox_SelectedIndexChanged;
+            // 
+            // brokenProduct
+            // 
+            brokenProduct.CheckedState.ImageSize = new Size(64, 64);
+            brokenProduct.HoverState.ImageSize = new Size(64, 64);
+            brokenProduct.Image = Properties.Resources.Broken_36;
+            brokenProduct.ImageOffset = new Point(0, 0);
+            brokenProduct.ImageRotate = 0F;
+            brokenProduct.ImageSize = new Size(48, 48);
+            brokenProduct.Location = new Point(798, 121);
+            brokenProduct.Name = "brokenProduct";
+            brokenProduct.PressedState.ImageSize = new Size(64, 64);
+            brokenProduct.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            brokenProduct.Size = new Size(50, 56);
+            brokenProduct.TabIndex = 27;
+            brokenProduct.Click += brokenProduct_Click;
+            // 
             // Products_UC
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(250, 252, 252);
+            Controls.Add(brokenProduct);
+            Controls.Add(comboBox);
             Controls.Add(download_Btn);
-            Controls.Add(sort_Btn);
-            Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(addBrand_Btn);
             Controls.Add(delete_Btn);
@@ -653,7 +469,6 @@ namespace InventoryManagementApp.User_Controls
             ((System.ComponentModel.ISupportInitialize)productData).EndInit();
             ((System.ComponentModel.ISupportInitialize)search_Icon).EndInit();
             panel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -670,11 +485,8 @@ namespace InventoryManagementApp.User_Controls
         private Krypton.Toolkit.KryptonButton delete_Btn;
         private Krypton.Toolkit.KryptonButton edit_Btn;
         private Panel panel1;
-        private Krypton.Toolkit.KryptonButton sortProd_Btn;
-        private Panel panel2;
-        private Krypton.Toolkit.KryptonButton sortBrand_Btn;
-        private Krypton.Toolkit.KryptonButton sortCat_Btn;
-        private Krypton.Toolkit.KryptonButton sort_Btn;
         private Guna.UI2.WinForms.Guna2ImageButton download_Btn;
+        private Guna.UI2.WinForms.Guna2ComboBox comboBox;
+        private Guna.UI2.WinForms.Guna2ImageButton brokenProduct;
     }
 }

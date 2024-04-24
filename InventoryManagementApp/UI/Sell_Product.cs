@@ -32,9 +32,9 @@ public partial class Sell_Product : KryptonForm
         soldAmount = (int)amountNumeric.Value;
         dynamicPriceInt = (int)dynamicPrice_Numeric.Value;
         dynamicPrice = Convert.ToDecimal(dynamicPriceInt);
-        location = locationListBox.SelectedItem.ToString();
-        payArea = payAreaListBox.SelectedItem.ToString();
-        payType = payTypeListBox.SelectedItem.ToString();
+        location = locationListBox.SelectedItem!.ToString()!;
+        payArea = payAreaListBox.SelectedItem!.ToString()!;
+        payType = payTypeListBox.SelectedItem!.ToString()!;
         var products = Products_UC.transferProduct;
         var storage = _db.Storages.FirstOrDefault(s => s.Product == products);
 
@@ -48,7 +48,7 @@ public partial class Sell_Product : KryptonForm
         }
         else
         {
-            if(storage.TotalAmount - soldAmount < 0)
+            if(storage!.TotalAmount - soldAmount < 0)
             {
                 MessageBox.Show("მარაგში არ გაქვთ საკმარისი პროდუქტი, სცადეთ თავიდან!",
                        "გაყიდვა ვერ მოხერხდა",
@@ -66,9 +66,9 @@ public partial class Sell_Product : KryptonForm
     void Sell()
     {
         var products = Products_UC.transferProduct;
-        location = locationListBox.SelectedItem.ToString();
-        payArea = payAreaListBox.SelectedItem.ToString();
-        payType = payTypeListBox.SelectedItem.ToString();
+        location = locationListBox.SelectedItem!.ToString()!;
+        payArea = payAreaListBox.SelectedItem!.ToString()!;
+        payType = payTypeListBox.SelectedItem!.ToString()!;
         custFirstName = customerFirstName.Text;
         custLastName = customerLastName.Text;
         custNumber = phoneNumber.Text;           
@@ -99,10 +99,10 @@ public partial class Sell_Product : KryptonForm
         _db.Sales.Add(sale);
         _db.Customers.Add(customer);
         var totalSold = _db.TotalSolds.FirstOrDefault(x => x.Product == products);
-        totalSold.TotalSoldAmount += soldAmount;
+        totalSold!.TotalSoldAmount += soldAmount;
         var storage = _db.Storages.FirstOrDefault(s => s.Product == products);
-        storage.TotalAmount -= soldAmount;
-       if(storage.TotalAmount == 0)
+        storage!.TotalAmount -= soldAmount;
+        if(storage.TotalAmount == 0)
         {
             products.Status = StockStatus.ამოიწურა;
         }
