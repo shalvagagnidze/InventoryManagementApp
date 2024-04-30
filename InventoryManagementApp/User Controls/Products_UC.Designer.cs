@@ -422,7 +422,7 @@ namespace InventoryManagementApp.User_Controls
             comboBox.ItemHeight = 35;
             comboBox.Items.AddRange(new object[] { "პროდუქტი", "კატეგორია", "ბრენდი" });
             comboBox.ItemsAppearance.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            comboBox.ItemsAppearance.ForeColor = Color.FromArgb(245, 204, 43);
+            comboBox.ItemsAppearance.ForeColor = Color.FromArgb(2, 79, 196);
             comboBox.Location = new Point(1130, 130);
             comboBox.Name = "comboBox";
             comboBox.ShadowDecoration.CustomizableEdges = customizableEdges3;
