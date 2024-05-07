@@ -393,7 +393,7 @@ public partial class Products_UC : UserControl
                             }).ToList();
 
                             productData.Columns["გაყიდვა"].DefaultCellStyle.ForeColor = Color.Green;
-                            productData.Columns["ჩამოწერა"].DefaultCellStyle.ForeColor = Color.DarkViolet;
+                           // productData.Columns["ჩამოწერა"].DefaultCellStyle.ForeColor = Color.DarkViolet;
                         }
                         else
                         {
